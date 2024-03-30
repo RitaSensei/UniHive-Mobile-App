@@ -1,0 +1,20 @@
+supabase:
+  url: https://fysrnplzrzbnyjwctoof.supabase.co
+  anon: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImZ5c3JucGx6cnpibnlqd2N0b29mIiwicm9sZSI6ImFub24iLCJpYXQiOjE3MTE1MTA5NDksImV4cCI6MjAyNzA4Njk0OX0.xd3MDD88KRRStaUynKtSM8i1Oyxx7GkypMe7dD64ieI
+  jwt_secret: J1ssCJAhyDcBhJ0Zx8JepLUXFksnzFICdIen42e/6wNJjx01O8j9pB1F5dz4W1RIwKln5Q5F7aBRpEbo5AnYiw==
+
+spring:
+  application:
+    name: backend
+  datasource:
+    url: jdbc:postgresql://aws-0-us-west-1.pooler.supabase.com:5432/postgres
+    username: postgres.fysrnplzrzbnyjwctoof
+    password: UniHive575859
+    driverClassName: org.postgresql.Driver
+  jpa:
+    open-in-view: true
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.PostgreSQLDialect
+        ddl-auto: update
+      show-sql: true
