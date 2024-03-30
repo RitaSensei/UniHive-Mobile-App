@@ -9,3 +9,13 @@ UniHive is a comprehensive and efficient android application for managing club e
 * **Ilyass Krichi** -[Ilyass Krichi](https://github.com/IlyassKrichi)
 * **Oumaima Nadir** - [Oumaima Nadir](https://github.com/nadiroumaima)
 * **Ghita Loukili** - [Ghita Loukili](https://github.com/GhitaLoukili)
+
+## UML Diagrams
+
+### Use case diagram
+
+<img src="UML Diagrams\use case diagram.png" width="600"/>
+
+### Class diagram
+
+<img src="UML Diagrams\class diagram.png" width="600"/>
