@@ -1,5 +1,7 @@
 <resources>
     <string name="app_name">UniHive</string>
+    <string name="login_button">Log in</string>
+    <string name="create_account_button">Create account</string>
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
     <string name="nav_header_title">Android Studio</string>
