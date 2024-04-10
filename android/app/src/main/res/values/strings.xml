@@ -1,7 +1,18 @@
 <resources>
     <string name="app_name">UniHive</string>
     <string name="login_button">Log in</string>
+    <string name="signup_button">Sign up</string>
     <string name="create_account_button">Create account</string>
+    <string name="email_address_text">Email Address</string>
+    <string name="password_text">Password</string>
+    <string name="confirm_password_text">Confirm Password</string>
+    <string name="loginOrSignup">Or</string>
+    <string name="rememberme_check_box">Remember Me</string>
+    <string name="forget_password_text">Forgot password ?</string>
+    <string name="firstname_text">First Name</string>
+    <string name="lastname_text">Last Name</string>
+    <string name="cne_massar_text">CNE/MASSAR</string>
+    <string name="import_school_card_text">Import School Card</string>
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
     <string name="nav_header_title">Android Studio</string>

@@ -4,4 +4,6 @@
     <color name="white">#FFFFFFFF</color>
     <color name="picton_blue">#46BFFF</color>
     <color name="red">#FF0000</color>
+    <color name="grey">#868686</color>
+    <color name="light_grey">#D5D5D5</color>
 </resources>

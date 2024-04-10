@@ -20,7 +20,7 @@ public class WelcomePage extends AppCompatActivity {
         startActivity(new Intent(WelcomePage.this, LoginActivity.class));
     }
 
-    public void onRegisterBtnClick(View view) {
+    public void onCreateAccountBtnClick(View view) {
         startActivity(new Intent(WelcomePage.this, SignupActivity.class));
     }
 }

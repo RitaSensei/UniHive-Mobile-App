@@ -53,7 +53,7 @@
         android:background="@drawable/rounded_corners"
         android:backgroundTint="@color/picton_blue"
         android:fontFamily="@font/poppins_medium"
-        android:onClick="onRegisterBtnClick"
+        android:onClick="onCreateAccountBtnClick"
         android:text="@string/create_account_button"
         android:textColor="@color/white"
         android:textSize="20sp"

@@ -6,10 +6,10 @@
     android:layout_height="match_parent">
 
     <ImageView
-        android:id="@+id/imageView2"
+        android:id="@+id/app_logo_login"
         android:layout_width="166dp"
         android:layout_height="78dp"
-        android:layout_marginBottom="50dp"
+        android:layout_marginBottom="30dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -19,62 +19,120 @@
         android:id="@+id/login_title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="150dp"
+        android:layout_marginTop="70dp"
         android:fontFamily="@font/poppins_medium"
-        android:text="Log in"
+        android:text="@string/login_button"
         android:textColor="@color/black"
         android:textSize="35sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <EditText
-        android:id="@+id/editEmailAddressText"
-        style="@style/Widget.AppCompat.EditText"
-        android:layout_width="wrap_content"
-        android:layout_height="59dp"
-        android:layout_marginTop="80dp"
-        android:breakStrategy="simple"
-        android:ems="10"
-        android:fontFamily="@font/poppins_regular"
-        android:hint="Email Address"
-        android:inputType="textEmailAddress"
-        android:textAppearance="@style/TextAppearance.AppCompat.Medium"
-        android:textColor="@color/black"
-        android:textSize="16sp"
-        android:typeface="normal"
+    <LinearLayout
+        android:layout_width="256dp"
+        android:layout_height="560dp"
+        android:orientation="vertical"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/login_title" />
+        app:layout_constraintTop_toBottomOf="@+id/login_title">
 
-    <EditText
-        android:id="@+id/editPasswordText"
-        android:layout_width="wrap_content"
-        android:layout_height="59dp"
-        android:layout_marginTop="20dp"
-        android:ems="10"
-        android:fontFamily="@font/poppins_medium"
-        android:hint="Password"
-        android:inputType="textPassword"
-        android:textSize="16sp"
-        android:typeface="normal"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editEmailAddressText" />
+        <TextView
+            android:id="@+id/emailAddressTextView"
+            android:layout_width="200dp"
+            android:layout_height="19dp"
+            android:layout_marginTop="50dp"
+            android:fontFamily="@font/poppins_regular"
+            android:text="@string/email_address_text" />
 
-    <Button
-        android:id="@+id/login_button_page"
-        android:layout_width="236dp"
-        android:layout_height="49dp"
-        android:layout_marginTop="30dp"
-        android:background="@drawable/rounded_corners"
-        android:backgroundTint="@color/picton_blue"
-        android:fontFamily="@font/poppins_medium"
-        android:onClick="onLoginBtnPageClick"
-        android:text="Log in"
-        android:textColor="@color/white"
-        android:textSize="20sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editPasswordText" />
+        <EditText
+            android:id="@+id/editEmailAddressLoginText"
+            style="@style/Widget.AppCompat.EditText"
+            android:layout_width="match_parent"
+            android:layout_height="59dp"
+            android:breakStrategy="simple"
+            android:ems="10"
+            android:fontFamily="@font/poppins_regular"
+            android:hint="@string/email_address_text"
+            android:inputType="textEmailAddress"
+            android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+            android:textColor="@color/grey"
+            android:textSize="16sp"
+            android:typeface="normal" />
+
+        <TextView
+            android:id="@+id/passwordTextView"
+            android:layout_width="200dp"
+            android:layout_height="19dp"
+            android:layout_marginTop="10dp"
+            android:fontFamily="@font/poppins_regular"
+            android:text="@string/password_text" />
+
+        <EditText
+            android:id="@+id/editPasswordLoginText"
+            android:layout_width="match_parent"
+            android:layout_height="59dp"
+            android:drawableEnd="@drawable/baseline_visibility_off"
+            android:ems="10"
+            android:fontFamily="@font/poppins_regular"
+            android:hint="@string/password_text"
+            android:inputType="textPassword"
+            android:textColor="@color/grey"
+            android:textSize="16sp"
+            android:typeface="normal" />
+
+        <TextView
+            android:id="@+id/forgetPasswordTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:fontFamily="@font/poppins_regular"
+            android:text="@string/forget_password_text"
+            android:textSize="12sp" />
+
+        <CheckBox
+            android:id="@+id/rememberMeCheckBox"
+            android:layout_width="132dp"
+            android:layout_height="48dp"
+            android:layout_marginTop="20dp"
+            android:text="@string/rememberme_check_box" />
+
+        <Button
+            android:id="@+id/login_button_page"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:background="@drawable/rounded_corners"
+            android:backgroundTint="@color/picton_blue"
+            android:fontFamily="@font/poppins_medium"
+            android:onClick="onLoginBtnPageLoginClick"
+            android:text="@string/login_button"
+            android:textColor="@color/white"
+            android:textSize="20sp" />
+
+        <TextView
+            android:id="@+id/orTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:layout_gravity="center_horizontal"
+            android:fontFamily="@font/poppins_regular"
+            android:text="@string/loginOrSignup"
+            android:textColor="@color/grey" />
+
+        <Button
+            android:id="@+id/create_account_button_page"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:background="@drawable/rounded_corners"
+            android:backgroundTint="@color/picton_blue"
+            android:fontFamily="@font/poppins_medium"
+            android:onClick="onCreateAccountBtnClick"
+            android:text="@string/create_account_button"
+            android:textColor="@color/white"
+            android:textSize="20sp" />
+
+    </LinearLayout>
+
+
 </androidx.constraintlayout.widget.ConstraintLayout>
