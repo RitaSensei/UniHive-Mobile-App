@@ -4,7 +4,7 @@
         <!-- Primary brand color. -->
         <item name="colorOnPrimary">@color/white</item>
         <!-- Secondary brand color. -->
-<!--        <item name="colorOnSecondary">@color/black</item>-->
+        <item name="colorOnSecondary">@color/black</item>
         <!-- Status bar color. -->
         <item name="android:statusBarColor">@color/picton_blue</item>
         <!-- Customize your theme here. -->
