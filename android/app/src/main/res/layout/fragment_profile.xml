@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    tools:context=".ui.home.FragmentHome">
+    tools:context=".ui.profile.FragmentProfile">
 
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/toolbar"
@@ -27,7 +27,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:fontFamily="@font/poppins_medium"
-            android:text="@string/ic_home"
+            android:text="@string/ic_profile"
             android:textColor="@color/black"
             android:textSize="27sp"
             android:layout_gravity="center_vertical"

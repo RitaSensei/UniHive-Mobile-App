@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android" >
+    <item
+        android:id="@+id/action_home"
+        android:enabled="true"
+        android:icon="@drawable/home_icon_selector"
+        android:iconTint="@drawable/bottom_navigation_bar_icon_color"
+        android:title="@string/ic_home"
+        />
+    <item
+        android:id="@+id/action_events"
+        android:enabled="true"
+        android:icon="@drawable/events_icon_selector"
+        android:title="@string/ic_events"/>
+    <item
+        android:id="@+id/action_clubs"
+        android:enabled="true"
+        android:icon="@drawable/clubs_icon_selector"
+        android:title="@string/ic_clubs"/>
+    <item
+        android:id="@+id/action_calendar"
+        android:enabled="true"
+        android:icon="@drawable/calendar_icon_selector"
+        android:title="@string/ic_calendar"/>
+    <item
+        android:id="@+id/action_profile"
+        android:enabled="true"
+        android:icon="@drawable/profile_icon_selector"
+        android:title="@string/ic_profile"/>
+</menu>

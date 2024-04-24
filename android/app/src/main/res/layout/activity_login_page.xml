@@ -80,27 +80,36 @@
             android:textSize="16sp"
             android:typeface="normal" />
 
-        <TextView
-            android:id="@+id/forgetPasswordTextView"
-            android:layout_width="wrap_content"
+        <LinearLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:orientation="horizontal"
             android:layout_marginTop="8dp"
-            android:fontFamily="@font/poppins_regular"
-            android:text="@string/forget_password_text"
-            android:textSize="12sp" />
+            android:gravity="center_vertical"
+            app:layout_constraintTop_toBottomOf="@+id/editPasswordLoginText"
+            >
+            <CheckBox
+                android:id="@+id/rememberMeCheckBox"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/rememberme_check_box" />
 
-        <CheckBox
-            android:id="@+id/rememberMeCheckBox"
-            android:layout_width="132dp"
-            android:layout_height="48dp"
-            android:layout_marginTop="20dp"
-            android:text="@string/rememberme_check_box" />
+            <TextView
+                android:id="@+id/forgetPasswordTextView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="20dp"
+                android:fontFamily="@font/poppins_regular"
+                android:text="@string/forget_password_text"
+                android:textSize="12sp" />
+
+        </LinearLayout>
 
         <Button
             android:id="@+id/login_button_page"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
+            android:layout_marginTop="25dp"
             android:background="@drawable/rounded_corners"
             android:backgroundTint="@color/picton_blue"
             android:fontFamily="@font/poppins_medium"

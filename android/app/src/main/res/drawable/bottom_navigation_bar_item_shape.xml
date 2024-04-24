@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+    <!-- Background for the whole item -->
+    <item android:id="@+id/background">
+        <shape android:shape="rectangle">
+            <solid android:color="@android:color/transparent" />
+            <corners android:radius="30dp" />
+        </shape>
+    </item>
+    <!-- Background for the icon -->
+    <item android:id="@+id/icon_background"
+        android:left="14dp"
+        android:right="14dp"
+        android:top="6dp"
+        android:bottom="22dp">
+    <shape android:shape="rectangle">
+        <solid android:color="@color/picton_blue" />
+        <corners android:radius="30dp" />
+    </shape>
+</item>
+    </layer-list>
+

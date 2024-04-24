@@ -7,7 +7,10 @@ import android.view.View;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.biog.unihiveandroid.MainActivity;
 import com.biog.unihiveandroid.R;
+import com.biog.unihiveandroid.SettingsActivity;
+import com.biog.unihiveandroid.ui.home.FragmentHome;
 
 public class LoginActivity extends AppCompatActivity {
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -18,4 +21,11 @@ public class LoginActivity extends AppCompatActivity {
     public void onCreateAccountBtnClick(View view) {
         startActivity(new Intent(LoginActivity.this, SignupActivity.class));
     }
+
+    public void onLoginBtnPageLoginClick(View view) {
+        Intent intent = new Intent(LoginActivity.this, MainActivity.class);
+        startActivity(intent);
+        finish(); // Finish LoginActivity to prevent navigating back to it using the back button
+    }
+
 }

@@ -2,41 +2,48 @@
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/mobile_navigation"
-    app:startDestination="@+id/nav_home">
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/action_home">
 
     <fragment
-        android:id="@+id/nav_home"
+        android:id="@+id/action_home"
         android:name="com.biog.unihiveandroid.ui.home.FragmentHome"
         android:label="Home"
         tools:layout="@layout/fragment_home" >
+        <action
+            android:id="@+id/action_action_home_to_action_events"
+            app:destination="@id/action_events" />
     </fragment>
-
     <fragment
-        android:id="@+id/nav_events"
+        android:id="@+id/action_events"
         android:name="com.biog.unihiveandroid.ui.events.FragmentEvents"
         android:label="Events"
         tools:layout="@layout/fragment_events" >
+        <action
+            android:id="@+id/action_action_events_to_action_clubs"
+            app:destination="@id/action_clubs" />
     </fragment>
-
     <fragment
-        android:id="@+id/nav_clubs"
+        android:id="@+id/action_clubs"
         android:name="com.biog.unihiveandroid.ui.clubs.FragmentClubs"
         android:label="Clubs"
         tools:layout="@layout/fragment_clubs" >
+        <action
+            android:id="@+id/action_action_clubs_to_action_calendar"
+            app:destination="@id/action_calendar" />
     </fragment>
-
     <fragment
-        android:id="@+id/nav_calendar"
+        android:id="@+id/action_calendar"
         android:name="com.biog.unihiveandroid.ui.calendar.FragmentCalendar"
         android:label="Calendar"
         tools:layout="@layout/fragment_calendar" >
+        <action
+            android:id="@+id/action_action_calendar_to_action_profile"
+            app:destination="@id/action_profile" />
     </fragment>
-
     <fragment
-        android:id="@+id/nav_profile"
+        android:id="@+id/action_profile"
         android:name="com.biog.unihiveandroid.ui.profile.FragmentProfile"
         android:label="Profile"
-        tools:layout="@layout/fragment_profile" >
-    </fragment>
+        tools:layout="@layout/fragment_profile" />
 </navigation>
