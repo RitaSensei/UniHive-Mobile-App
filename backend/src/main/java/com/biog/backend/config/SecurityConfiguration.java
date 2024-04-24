@@ -21,32 +21,29 @@ public class SecurityConfiguration {
   @Bean
   public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
     http
-      .csrf(csrf -> csrf.disable())
-      .authorizeHttpRequests(requests ->
-        requests
-          .requestMatchers("/auth/authenticate", "/auth/forgotPassword")
-          .permitAll()
-          .requestMatchers("/auth/register/**")
-          .hasRole("ADMIN")
-          .requestMatchers("/professor/**")
-          .hasAnyRole("PROFESSOR", "ADMIN")
-          .requestMatchers("/student/**")
-          .hasAnyRole("STUDENT", "ADMIN")
-          .requestMatchers("/auth/changePassword")
-          .hasAnyRole("STUDENT", "PROFESSOR")
-          .requestMatchers("/**")
-          .hasRole("ADMIN")
-          .anyRequest()
-          .authenticated()
-      )
-      .sessionManagement(management ->
-        management.sessionCreationPolicy(SessionCreationPolicy.STATELESS)
-      )
-      .authenticationProvider(authenticationProvider)
-      .addFilterBefore(
-        jwtAuthFilter,
-        UsernamePasswordAuthenticationFilter.class
-      );
+            .csrf(csrf -> csrf.disable())
+            .authorizeHttpRequests(requests -> requests
+                    .requestMatchers("/auth/authenticate", "/auth/forgotPassword")
+                    .permitAll()
+                    .requestMatchers("/auth/register/**")
+                    .hasRole("SUPER_ADMIN")
+                    .requestMatchers("/admin/**")
+                    .hasAnyRole("ADMIN", "SUPER_ADMIN")
+                    .requestMatchers("/club/**")
+                    .hasAnyRole("CLUB", "SUPER_ADMIN")
+                    .requestMatchers("/student/**")
+                    .hasAnyRole("STUDENT", "SUPER_ADMIN")
+                    .requestMatchers("/auth/changePassword")
+                    .hasAnyRole("STUDENT", "CLUB", "ADMIN")
+                    .requestMatchers("/superadmin/**")
+                    .hasRole("SUPER_ADMIN")
+                    .anyRequest()
+                    .authenticated())
+            .sessionManagement(management -> management.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
+            .authenticationProvider(authenticationProvider)
+            .addFilterBefore(
+                    jwtAuthFilter,
+                    UsernamePasswordAuthenticationFilter.class);
 
     return http.build();
   }

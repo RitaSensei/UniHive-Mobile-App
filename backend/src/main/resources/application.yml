@@ -1,3 +1,8 @@
+server:
+  port: ${SERVER_PORT:8080}
+  error:
+    include-message: always
+
 supabase:
   url: https://fysrnplzrzbnyjwctoof.supabase.co
   anon: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImZ5c3JucGx6cnpibnlqd2N0b29mIiwicm9sZSI6ImFub24iLCJpYXQiOjE3MTE1MTA5NDksImV4cCI6MjAyNzA4Njk0OX0.xd3MDD88KRRStaUynKtSM8i1Oyxx7GkypMe7dD64ieI
@@ -18,3 +23,14 @@ spring:
         dialect: org.hibernate.dialect.PostgreSQLDialect
         ddl-auto: update
       show-sql: true
+  mail:
+    host: smtp.gmail.com
+    port: 587
+    username: info.unihive@gmail.com
+    password: adhutlynxawdtvbr
+    properties:
+      mail:
+        smtp:
+          auth: true
+          starttls:
+            enable: true

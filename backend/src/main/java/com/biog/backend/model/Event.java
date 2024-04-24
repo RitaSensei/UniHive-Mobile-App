@@ -1,5 +1,6 @@
 package com.biog.backend.model;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -43,7 +44,16 @@ public class Event {
   @Column(name = "event_rating")
   private float eventRating;
 
+  @Column(name = "rating_count")
+  private int ratingCount;
+
   @ManyToOne(cascade = CascadeType.ALL)
   @JoinColumn(name = "club_id", referencedColumnName = "id", nullable = false)
-  private Club club_id;
+  @JsonManagedReference(value = "club-event")
+  private Club club;
+
+  @PrePersist
+  protected void onCreate() {
+    createdAt = Instant.now();
+  }
 }

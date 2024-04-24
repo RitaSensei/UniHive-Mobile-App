@@ -5,6 +5,7 @@ import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
 import io.jsonwebtoken.io.Decoders;
 import io.jsonwebtoken.security.Keys;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
@@ -18,8 +19,8 @@ import java.util.function.Function;
 @Service
 public class JwtService {
 
-  private final String SECRET_KEY =
-    "5367566B59703373357638792F423F4528482B4D6251655468576D5A71347437";
+  @Value("${supabase.jwt_secret}")
+  private String SECRET_KEY;
 
   public String extractUsername(String token) {
     return extractClaim(token, Claims::getSubject);
@@ -35,31 +36,31 @@ public class JwtService {
   }
 
   public String generateToken(
-    Map<String, Object> extraClaims,
-    UserDetails userDetails
+          Map<String, Object> extraClaims,
+          UserDetails userDetails
   ) {
     String role = userDetails
-      .getAuthorities()
-      .stream()
-      .findFirst()
-      .map(GrantedAuthority::getAuthority)
-      .orElse("defaultRole");
+            .getAuthorities()
+            .stream()
+            .findFirst()
+            .map(GrantedAuthority::getAuthority)
+            .orElse("defaultRole");
 
     return Jwts
-      .builder()
-      .setClaims(extraClaims)
-      .claim("role", role)
-      .setSubject(userDetails.getUsername())
-      .setIssuedAt(new Date(System.currentTimeMillis()))
-      .setExpiration(new Date(System.currentTimeMillis() + 1000 * 60 * 60 * 10))
-      .signWith(getSigninKey(), SignatureAlgorithm.HS256)
-      .compact();
+            .builder()
+            .setClaims(extraClaims)
+            .claim("role", role)
+            .setSubject(userDetails.getUsername())
+            .setIssuedAt(new Date(System.currentTimeMillis()))
+            .setExpiration(new Date(System.currentTimeMillis() + 1000 * 60 * 60 * 10))
+            .signWith(getSigninKey(), SignatureAlgorithm.HS256)
+            .compact();
   }
 
   public boolean isTokenValid(String token, UserDetails userDetails) {
     final String username = extractUsername(token);
     return (
-      (username.equals(userDetails.getUsername())) && !isTokenExpired(token)
+            (username.equals(userDetails.getUsername())) && !isTokenExpired(token)
     );
   }
 
@@ -73,11 +74,11 @@ public class JwtService {
 
   public Claims extractAllClaims(String token) {
     return Jwts
-      .parserBuilder()
-      .setSigningKey(getSigninKey())
-      .build()
-      .parseClaimsJws(token)
-      .getBody();
+            .parserBuilder()
+            .setSigningKey(getSigninKey())
+            .build()
+            .parseClaimsJws(token)
+            .getBody();
   }
 
   private Key getSigninKey() {

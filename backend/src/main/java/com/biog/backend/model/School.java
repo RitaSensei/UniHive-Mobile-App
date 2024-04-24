@@ -1,5 +1,6 @@
 package com.biog.backend.model;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -32,12 +33,20 @@ public class School {
   @Column(name = "school_address", nullable = false)
   private String schoolAddress;
 
-  @OneToOne(mappedBy = "school_id")
+  @OneToOne(mappedBy = "school")
+  @JsonBackReference(value = "school-admin")
   private Admin admin;
 
-  @OneToMany(mappedBy = "school_id")
+  @OneToMany(mappedBy = "school")
+  @JsonBackReference(value = "school-club")
   private List<Club> clubs;
 
-  @OneToMany(mappedBy = "school_id")
+  @OneToMany(mappedBy = "school")
+  @JsonBackReference(value = "school-student")
   private List<Student> students;
+
+  @PrePersist
+  protected void onCreate() {
+    createdAt = Instant.now();
+  }
 }
