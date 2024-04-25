@@ -44,5 +44,14 @@
 
     </androidx.appcompat.widget.Toolbar>
 
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/carousel_recycler_view"
+        android:layout_width="match_parent"
+        android:layout_height="230dp"
+        android:layout_marginTop="60dp"
+        android:foreground="?attr/selectableItemBackground"
+        android:orientation="horizontal"
+        app:carousel_alignment="center"
+        app:layoutManager="com.google.android.material.carousel.CarouselLayoutManager" />
 
 </FrameLayout>

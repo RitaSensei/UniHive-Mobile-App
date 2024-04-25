@@ -1,27 +1,30 @@
 package com.biog.unihiveandroid.ui.home;
 
+import android.app.Activity;
+import android.app.ActivityOptions;
 import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
 
 import com.biog.unihiveandroid.R;
 import com.biog.unihiveandroid.SettingsActivity;
+import com.biog.unihiveandroid.ui.ImageAdapter;
+import com.biog.unihiveandroid.ui.ImageViewActivity;
+import com.google.android.material.carousel.CarouselLayoutManager;
+import com.google.android.material.carousel.FullScreenCarouselStrategy;
+
+import java.util.ArrayList;
 
 public class FragmentHome extends Fragment {
-
-    private static final String ARG_PARAM1 = "param1";
-    private static final String ARG_PARAM2 = "param2";
-
-    // TODO: Rename and change types of parameters
-    private String mParam1;
-    private String mParam2;
 
     public FragmentHome() {
         // Required empty public constructor
@@ -30,8 +33,6 @@ public class FragmentHome extends Fragment {
     public static FragmentHome newInstance(String param1, String param2) {
         FragmentHome fragment = new FragmentHome();
         Bundle args = new Bundle();
-        args.putString(ARG_PARAM1, param1);
-        args.putString(ARG_PARAM2, param2);
         fragment.setArguments(args);
         return fragment;
     }
@@ -39,10 +40,6 @@ public class FragmentHome extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
-        }
     }
 
     @Override
@@ -50,6 +47,8 @@ public class FragmentHome extends Fragment {
         View rootView = inflater.inflate(R.layout.fragment_home, container, false);
         Toolbar toolbar = rootView.findViewById(R.id.toolbar);
         ImageView settingsIcon = toolbar.findViewById(R.id.action_bar_settings_icon);
+        RecyclerView carouselRecyclerView = rootView.findViewById(R.id.carousel_recycler_view);
+        CarouselLayoutManager carouselLayoutManager = new CarouselLayoutManager(new FullScreenCarouselStrategy());
 
         settingsIcon.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -63,6 +62,25 @@ public class FragmentHome extends Fragment {
             @Override
             public void onClick(View v) {
                 // Handle the Up navigation here, if needed
+            }
+        });
+
+        // Prepare data for the adapter
+        ArrayList<Integer> carouselItems = new ArrayList<>();
+        carouselItems.add(R.drawable.itholic_banner);
+        carouselItems.add(R.drawable.aiday_banner);
+        carouselItems.add(R.drawable.japanday_banner);
+        carouselItems.add(R.drawable.cindhconvoi_banner);
+
+        // Set up the adapter
+        ImageAdapter adapter = new ImageAdapter(getContext(), carouselItems);
+        carouselRecyclerView.setLayoutManager(carouselLayoutManager);
+        carouselLayoutManager.setCarouselAlignment(CarouselLayoutManager.ALIGNMENT_CENTER);
+        carouselRecyclerView.setAdapter(adapter);
+        adapter.setOnItemClickListener(new ImageAdapter.OnItemClickListener() {
+            @Override
+            public void onClick(ImageView imageView, String path) {
+                startActivity(new Intent(getContext(), ImageViewActivity.class).putExtra("image", path), ActivityOptions.makeSceneTransitionAnimation((Activity) getContext(), imageView, "image").toBundle());
             }
         });
 

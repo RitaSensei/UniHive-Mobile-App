@@ -130,10 +130,11 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
-            android:background="@drawable/rounded_corners"
+            android:background="@drawable/rounded_corners_white"
             android:backgroundTint="@color/picton_blue"
             android:fontFamily="@font/poppins_medium"
             android:onClick="onSignupBtnClick"
+            android:outlineProvider="none"
             android:text="@string/signup_button"
             android:textColor="@color/white"
             android:textSize="20sp" />
