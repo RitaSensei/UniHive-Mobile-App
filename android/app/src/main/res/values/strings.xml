@@ -18,22 +18,48 @@
     <string name="ic_clubs">Clubs</string>
     <string name="ic_calendar">Calendar</string>
     <string name="ic_profile">Profile</string>
+    <string name="settings_title">Settings</string>
     <string name="title_activity_bottom_bar">BottomBarActivity</string>
     <string name="title_activity_settings">SettingsActivity</string>
+    <string name="title_activity_imageview">ImageViewActivity</string>
+
+    <!-- Settings Titles -->
+    <string name="general_section">General</string>
+    <string name="language_settings">Language</string>
+    <string name="view_mode_settings">Night Mode</string>
+    <string name="contact_settings">Contact</string>
+    <string name="about_us_settings">About Us</string>
+    <string name="delete_account_settings">Delete My Account</string>
 
     <!-- Preference Titles -->
-    <string name="messages_header">Messages</string>
-    <string name="sync_header">Sync</string>
-
-    <!-- Messages Preferences -->
-    <string name="signature_title">Your signature</string>
-    <string name="reply_title">Default reply action</string>
-
-    <!-- Sync Preferences -->
-    <string name="sync_title">Sync email periodically</string>
-    <string name="attachment_title">Download incoming attachments</string>
-    <string name="attachment_summary_on">Automatically download attachments for incoming emails
-    </string>
-    <string name="attachment_summary_off">Only download attachments when manually requested</string>
+    <string name="language_setting_description">Choose a language</string>
+    <string-array name="language_entries_settings">
+        <item>Arabic</item>
+        <item>English</item>
+        <item>Spanish</item>
+        <item>French</item>
+        <item>German</item>
+        <item>Italian</item>
+        <item>Japanese</item>
+        <item>Korean</item>
+        <item>Chinese (Simplified)</item>
+        <item>Chinese (Traditional)</item>
+        <item>Russian</item>
+        <item>Portuguese</item>
+    </string-array>
+    <string-array name="language_entry_values">
+        <item>ar</item>
+        <item>en</item>
+        <item>es</item>
+        <item>fr</item>
+        <item>ge</item>
+        <item>it</item>
+        <item>ja</item>
+        <item>ko</item>
+        <item>chs</item>
+        <item>cht</item>
+        <item>ru</item>
+        <item>po</item>
+    </string-array>
 
 </resources>

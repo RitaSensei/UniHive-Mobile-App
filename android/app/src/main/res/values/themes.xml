@@ -40,13 +40,13 @@
 
     <style name="BottomNavigationTextActiveStyle" parent="@android:style/TextAppearance.Widget.TabWidget">
         <item name="android:fontFamily">@font/poppins_medium</item>
-        <item name="android:textSize">11sp</item>
+        <item name="android:textSize">14sp</item>
         <item name="android:textColor">@color/picton_blue</item>
     </style>
 
     <style name="BottomNavigationTextInactiveStyle" parent="@android:style/TextAppearance.Widget.TabWidget">
         <item name="android:fontFamily">@font/poppins_medium</item>
-        <item name="android:textSize">11sp</item>
+        <item name="android:textSize">14sp</item>
         <item name="android:textColor">@color/black</item>
     </style>
 
@@ -58,4 +58,5 @@
     <style name="Theme.Unihiveandroid.TextButtonColor" parent="">
         <item name="android:textColor">@drawable/button_text_color</item>
     </style>
+
 </resources>

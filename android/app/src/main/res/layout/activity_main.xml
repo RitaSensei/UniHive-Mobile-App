@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto">
@@ -15,19 +15,21 @@
 
     <com.google.android.material.bottomnavigation.BottomNavigationView
         android:id="@+id/bottom_navigation_bar"
+        style="@style/BottomNavigationItemBackgroundStyle"
         android:layout_width="0dp"
-        android:layout_height="50dp"
-        app:labelVisibilityMode="labeled"
+        android:layout_height="55dp"
+        android:focusable="true"
         app:backgroundTint="@color/white"
         app:compatShadowEnabled="true"
-        app:itemIconSize="17dp"
-        android:focusable="true"
+        app:itemIconSize="18dp"
+        app:itemPaddingBottom="10dp"
         app:itemTextAppearanceActive="@style/BottomNavigationTextActiveStyle"
         app:itemTextAppearanceInactive="@style/BottomNavigationTextInactiveStyle"
+        app:labelVisibilityMode="labeled"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        style="@style/BottomNavigationItemBackgroundStyle"
         app:menu="@menu/bottom_navigation_bar_menu" />
 
 

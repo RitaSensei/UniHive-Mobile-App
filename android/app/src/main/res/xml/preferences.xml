@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <PreferenceCategory
+        app:key="general_section"
+        app:title="@string/general_section"
+        app:layout="@layout/layout_preference_category"
+        app:allowDividerBelow="false"
+        app:allowDividerAbove="false"
+        >
+        <ListPreference
+            app:key="language_section"
+            app:title="@string/language_settings"
+            android:entries="@array/language_entries_settings"
+            android:dialogTitle="@string/language_setting_description"
+            android:entryValues="@array/language_entry_values"
+            app:layout="@layout/layout_preference_list"
+            />
+
+        <SwitchPreference
+            app:key="view_mode_section"
+            app:title="@string/view_mode_settings"
+            android:defaultValue="false"
+            app:layout="@layout/layout_switch_preference"
+            />
+
+    </PreferenceCategory>
+
+    <PreferenceCategory
+        app:key="notifications_category"
+        app:title="Notifications"
+        app:layout="@layout/layout_preference_category"
+        app:allowDividerBelow="false"
+        app:allowDividerAbove="false">
+
+        <SwitchPreferenceCompat
+            app:key="notifications"
+            app:title="Enable notifications"
+            android:defaultValue="false"
+            app:layout="@layout/layout_switch_preference"/>
+
+    </PreferenceCategory>
+
+    <PreferenceCategory
+        app:key="help_category"
+        app:title="Help"
+        app:allowDividerBelow="false"
+        app:allowDividerAbove="false"
+        app:layout="@layout/layout_preference_category">
+
+        <Preference
+            app:key="help_center"
+            app:title="Help Center"
+            app:layout="@layout/layout_preference_list"/>
+
+        <Preference
+            app:key="contact_us"
+            app:title="Contact us"
+            app:layout="@layout/layout_preference_list"/>
+
+        <Preference
+            app:key="terms_privacy"
+            app:title="Terms and Privacy Policy"
+            app:layout="@layout/layout_preference_list"/>
+
+        <Preference
+            app:key="feedback"
+            app:title="Send feedback"
+            app:layout="@layout/layout_preference_list"/>
+
+    </PreferenceCategory>
+
+    <Preference
+        app:key="delete_account"
+        app:title="@string/delete_account_settings"
+        app:layout="@layout/layout_delete_preference"/>
+
+</PreferenceScreen>

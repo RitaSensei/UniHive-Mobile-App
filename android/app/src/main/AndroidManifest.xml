@@ -40,12 +40,9 @@
         <activity
             android:name=".SettingsActivity"
             android:exported="false"
-            android:label="@string/title_activity_settings" />
-        <activity
-            android:name=".BottomBarActivity"
-            android:exported="false"
-            android:label="@string/title_activity_bottom_bar"
-            android:theme="@style/Theme.Unihiveandroid" />
+            android:label="@string/title_activity_settings"
+            android:theme="@style/Theme.Unihiveandroid.NoActionBar2"
+            />
     </application>
 
 </manifest>

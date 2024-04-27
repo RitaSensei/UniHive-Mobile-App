@@ -7,11 +7,11 @@
     tools:context=".ui.calendar.FragmentCalendar">
 
     <androidx.appcompat.widget.Toolbar
-        android:id="@+id/toolbar"
+        android:id="@+id/calendar_toolbar"
         android:layout_width="match_parent"
         android:layout_height="60dp"
         android:background="@color/white"
-        android:elevation="4dp"
+        android:elevation="0dp"
         android:theme="@style/ThemeOverlay.AppCompat.ActionBar"
         app:popupTheme="@style/ThemeOverlay.AppCompat.Light">
 
@@ -34,13 +34,15 @@
             android:layout_marginStart="30dp"
             />
 
-        <ImageView
-            android:id="@+id/action_bar_settings_icon"
+        <ImageButton
+            android:id="@+id/action_bar_calendar_settings_icon"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="end|center_vertical"
             android:src="@drawable/ic_settings"
-            android:layout_marginEnd="10dp" />
+            android:backgroundTint="@color/white"
+            android:layout_marginEnd="10dp"
+            android:contentDescription="@null" />
 
     </androidx.appcompat.widget.Toolbar>
 
