@@ -4,7 +4,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    tools:context=".ui.home.FragmentHome">
+    tools:context=".ui.home.FragmentHome"
+    android:background="@color/white">
 
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/home_toolbar"
@@ -47,7 +48,7 @@
     </androidx.appcompat.widget.Toolbar>
 
     <ImageSwitcher
-        android:id="@+id/image_switcher"
+        android:id="@+id/trending_events_switcher_home"
         android:layout_width="match_parent"
         android:layout_height="230dp"
         android:layout_marginTop="60dp" />
@@ -58,7 +59,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="140dp"
         android:background="?selectableItemBackgroundBorderless"
-        android:src="@drawable/navigate_before"
+        android:src="@drawable/ic_navigate_before_white"
         android:contentDescription="@null" />
 
     <ImageButton
@@ -68,7 +69,188 @@
         android:layout_marginTop="140dp"
         android:layout_gravity="end"
         android:background="?selectableItemBackgroundBorderless"
-        android:src="@drawable/navigate_next"
+        android:src="@drawable/ic_navigate_next_white"
         android:contentDescription="@null"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="300dp"
+        android:orientation="vertical">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="8dp">
+
+            <RelativeLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="15dp">
+
+                <View
+                    android:layout_width="4dp"
+                    android:layout_height="12dp"
+                    android:background="@drawable/blue_vertical_bar"
+                    android:layout_marginTop="9dp"
+                    />
+
+                <TextView
+                    android:id="@+id/clubs_switcher_title_home"
+                    android:layout_width="wrap_content"
+                    android:layout_height="30dp"
+                    android:layout_marginStart="8dp"
+                    android:text="@string/ic_clubs"
+                    android:fontFamily="@font/poppins_medium"
+                    android:textSize="18sp"
+                    android:textColor="@color/black"
+                    android:gravity="center_vertical"/>
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:layout_marginStart="330dp">
+
+                <TextView
+                    android:id="@+id/clubs_switcher_see_all_home"
+                    android:layout_width="wrap_content"
+                    android:layout_height="30dp"
+                    android:fontFamily="@font/poppins_regular"
+                    android:gravity="center_vertical"
+                    android:text="@string/see_all_text"
+                    android:textColor="@color/black"
+                    android:textSize="12sp" />
+
+                <ImageButton
+                    android:id="@+id/see_all_button_clubs_switcher"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_marginStart="40dp"
+                    android:background="?selectableItemBackgroundBorderless"
+                    android:src="@drawable/ic_navigate_next_black"
+                    android:contentDescription="@null"/>
+
+            </RelativeLayout>
+
+        </RelativeLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:paddingStart="12dp"
+            android:paddingTop="15dp">
+
+            <GridView
+                android:id="@+id/clubs_grid_view"
+                android:layout_width="wrap_content"
+                android:layout_height="150dp"
+                android:numColumns="3"
+                android:scrollbars="none"
+                android:layout_gravity="center"
+                android:stretchMode="columnWidth"
+                android:clickable="true"
+                android:focusable="true"
+                android:drawSelectorOnTop="true"
+                />
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="520dp"
+        android:orientation="vertical">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="8dp">
+
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="15dp">
+
+            <View
+                android:layout_width="4dp"
+                android:layout_height="12dp"
+                android:background="@drawable/blue_vertical_bar"
+                android:layout_marginTop="9dp"
+                />
+
+            <TextView
+                android:id="@+id/upcoming_events_switcher_title_home"
+                android:layout_width="wrap_content"
+                android:layout_height="30dp"
+                android:layout_marginStart="8dp"
+                android:text="@string/upcoming_events_title"
+                android:fontFamily="@font/poppins_medium"
+                android:textSize="18sp"
+                android:textColor="@color/black"
+                android:gravity="center_vertical"/>
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:layout_marginStart="330dp">
+
+            <TextView
+                android:id="@+id/upcoming_events_switcher_see_all_home"
+                android:layout_width="wrap_content"
+                android:layout_height="30dp"
+                android:fontFamily="@font/poppins_regular"
+                android:gravity="center_vertical"
+                android:text="@string/see_all_text"
+                android:textColor="@color/black"
+                android:textSize="12sp" />
+
+            <ImageButton
+                android:id="@+id/see_all_button_upcoming_events_switcher"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_marginStart="40dp"
+                android:background="?selectableItemBackgroundBorderless"
+                android:src="@drawable/ic_navigate_next_black"
+                android:contentDescription="@null"/>
+
+        </RelativeLayout>
+
+        </RelativeLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:paddingHorizontal="3dp"
+            android:paddingTop="15dp">
+
+            <GridView
+                android:id="@+id/upcoming_events_grid_view"
+                android:layout_width="wrap_content"
+                android:layout_height="160dp"
+                android:numColumns="3"
+                android:scrollbars="none"
+                android:layout_gravity="center"
+                android:stretchMode="columnWidth"
+                android:clickable="true"
+                android:focusable="true"
+                android:horizontalSpacing="3dp"
+                android:drawSelectorOnTop="true"
+                />
+
+        </LinearLayout>
+
+    </LinearLayout>
 
 </FrameLayout>

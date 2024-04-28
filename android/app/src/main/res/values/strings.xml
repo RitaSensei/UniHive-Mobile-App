@@ -62,4 +62,9 @@
         <item>po</item>
     </string-array>
 
+
+    <string name="see_all_text">See all</string>
+    <string name="upcoming_events_title">Upcoming events</string>
+    <string name="upcoming_events_card_name">Name Of Event</string>
+
 </resources>

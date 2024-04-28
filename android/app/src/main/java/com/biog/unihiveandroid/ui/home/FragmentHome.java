@@ -1,35 +1,38 @@
 package com.biog.unihiveandroid.ui.home;
 
-import static com.biog.unihiveandroid.ImageData.getSwitcherItems;
-
+import static com.biog.unihiveandroid.ImageData.getClubsGridItems;
+import static com.biog.unihiveandroid.ImageData.getTrendingEventsSwitcherItems;
+import static com.biog.unihiveandroid.ImageData.getUpcomingEventsGridItems;
 import android.app.Activity;
 import android.content.Intent;
-import android.graphics.BitmapFactory;
 import android.os.Bundle;
-
 import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.Fragment;
-
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.GridView;
 import android.widget.ImageButton;
 import android.widget.ImageSwitcher;
 import android.widget.ImageView;
 import android.widget.ViewSwitcher;
 
-import com.biog.unihiveandroid.ImageData;
+import com.biog.unihiveandroid.adapter.ClubAdapter;
+import com.biog.unihiveandroid.adapter.UpcomingEventAdapter;
+import com.biog.unihiveandroid.model.ClubModel;
 import com.biog.unihiveandroid.R;
 import com.biog.unihiveandroid.SettingsActivity;
-import com.biog.unihiveandroid.authentication.LoginActivity;
-import com.biog.unihiveandroid.authentication.SignupActivity;
+import com.biog.unihiveandroid.model.UpcomingEventModel;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class FragmentHome extends Fragment {
     int currentPosition = 0;
-    List<Integer> switcherItems = getSwitcherItems();
+    List<Integer> trendingEventsItems = getTrendingEventsSwitcherItems();
+    List<Integer> clubsItems = getClubsGridItems();
+    List<Integer> upcomingEventsItems = getUpcomingEventsGridItems();
+    GridView clubsGridView, upcomingEventsGridView;
 
     public FragmentHome() {
         // Required empty public constructor
@@ -60,12 +63,12 @@ public class FragmentHome extends Fragment {
             }
         });
 
-        ImageSwitcher imageSwitcher = rootView.findViewById(R.id.image_switcher);
+        ImageSwitcher trendingEventsSwitcher = rootView.findViewById(R.id.trending_events_switcher_home);
         ImageButton previousButton = rootView.findViewById(R.id.previous_button_switcher);
         ImageButton nextButton = rootView.findViewById(R.id.next_button_switcher);
-        int count = switcherItems.size();
+        int trendingEventsCount = trendingEventsItems.size();
 
-        imageSwitcher.setFactory(new ViewSwitcher.ViewFactory() {
+        trendingEventsSwitcher.setFactory(new ViewSwitcher.ViewFactory() {
             @Override
             public View makeView() {
                 ImageView imageView = new ImageView(getContext());
@@ -75,17 +78,16 @@ public class FragmentHome extends Fragment {
                 return imageView;
             }
         });
-
-        imageSwitcher.setImageResource(switcherItems.get(currentPosition));
+        trendingEventsSwitcher.setImageResource(trendingEventsItems.get(currentPosition));
 
         previousButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 currentPosition--;
                 if (currentPosition < 0) {
-                    currentPosition = switcherItems.size() - 1;
+                    currentPosition = trendingEventsItems.size() - 1;
                 }
-                imageSwitcher.setImageResource(switcherItems.get(currentPosition));
+                trendingEventsSwitcher.setImageResource(trendingEventsItems.get(currentPosition));
             }
         });
 
@@ -93,43 +95,35 @@ public class FragmentHome extends Fragment {
             @Override
             public void onClick(View v) {
                 currentPosition++;
-                if (currentPosition == count) {
+                if (currentPosition == trendingEventsCount) {
                     currentPosition = 0;
                 }
-                imageSwitcher.setImageResource(switcherItems.get(currentPosition));
+                trendingEventsSwitcher.setImageResource(trendingEventsItems.get(currentPosition));
             }
         });
+
+        clubsGridView = rootView.findViewById(R.id.clubs_grid_view);
+        ArrayList<ClubModel> clubModelArrayList = new ArrayList<>();
+        for (int i = 0; i < 3; i++) {
+            clubModelArrayList.add(new ClubModel(5, clubsItems.get(i)));
+        }
+        ClubAdapter clubAdapter = new ClubAdapter(requireContext(), clubModelArrayList);
+        clubsGridView.setAdapter(clubAdapter);
+
+        ImageButton seeAllClubsButton = rootView.findViewById(R.id.see_all_button_clubs_switcher);
+
+
+        upcomingEventsGridView = rootView.findViewById(R.id.upcoming_events_grid_view);
+        ArrayList<UpcomingEventModel> upcomingEventModelArrayList = new ArrayList<>();
+        for (int i = 0; i < 3; i++) {
+            upcomingEventModelArrayList.add(new UpcomingEventModel(5, "Event Name", upcomingEventsItems.get(i)));
+        }
+        UpcomingEventAdapter upcomingEventAdapter = new UpcomingEventAdapter(requireContext(), upcomingEventModelArrayList);
+        upcomingEventsGridView.setAdapter(upcomingEventAdapter);
+
+        ImageButton seeAllUpcomingEventsButton = rootView.findViewById(R.id.see_all_button_upcoming_events_switcher);
+
+
         return rootView;
     }
-
-    private void adjustImageSize(ImageView imageView, int imageResource) {
-        // Get the dimensions of the ImageView
-        int targetWidth = imageView.getWidth();
-        int targetHeight = imageView.getHeight();
-
-        // Get the dimensions of the original image
-        BitmapFactory.Options options = new BitmapFactory.Options();
-        options.inJustDecodeBounds = true;
-        BitmapFactory.decodeResource(getResources(), imageResource, options);
-        int originalWidth = options.outWidth;
-        int originalHeight = options.outHeight;
-
-        // Calculate the scaling factors
-        float widthScaleFactor = (float) targetWidth / originalWidth;
-        float heightScaleFactor = (float) targetHeight / originalHeight;
-
-        // Take the minimum scaling factor
-        float scaleFactor = Math.min(widthScaleFactor, heightScaleFactor);
-
-        // Calculate the new dimensions
-        int newWidth = Math.round(originalWidth * scaleFactor);
-        int newHeight = Math.round(originalHeight * scaleFactor);
-
-        // Set the new dimensions to the ImageView
-        ViewGroup.LayoutParams params = imageView.getLayoutParams();
-        params.width = newWidth;
-        params.height = newHeight;
-        imageView.setLayoutParams(params);
-    }
-
 }
