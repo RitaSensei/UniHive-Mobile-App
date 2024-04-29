@@ -2,8 +2,6 @@ package com.biog.unihiveandroid.ui.events;
 
 import static com.biog.unihiveandroid.ImageData.getUpcomingEventsGridItems;
 import static java.time.Instant.now;
-
-import android.os.Build;
 import android.os.Bundle;
 import androidx.fragment.app.Fragment;
 import android.view.LayoutInflater;
@@ -16,15 +14,8 @@ import com.biog.unihiveandroid.MainActivity;
 import com.biog.unihiveandroid.R;
 import com.biog.unihiveandroid.adapter.UpcomingEventsFragmentEventsAdapter;
 import com.biog.unihiveandroid.model.UpcomingEventModel;
-
-import java.time.LocalDateTime;
-import java.time.ZoneId;
-import java.time.ZoneOffset;
 import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.Date;
 import java.util.List;
-import java.time.Instant;
 
 public class FragmentEvents extends Fragment {
     List<Integer> upcomingEventsItems = getUpcomingEventsGridItems();
@@ -59,7 +50,7 @@ public class FragmentEvents extends Fragment {
 
         upcomingEventsListView = rootView.findViewById(R.id.upcoming_events_list_view);
         ArrayList<UpcomingEventModel> upcomingEventModelArrayList = new ArrayList<>();
-        for (int i = 0; i < 7; i++) {
+        for (int i = 0; i < upcomingEventsItems.size(); i++) {
             upcomingEventModelArrayList.add(new UpcomingEventModel("Event Name", now(), 4.5F, "Club Name" , upcomingEventsItems.get(i)));
         }
         UpcomingEventsFragmentEventsAdapter upcomingEventsFragmentEventsAdapter = new UpcomingEventsFragmentEventsAdapter(requireContext(), upcomingEventModelArrayList);

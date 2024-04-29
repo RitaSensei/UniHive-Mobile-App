@@ -1,5 +1,9 @@
 package com.biog.unihiveandroid.ui.clubs;
 
+import static com.biog.unihiveandroid.ImageData.getClubsGridItems;
+import static com.biog.unihiveandroid.ImageData.getUpcomingEventsGridItems;
+import static java.time.Instant.now;
+
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
@@ -12,13 +16,23 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.ListView;
 import android.widget.TextView;
 
 import com.biog.unihiveandroid.MainActivity;
 import com.biog.unihiveandroid.R;
 import com.biog.unihiveandroid.SettingsActivity;
+import com.biog.unihiveandroid.adapter.ClubFragmentClubAdapter;
+import com.biog.unihiveandroid.adapter.UpcomingEventsFragmentEventsAdapter;
+import com.biog.unihiveandroid.model.ClubModel;
+import com.biog.unihiveandroid.model.UpcomingEventModel;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class FragmentClubs extends Fragment {
+    List<Integer> clubsItems = getClubsGridItems();
+    ListView clubsListView;
 
     public FragmentClubs() {
         // Required empty public constructor
@@ -45,6 +59,14 @@ public class FragmentClubs extends Fragment {
         // Access the search icon in Toolbar and change its visibility
         ImageButton searchIcon = ((MainActivity) requireActivity()).findViewById(R.id.main_toolbar_search_icon);
         searchIcon.setVisibility(View.VISIBLE);
+
+        clubsListView = rootView.findViewById(R.id.clubs_list_view);
+        ArrayList<ClubModel> clubsModelArrayList = new ArrayList<>();
+        for (int i = 0; i < clubsItems.size(); i++) {
+            clubsModelArrayList.add(new ClubModel("Club Name", "Description of the club", 4.5F, clubsItems.get(i)));
+        }
+        ClubFragmentClubAdapter clubsFragmentClubsAdapter = new ClubFragmentClubAdapter(requireContext(), clubsModelArrayList);
+        clubsListView.setAdapter(clubsFragmentClubsAdapter);
 
         return rootView;
     }

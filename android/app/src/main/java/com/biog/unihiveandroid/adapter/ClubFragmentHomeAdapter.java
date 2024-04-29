@@ -16,14 +16,14 @@ import com.biog.unihiveandroid.model.ClubModel;
 
 import java.util.List;
 
-public class ClubAdapter extends ArrayAdapter<ClubModel> {
+public class ClubFragmentHomeAdapter extends ArrayAdapter<ClubModel> {
     // ViewHolder class to hold references to views
     private static class ViewHolder {
         TextView clubRating;
         ImageView clubLogo;
     }
 
-    public ClubAdapter(@NonNull Context context, List<ClubModel> objects) {
+    public ClubFragmentHomeAdapter(@NonNull Context context, List<ClubModel> objects) {
         super(context, 0, objects);
     }
 

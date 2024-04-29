@@ -13,6 +13,7 @@ import androidx.annotation.Nullable;
 
 import com.biog.unihiveandroid.R;
 import com.biog.unihiveandroid.model.UpcomingEventModel;
+import com.google.android.material.imageview.ShapeableImageView;
 
 import java.util.List;
 
@@ -20,7 +21,7 @@ public class UpcomingEventsFragmentEventsAdapter extends ArrayAdapter<UpcomingEv
     // ViewHolder class to hold references to views
     private static class ViewHolder {
         TextView eventRating, eventTitle, eventDate, clubName;
-        ImageView eventPoster;
+        ShapeableImageView eventPoster;
     }
 
     public UpcomingEventsFragmentEventsAdapter(@NonNull Context context, List<UpcomingEventModel> objects) {

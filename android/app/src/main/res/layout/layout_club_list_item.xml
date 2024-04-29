@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:padding="4dp"
+    android:orientation="horizontal"
+    app:layout_constrainedHeight="true">
+
+    <com.google.android.material.imageview.ShapeableImageView
+        android:id="@+id/club_logo_list_view_item"
+        android:layout_width="140dp"
+        android:layout_height="140dp"
+        android:elevation="0dp"
+        android:scaleType="fitXY"
+        app:shapeAppearanceOverlay="@style/ShapeAppearanceRoundedCorners"
+        android:src="@drawable/eitc_logo" />
+
+    <LinearLayout
+        android:layout_width="230dp"
+        android:layout_height="110dp"
+        android:layout_gravity="center_vertical"
+        android:layout_marginStart="10dp"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/club_name_list_view_item"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/club_name"
+            android:fontFamily="@font/poppins_semibold"
+            android:textSize="20sp"
+            android:textColor="@color/black" />
+
+        <TextView
+            android:id="@+id/club_description_list_view_item"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/club_description"
+            android:fontFamily="@font/poppins_regular"
+            android:textSize="12sp"
+            android:textColor="@color/black" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="30dp"
+            android:layout_gravity="center_vertical"
+            android:layout_marginTop="5dp"
+            android:orientation="horizontal">
+
+            <ImageView
+                android:layout_width="15dp"
+                android:layout_height="15dp"
+                android:layout_gravity="center_vertical"
+                android:contentDescription="@null"
+                android:src="@drawable/ic_star" />
+
+            <TextView
+                android:id="@+id/club_rating_list_view_item"
+                android:layout_width="wrap_content"
+                android:layout_height="20dp"
+                android:layout_gravity="center_vertical"
+                android:layout_marginStart="5dp"
+                android:fontFamily="@font/poppins_bold"
+                android:text="rating"
+                android:textColor="@color/yellow"
+                android:textSize="13sp" />
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+</LinearLayout>

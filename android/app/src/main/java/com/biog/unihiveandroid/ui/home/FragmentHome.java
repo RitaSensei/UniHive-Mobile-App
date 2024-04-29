@@ -19,7 +19,7 @@ import android.widget.TextView;
 import android.widget.ViewSwitcher;
 
 import com.biog.unihiveandroid.MainActivity;
-import com.biog.unihiveandroid.adapter.ClubAdapter;
+import com.biog.unihiveandroid.adapter.ClubFragmentHomeAdapter;
 import com.biog.unihiveandroid.adapter.UpcomingEventsFragmentHomeAdapter;
 import com.biog.unihiveandroid.model.ClubModel;
 import com.biog.unihiveandroid.R;
@@ -112,8 +112,8 @@ public class FragmentHome extends Fragment {
         for (int i = 0; i < 3; i++) {
             clubModelArrayList.add(new ClubModel(5.0F, clubsItems.get(i)));
         }
-        ClubAdapter clubAdapter = new ClubAdapter(requireContext(), clubModelArrayList);
-        clubsGridView.setAdapter(clubAdapter);
+        ClubFragmentHomeAdapter clubFragmentHomeAdapter = new ClubFragmentHomeAdapter(requireContext(), clubModelArrayList);
+        clubsGridView.setAdapter(clubFragmentHomeAdapter);
 
         ImageButton seeAllClubsButton = rootView.findViewById(R.id.see_all_button_clubs_switcher);
         seeAllClubsButton.setOnClickListener(new View.OnClickListener() {
