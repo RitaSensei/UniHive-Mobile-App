@@ -1,12 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
-<menu xmlns:android="http://schemas.android.com/apk/res/android" >
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
     <item
         android:id="@+id/action_home"
         android:enabled="true"
         android:icon="@drawable/home_icon_selector"
         android:iconTint="@drawable/bottom_navigation_bar_icon_color"
-        android:title="@string/ic_home"
-        />
+        android:title="@string/ic_home"/>
     <item
         android:id="@+id/action_events"
         android:enabled="true"

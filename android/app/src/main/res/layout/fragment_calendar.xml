@@ -4,47 +4,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    tools:context=".ui.calendar.FragmentCalendar">
-
-    <androidx.appcompat.widget.Toolbar
-        android:id="@+id/calendar_toolbar"
-        android:layout_width="match_parent"
-        android:layout_height="60dp"
-        android:background="@color/white"
-        android:elevation="0dp"
-        android:theme="@style/ThemeOverlay.AppCompat.ActionBar"
-        app:popupTheme="@style/ThemeOverlay.AppCompat.Light">
-
-        <ImageView
-            android:id="@+id/action_bar_logo"
-            android:layout_width="90dp"
-            android:layout_height="50dp"
-            android:layout_gravity="center_vertical"
-            android:src="@drawable/logov1_rounded" />
-
-        <TextView
-            android:id="@+id/action_bar_home_text"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:fontFamily="@font/poppins_medium"
-            android:text="@string/ic_calendar"
-            android:textColor="@color/black"
-            android:textSize="27sp"
-            android:layout_gravity="center_vertical"
-            android:layout_marginStart="30dp"
-            />
-
-        <ImageButton
-            android:id="@+id/action_bar_calendar_settings_icon"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="end|center_vertical"
-            android:src="@drawable/ic_settings"
-            android:backgroundTint="@color/white"
-            android:layout_marginEnd="10dp"
-            android:contentDescription="@null" />
-
-    </androidx.appcompat.widget.Toolbar>
+    tools:context=".ui.calendar.FragmentCalendar"
+    android:background="@color/white">
 
 
 </FrameLayout>

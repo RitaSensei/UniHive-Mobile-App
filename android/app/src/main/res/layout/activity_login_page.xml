@@ -29,7 +29,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <LinearLayout
-        android:layout_width="256dp"
+        android:layout_width="290dp"
         android:layout_height="560dp"
         android:orientation="vertical"
         app:layout_constraintEnd_toEndOf="parent"
@@ -38,8 +38,8 @@
 
         <TextView
             android:id="@+id/emailAddressTextView"
-            android:layout_width="200dp"
-            android:layout_height="19dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
             android:layout_marginTop="50dp"
             android:fontFamily="@font/poppins_regular"
             android:text="@string/email_address_text" />
@@ -61,8 +61,8 @@
 
         <TextView
             android:id="@+id/passwordTextView"
-            android:layout_width="200dp"
-            android:layout_height="19dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
             android:fontFamily="@font/poppins_regular"
             android:text="@string/password_text" />
@@ -88,27 +88,31 @@
             android:gravity="center_vertical"
             app:layout_constraintTop_toBottomOf="@+id/editPasswordLoginText"
             >
+
             <CheckBox
                 android:id="@+id/rememberMeCheckBox"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_gravity="start|center_vertical"
                 android:text="@string/rememberme_check_box" />
 
             <TextView
                 android:id="@+id/forgetPasswordTextView"
-                android:layout_width="wrap_content"
+                android:layout_width="130dp"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="20dp"
+                android:layout_marginTop="2dp"
+                android:layout_marginStart="28dp"
                 android:fontFamily="@font/poppins_regular"
+                android:textAlignment="textEnd"
                 android:text="@string/forget_password_text"
-                android:textSize="12sp" />
+                android:textSize="12sp"/>
 
         </LinearLayout>
 
         <Button
             android:id="@+id/login_button_page"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="50dp"
             android:layout_marginTop="25dp"
             android:background="@drawable/rounded_corners_white"
             android:backgroundTint="@color/picton_blue"
@@ -132,7 +136,7 @@
         <Button
             android:id="@+id/create_account_button_page"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="50dp"
             android:layout_marginTop="10dp"
             android:background="@drawable/rounded_corners_white"
             android:backgroundTint="@color/picton_blue"

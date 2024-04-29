@@ -59,4 +59,9 @@
         <item name="android:textColor">@drawable/button_text_color</item>
     </style>
 
+    <style name="ShapeAppearanceRoundedCorners" parent="ShapeAppearance.M3.Sys.Shape.Corner.Small">
+        <item name="cornerFamily">?attr/shapeCornerFamily</item>
+        <item name="cornerSize">5dp</item>
+    </style>
+
 </resources>

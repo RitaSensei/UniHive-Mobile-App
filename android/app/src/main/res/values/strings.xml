@@ -66,5 +66,7 @@
     <string name="see_all_text">See all</string>
     <string name="upcoming_events_title">Upcoming events</string>
     <string name="upcoming_events_card_name">Name Of Event</string>
+    <string name="upcoming_events_date">From Day Month Year To Day Month Year</string>
+    <string name="club_name">Club Name</string>
 
 </resources>

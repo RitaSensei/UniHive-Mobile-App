@@ -12,7 +12,9 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.TextView;
 
+import com.biog.unihiveandroid.MainActivity;
 import com.biog.unihiveandroid.R;
 import com.biog.unihiveandroid.SettingsActivity;
 
@@ -37,15 +39,12 @@ public class FragmentClubs extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fragment_clubs, container, false);
-        Toolbar toolbar = rootView.findViewById(R.id.clubs_toolbar);
-        ImageButton settingsIcon = toolbar.findViewById(R.id.action_bar_clubs_settings_icon);
-
-        settingsIcon.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                startActivity(new Intent((Activity) getContext(), SettingsActivity.class));
-            }
-        });
+        // Access the textview in Toolbar and change its text
+        TextView toolbarTitle =((MainActivity) requireActivity()).findViewById(R.id.main_toolbar_title);
+        toolbarTitle.setText(R.string.ic_clubs);
+        // Access the search icon in Toolbar and change its visibility
+        ImageButton searchIcon = ((MainActivity) requireActivity()).findViewById(R.id.main_toolbar_search_icon);
+        searchIcon.setVisibility(View.VISIBLE);
 
         return rootView;
     }

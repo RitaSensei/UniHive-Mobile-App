@@ -12,44 +12,45 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import com.biog.unihiveandroid.R;
-import com.biog.unihiveandroid.model.ClubModel;
 import com.biog.unihiveandroid.model.UpcomingEventModel;
 
 import java.util.List;
 
-public class UpcomingEventAdapter extends ArrayAdapter<UpcomingEventModel> {
+public class UpcomingEventsFragmentEventsAdapter extends ArrayAdapter<UpcomingEventModel> {
     // ViewHolder class to hold references to views
     private static class ViewHolder {
-        TextView eventRating, eventTitle;
+        TextView eventRating, eventTitle, eventDate, clubName;
         ImageView eventPoster;
     }
 
-    public UpcomingEventAdapter(@NonNull Context context, List<UpcomingEventModel> objects) {
+    public UpcomingEventsFragmentEventsAdapter(@NonNull Context context, List<UpcomingEventModel> objects) {
         super(context, 0, objects);
     }
 
     @NonNull
     @Override
     public View getView(int position, @Nullable View convertView, @NonNull ViewGroup parent) {
-        UpcomingEventAdapter.ViewHolder viewHolder;
+        UpcomingEventsFragmentEventsAdapter.ViewHolder viewHolder;
 
         if (convertView == null) {
             // If convertView is null, inflate the layout and create a new ViewHolder
-            convertView = LayoutInflater.from(getContext()).inflate(R.layout.layout_upcoming_event_card, parent, false);
+            convertView = LayoutInflater.from(getContext()).inflate(R.layout.layout_upcoming_event_list_item, parent, false);
 
-            viewHolder = new UpcomingEventAdapter.ViewHolder();
-            viewHolder.eventRating = convertView.findViewById(R.id.event_rating_card_item);
-            viewHolder.eventTitle = convertView.findViewById(R.id.event_title_card_item);
-            viewHolder.eventPoster = convertView.findViewById(R.id.event_poster_card_item);
+            viewHolder = new UpcomingEventsFragmentEventsAdapter.ViewHolder();
+            viewHolder.eventTitle = convertView.findViewById(R.id.event_title_list_view_item);
+            viewHolder.eventDate = convertView.findViewById(R.id.event_date_list_view_item);
+            viewHolder.clubName = convertView.findViewById(R.id.club_name_list_view_item);
+            viewHolder.eventPoster = convertView.findViewById(R.id.event_poster_list_view_item);
+            viewHolder.eventRating = convertView.findViewById(R.id.event_rating_list_view_item);
 
             // Set the ViewHolder as a tag for the convertView
             convertView.setTag(viewHolder);
         } else {
             // If convertView is not null, retrieve the ViewHolder from the tag
-            viewHolder = (UpcomingEventAdapter.ViewHolder) convertView.getTag();
+            viewHolder = (UpcomingEventsFragmentEventsAdapter.ViewHolder) convertView.getTag();
         }
 
-        // Get the ClubModel object at the current position
+        // Get the UpcomingEventModel object at the current position
         UpcomingEventModel upcomingEventModel = getItem(position);
 
         // Set data to views using ViewHolder references

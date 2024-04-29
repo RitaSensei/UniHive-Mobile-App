@@ -28,8 +28,8 @@
             android:id="@+id/switch1"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:thumb="@drawable/custome_switch_thumb"
-            android:track="@drawable/custome_switch_track"
+            android:thumb="@drawable/custom_switch_thumb"
+            android:track="@drawable/custom_switch_track"
             android:layout_marginBottom="5dp"
             tools:ignore="UseSwitchCompatOrMaterialXml" />
 
