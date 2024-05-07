@@ -8,6 +8,7 @@ import java.util.List;
 import java.util.UUID;
 
 public interface EventService {
+    List<Event> getAllByStudent();
     List<Event> getAll(UUID... schoolId) throws AccessDeniedException;
 
     Event addEvent(Event event, UUID... schoolId) throws AccessDeniedException;

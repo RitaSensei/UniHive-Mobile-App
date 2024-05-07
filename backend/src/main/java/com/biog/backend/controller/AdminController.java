@@ -22,3 +22,4 @@ public class AdminController {
     return studentService.updateStudent(id, newstudent, schoolId);
   }
 }
+

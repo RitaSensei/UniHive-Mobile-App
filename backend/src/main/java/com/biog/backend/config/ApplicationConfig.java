@@ -1,7 +1,13 @@
 package com.biog.backend.config;
 
-import com.biog.backend.repository.UserRepository;
-import com.biog.backend.model.User;
+import com.biog.backend.model.Admin;
+import com.biog.backend.model.Club;
+import com.biog.backend.model.Student;
+import com.biog.backend.model.SuperAdmin;
+import com.biog.backend.repository.AdminRepository;
+import com.biog.backend.repository.ClubRepository;
+import com.biog.backend.repository.StudentRepository;
+import com.biog.backend.repository.SuperAdminRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -20,17 +26,34 @@ import java.util.Optional;
 @RequiredArgsConstructor
 public class ApplicationConfig {
 
-  public final UserRepository userRepository;
+  public final AdminRepository adminRepository;
+  public final ClubRepository clubRepository;
+  public final StudentRepository studentRepository;
+  public final SuperAdminRepository superAdminRepository;
 
   @Bean
   public UserDetailsService userDetailsService() throws UsernameNotFoundException {
     return username -> {
-      Optional<User> user = userRepository.findByEmail(username);
-      if (user.isPresent() &&
-              Arrays.asList("SUPER_ADMIN", "ADMIN", "STUDENT", "CLUB").contains(user.get().getRole().toString())) {
-        return user.get();
+      Optional<Admin> admin = adminRepository.findByEmail(username);
+      if (admin.isPresent()) {
+        return admin.get();
       } else {
-        throw new UsernameNotFoundException("User not found");
+        Optional<Club> club = clubRepository.findByEmail(username);
+        if (club.isPresent()) {
+          return club.get();
+        } else {
+          Optional<Student> student = studentRepository.findByEmail(username);
+          if (student.isPresent()) {
+            return student.get();
+          } else {
+            Optional<SuperAdmin> superAdmin = superAdminRepository.findByEmail(username);
+            if (superAdmin.isPresent()) {
+              return superAdmin.get();
+            } else {
+              throw new UsernameNotFoundException("User not found");
+            }
+          }
+        }
       }
     };
   }
@@ -45,8 +68,7 @@ public class ApplicationConfig {
 
   @Bean
   public AuthenticationManager authenticationManager(
-          AuthenticationConfiguration config
-  ) throws Exception {
+          AuthenticationConfiguration config) throws Exception {
     return config.getAuthenticationManager();
   }
 

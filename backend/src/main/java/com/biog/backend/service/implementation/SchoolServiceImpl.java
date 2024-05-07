@@ -37,8 +37,6 @@ public class SchoolServiceImpl implements SchoolService {
         oldschool.setSchoolName(newschool.getSchoolName());
         oldschool.setSchoolAddress(newschool.getSchoolAddress());
         oldschool.setSchoolCity(newschool.getSchoolCity());
-        oldschool.setClubs(newschool.getClubs());
-        oldschool.setStudents(newschool.getStudents());
         return schoolRepository.save(oldschool);
     }
 
