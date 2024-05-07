@@ -1,7 +1,7 @@
 package com.biog.backend.config;
 
-import com.biog.backend.model.*;
-import com.biog.backend.repository.*;
+import com.biog.backend.repository.UserRepository;
+import com.biog.backend.model.User;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -20,34 +20,17 @@ import java.util.Optional;
 @RequiredArgsConstructor
 public class ApplicationConfig {
 
-  public final AdminRepository adminRepository;
-  public final ClubRepository clubRepository;
-  public final StudentRepository studentRepository;
-  public final SuperAdminRepository superAdminRepository;
+  public final UserRepository userRepository;
 
   @Bean
   public UserDetailsService userDetailsService() throws UsernameNotFoundException {
     return username -> {
-      Optional<Admin> admin = adminRepository.findByEmail(username);
-      if (admin.isPresent()) {
-        return admin.get();
+      Optional<User> user = userRepository.findByEmail(username);
+      if (user.isPresent() &&
+              Arrays.asList("SUPER_ADMIN", "ADMIN", "STUDENT", "CLUB").contains(user.get().getRole().toString())) {
+        return user.get();
       } else {
-        Optional<Club> club = clubRepository.findByEmail(username);
-        if (club.isPresent()) {
-          return club.get();
-        } else {
-          Optional<Student> student = studentRepository.findByEmail(username);
-          if (student.isPresent()) {
-            return student.get();
-          } else {
-            Optional<SuperAdmin> superAdmin = superAdminRepository.findByEmail(username);
-            if (superAdmin.isPresent()) {
-              return superAdmin.get();
-            } else {
-              throw new UsernameNotFoundException("User not found");
-            }
-          }
-        }
+        throw new UsernameNotFoundException("User not found");
       }
     };
   }
@@ -62,7 +45,8 @@ public class ApplicationConfig {
 
   @Bean
   public AuthenticationManager authenticationManager(
-          AuthenticationConfiguration config) throws Exception {
+          AuthenticationConfiguration config
+  ) throws Exception {
     return config.getAuthenticationManager();
   }
 

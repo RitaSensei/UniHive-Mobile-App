@@ -1,5 +1,6 @@
 package com.biog.backend.model;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -31,9 +32,6 @@ public class Event {
   @Column(name = "event_description", nullable = false)
   private String eventDescription;
 
-  @Column(name = "event_location", nullable = false)
-  private String eventLocation;
-
   @Column(name = "event_banner", nullable = false)
   private String eventBanner;
 
@@ -49,8 +47,9 @@ public class Event {
   @Column(name = "rating_count")
   private int ratingCount;
 
-  @ManyToOne
+  @ManyToOne(cascade = CascadeType.ALL)
   @JoinColumn(name = "club_id", referencedColumnName = "id", nullable = false)
+  @JsonManagedReference(value = "club-event")
   private Club club;
 
   @PrePersist

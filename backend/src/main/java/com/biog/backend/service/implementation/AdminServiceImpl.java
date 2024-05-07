@@ -3,10 +3,12 @@ package com.biog.backend.service.implementation;
 import com.biog.backend.exception.NotFoundException;
 import com.biog.backend.model.Admin;
 import com.biog.backend.model.School;
+import com.biog.backend.model.User;
 import com.biog.backend.repository.AdminRepository;
-import com.biog.backend.repository.SchoolRepository;
+import com.biog.backend.repository.UserRepository;
 import com.biog.backend.service.AdminService;
 import lombok.AllArgsConstructor;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -17,7 +19,8 @@ import java.util.UUID;
 public class AdminServiceImpl implements AdminService {
 
     private final AdminRepository adminRepository;
-    private final SchoolRepository schoolRepository;
+    private final UserRepository userRepository;
+    private final PasswordEncoder passwordEncoder;
 
     @Override
     public List<Admin> getAll() {
@@ -28,18 +31,19 @@ public class AdminServiceImpl implements AdminService {
     public Admin updateAdmin(UUID id, Admin newadmin) {
         Admin oldadmin = adminRepository.findById(id).orElseThrow(
                 () -> new NotFoundException("Admin with id " + id + " not found"));
-
-        oldadmin.setEmail(newadmin.getEmail());
+        User olduser = oldadmin.getUser();
+        olduser.setEmail(newadmin.getUser().getEmail());
+        olduser.setPassword(passwordEncoder.encode(newadmin.getUser().getPassword()));
+        userRepository.save(olduser);
         oldadmin.setFirstName(newadmin.getFirstName());
         oldadmin.setLastName(newadmin.getLastName());
-        oldadmin.setSchool(schoolRepository.findById(newadmin.getSchool().getId()).orElseThrow(
-                () -> new NotFoundException(
-                        "School not found with id " + newadmin.getSchool().getId())));
         return adminRepository.save(oldadmin);
     }
 
     @Override
     public void deleteAdmin(UUID id) {
+        userRepository.deleteById(adminRepository.findById(id).orElseThrow(
+                () -> new NotFoundException("Admin with id " + id + " not found")).getUser().getId());
         adminRepository.deleteById(id);
     }
 

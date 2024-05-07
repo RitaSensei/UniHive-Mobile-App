@@ -1,17 +1,14 @@
 package com.biog.backend.model;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import org.springframework.security.core.GrantedAuthority;
-import org.springframework.security.core.authority.SimpleGrantedAuthority;
-import org.springframework.security.core.userdetails.UserDetails;
 
 import java.time.Instant;
-import java.util.Collection;
 import java.util.List;
 import java.util.UUID;
 import java.util.stream.Collectors;
@@ -22,7 +19,7 @@ import java.util.stream.Collectors;
 @Builder
 @Data
 @Table(name = "students", schema = "public")
-public class Student implements UserDetails {
+public class Student {
 
   @Id
   @GeneratedValue(strategy = GenerationType.UUID)
@@ -43,28 +40,23 @@ public class Student implements UserDetails {
   @Column(name = "last_name", nullable = false)
   private String lastName;
 
-  @Column(name = "email", nullable = false, unique = true)
-  private String email;
-
-  @Column(name = "password", nullable = false)
-  private String password;
-
-  @Builder.Default
-  @Column(name = "profile_image")
-  private String profileImage = "https://storage.googleapis.com/unihive-files/pfp-plaveholder.jpg";
+  @Column(name = "profile_image", nullable = false)
+  private String profileImage;
 
   @ManyToMany
   @JoinTable(name = "follows", joinColumns = @JoinColumn(name = "student_id"), inverseJoinColumns = @JoinColumn(name = "club_id"))
-  @JsonIgnore
+  @JsonBackReference(value = "club-student")
   private List<Club> clubs;
 
-  @ManyToOne
+  @ManyToOne(cascade = CascadeType.ALL)
   @JoinColumn(name = "school_id", referencedColumnName = "id", nullable = false)
+  @JsonManagedReference(value = "school-student")
   private School school;
 
-  @Builder.Default
-  @Enumerated(EnumType.STRING)
-  private Role role = Role.STUDENT;
+  @OneToOne(cascade = CascadeType.ALL)
+  @JoinColumn(name = "user_id", referencedColumnName = "id", nullable = false)
+  @JsonManagedReference(value = "user-student")
+  private User user;
 
   @PrePersist
   protected void onCreate() {
@@ -75,40 +67,5 @@ public class Student implements UserDetails {
     return clubs.stream()
             .filter(club -> club.getSchool().getId().equals(schoolId))
             .collect(Collectors.toList());
-  }
-
-  @Override
-  public Collection<? extends GrantedAuthority> getAuthorities() {
-    return List.of(new SimpleGrantedAuthority(role.name()));
-  }
-
-  @Override
-  public String getUsername() {
-    return this.email;
-  }
-
-  @Override
-  public String getPassword() {
-    return this.password;
-  }
-
-  @Override
-  public boolean isAccountNonExpired() {
-    return true;
-  }
-
-  @Override
-  public boolean isAccountNonLocked() {
-    return true;
-  }
-
-  @Override
-  public boolean isCredentialsNonExpired() {
-    return true;
-  }
-
-  @Override
-  public boolean isEnabled() {
-    return true;
   }
 }
