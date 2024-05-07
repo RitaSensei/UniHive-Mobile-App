@@ -32,3 +32,4 @@ build/
 ### VS Code ###
 .vscode/
 src/main/java/com/biog/backend/service/credentials.json
+src/main/resources/gcp-account-file.json
