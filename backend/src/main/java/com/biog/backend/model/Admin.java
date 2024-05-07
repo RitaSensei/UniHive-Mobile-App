@@ -1,13 +1,17 @@
 package com.biog.backend.model;
 
-import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
 
 import java.time.Instant;
+import java.util.Collection;
+import java.util.List;
 import java.util.UUID;
 
 @Entity
@@ -16,7 +20,7 @@ import java.util.UUID;
 @Builder
 @Data
 @Table(name = "admins", schema = "public")
-public class Admin {
+public class Admin implements UserDetails {
 
   @Id
   @GeneratedValue(strategy = GenerationType.UUID)
@@ -28,21 +32,60 @@ public class Admin {
   @Column(name = "last_name", nullable = false)
   private String lastName;
 
+  @Column(name = "email", nullable = false, unique = true)
+  private String email;
+
+  @Column(name = "password", nullable = false)
+  private String password;
+
+  @Builder.Default
+  @Enumerated(EnumType.STRING)
+  private Role role = Role.ADMIN;
+
   @Column(name = "created_at", nullable = false)
   private Instant createdAt;
 
   @OneToOne(cascade = CascadeType.ALL)
-  @JsonManagedReference(value = "school-admin")
-  @JoinColumn(name = "school_id", referencedColumnName = "id", nullable = false)
+  @JoinColumn(name = "school_id", referencedColumnName = "id", nullable = false, unique = true)
   private School school;
-
-  @OneToOne(cascade = CascadeType.ALL)
-  @JsonManagedReference(value = "user-admin")
-  @JoinColumn(name = "user_id", referencedColumnName = "id", nullable = false)
-  private User user;
 
   @PrePersist
   protected void onCreate() {
     createdAt = Instant.now();
+  }
+
+  @Override
+  public Collection<? extends GrantedAuthority> getAuthorities() {
+    return List.of(new SimpleGrantedAuthority(role.name()));
+  }
+
+  @Override
+  public String getUsername() {
+    return this.email;
+  }
+
+  @Override
+  public String getPassword() {
+    return this.password;
+  }
+
+  @Override
+  public boolean isAccountNonExpired() {
+    return true;
+  }
+
+  @Override
+  public boolean isAccountNonLocked() {
+    return true;
+  }
+
+  @Override
+  public boolean isCredentialsNonExpired() {
+    return true;
+  }
+
+  @Override
+  public boolean isEnabled() {
+    return true;
   }
 }

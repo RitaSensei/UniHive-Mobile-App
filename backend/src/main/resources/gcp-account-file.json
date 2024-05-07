@@ -1,0 +1,13 @@
+{
+  "type": "service_account",
+  "project_id": "unihive-421208",
+  "private_key_id": "aea5d985a574ce7e3fab22f765b6cb20e714dd93",
+  "private_key": "-----BEGIN PRIVATE KEY-----\nMIIEvQIBADANBgkqhkiG9w0BAQEFAASCBKcwggSjAgEAAoIBAQDADAJJ5tjrUr7c\n8BWInyPgNZmOzCTIqOkg3HG06tYRWI9SB5miWEarTxwZFvUaEScBhzB1hXvWvNh5\ndqnVzh8hmybANTp++cOl4+bwkokRiYO+SYZkj2QC2AN9b9Gj+BTOVFy/0SCsL7g2\n3GXexVRSevYt4YwlxIqwetXY0WbbFqXRnL9p062NZvSYBOqTMryh6DvC61IG6Mok\n4239cER34tsBIOo/F0Nx7ASzycf5aL4PwknrpXw1a8YHY1ruKfLvvUeRp4i4xcXr\nxyx+26tB0ZWniIo+oh0pVufydN4dZcmWAlmjgFOkKo09U8kpVVHhKxubSyJHKOol\naFAilGHvAgMBAAECggEAHvLwfXtj0syjcJSKS9mlnPDWXdJdTS8XXtHXyzmbJPF6\nK1SJOEX0oY/erdZqynggKplgQFgyJGGLm0t5xDhzAOXxgUEyu5rBol7PbU6YI0jf\nf892hocrLWAlc9YM2VlV9QhYaBsqIkWQcNrk2dlAJQim2q8B+GYrmZQ6GTZp1n2Q\nnUw8VG1Guq6QJFVEynGvBpzfCxpdV5KD1tvm1lkCm5g+nwzw71mAsFUL+LktUB/7\nInLSSCYtoPfJKa1cg2cEmbNzn5/vI9/FwWGfEpKB9gdlOBIbyzME6X8ORU+5CVvu\nWh6ix7vjMjS6/3vhSvC0WzCiycNhiOeHBb7YE1zB+QKBgQDyRRNsp4rzcdo4dX63\nE/DgFi1SC33V1oe2JieIJyPwZukat6q9hTTOROH8jX/38mNbYNSICO+vs7DTgBuc\nN/Tb9g+BD3TkareHigfbjjJ02WQoRKN+at3p+Wj2IY2FF6P4kCXrfG2i3itISf0a\nsOAvXYBqaDGAEa/ATWU3CzVl5wKBgQDK7kijclEuvyGs85+74nrruW9qt40U+x4V\nbZ8Y3cFeDNvJWF348dFLq7G75jiaH+58SAkLfOtliTjguc5Kerx9Fr12WTI5LFp7\n+Cc3uhKmuwBC0s9tpfWScjAAX/AmciR55QeXGG24wgYTVxv0tRROFiGJVDTb4O0c\nxboeaCCSuQKBgE1tWBzkmtrc6yIaIuo93ECxtcA/3fKGgo7rOL0hzTGaoisgwdea\nB9tYVmURj/FdLPXaR3JGcNvVcNDXY3uUwpO92wyjNPd/R7JwobxAgM2pYIIiFaJk\nYxHQ3QO0i3carBPXddcByERB/tE2nEZ4et2IY28eZ5uHi4TI920VDvbHAoGBALLl\nc9XbXqQ2TQq6TzQESdbrR8StgctgQbokRKBYRjKSZWPP6jAfhiIOf4YlQ/rjcYvQ\nuWCORLrjSOgcBTd1khs4Y9gkc/khF7e4IWKoP+8KZgWC8Og56Q6saZK7AOvzriJj\nfNh/6aJ6MX71SSjmRbs9GV2GhX7dgErgKN7LbwPJAoGAU77qxYOmzUgdV71zo3Fp\nOOglk2WXZxfHXAM9T1iinCRhR6o1lI1pjbmDotOK5ya0I8PvmO70T6UYZ40jf543\nwS2zy5x2kWB7ajFut/pVK+SCVoc4sTvVJ5eEh0Dp0b+hM+O1rDovyPj9jNhc27mb\nYeB3IuYu/m8CoybHYtq3X7g=\n-----END PRIVATE KEY-----\n",
+  "client_email": "unihive-project@unihive-421208.iam.gserviceaccount.com",
+  "client_id": "109606203896834798080",
+  "auth_uri": "https://accounts.google.com/o/oauth2/auth",
+  "token_uri": "https://oauth2.googleapis.com/token",
+  "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
+  "client_x509_cert_url": "https://www.googleapis.com/robot/v1/metadata/x509/unihive-project%40unihive-421208.iam.gserviceaccount.com",
+  "universe_domain": "googleapis.com"
+}

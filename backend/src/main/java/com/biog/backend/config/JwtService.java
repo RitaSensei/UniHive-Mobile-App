@@ -37,8 +37,7 @@ public class JwtService {
 
   public String generateToken(
           Map<String, Object> extraClaims,
-          UserDetails userDetails
-  ) {
+          UserDetails userDetails) {
     String role = userDetails
             .getAuthorities()
             .stream()
@@ -52,16 +51,14 @@ public class JwtService {
             .claim("role", role)
             .setSubject(userDetails.getUsername())
             .setIssuedAt(new Date(System.currentTimeMillis()))
-            .setExpiration(new Date(System.currentTimeMillis() + 1000 * 60 * 60 * 10))
+            .setExpiration(new Date(System.currentTimeMillis() + 1000 * 60 * 60 * 24))
             .signWith(getSigninKey(), SignatureAlgorithm.HS256)
             .compact();
   }
 
   public boolean isTokenValid(String token, UserDetails userDetails) {
     final String username = extractUsername(token);
-    return (
-            (username.equals(userDetails.getUsername())) && !isTokenExpired(token)
-    );
+    return ((username.equals(userDetails.getUsername())) && !isTokenExpired(token));
   }
 
   private boolean isTokenExpired(String token) {

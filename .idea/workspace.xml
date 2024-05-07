@@ -36,7 +36,7 @@
     "cidr.known.project.marker": "true",
     "git-widget-placeholder": "dev",
     "kotlin-language-version-configured": "true",
-    "last_opened_file_path": "D:/Ghita/2A/S4/Android/AndroidProject/UniHive-app",
+    "last_opened_file_path": "D:/Ghita/2A/S4/JEE/Project JEE/development-platform-biog",
     "nodejs_package_manager_path": "npm",
     "vue.rearranger.settings.migration": "true"
   }
@@ -56,6 +56,7 @@
       <updated>1711508729920</updated>
       <workItem from="1711809076988" duration="128000" />
       <workItem from="1713959711426" duration="7000" />
+      <workItem from="1714682204404" duration="79000" />
     </task>
     <servers />
   </component>
