@@ -73,4 +73,9 @@ dependencies {
     androidTestImplementation("androidx.compose.ui:ui-test-junit4")
     debugImplementation("androidx.compose.ui:ui-tooling")
     debugImplementation("androidx.compose.ui:ui-test-manifest")
+    implementation ("com.squareup.retrofit2:retrofit:2.11.0")
+    implementation ("com.squareup.retrofit2:converter-gson:2.11.0")
+    implementation ("io.jsonwebtoken:jjwt-api:0.12.5")
+    runtimeOnly ("io.jsonwebtoken:jjwt-impl:0.12.5")
+    runtimeOnly ("io.jsonwebtoken:jjwt-jackson:0.12.5")
 }

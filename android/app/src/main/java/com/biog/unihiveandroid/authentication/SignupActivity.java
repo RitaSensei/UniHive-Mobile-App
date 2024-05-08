@@ -18,4 +18,11 @@ public class SignupActivity extends AppCompatActivity {
     public void onSignupBtnClick(View view) {
         System.out.println("sign up clicked");
     }
+
+    private boolean validateEmail(String email) {
+        return email.matches("^[\\w!#$%&’*+/=?`{|}~^-]+(?:\\.[\\w!#$%&’*+/=?`{|}~^-]+)*@(?:[a-zA-Z0-9-]+\\.)+[a-zA-Z]{2,6}$");
+    }
+    private boolean validatePassword(String password) {
+        return password.matches("^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[@$!%*?&])[A-Za-z\\d@$!%*?&]{8,}$");
+    };
 }

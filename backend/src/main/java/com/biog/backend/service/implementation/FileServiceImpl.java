@@ -40,8 +40,7 @@ public class FileServiceImpl implements FileService {
     public ByteArrayResource downloadFile(String fileName) {
 
         Blob blob = storage.get(bucketName, fileName);
-        ByteArrayResource resource = new ByteArrayResource(
-                blob.getContent());
+        ByteArrayResource resource = new ByteArrayResource(blob.getContent());
 
         return resource;
     }
@@ -50,7 +49,6 @@ public class FileServiceImpl implements FileService {
     public boolean deleteFile(String fileName) {
 
         Blob blob = storage.get(bucketName, fileName);
-
         return blob.delete();
     }
 

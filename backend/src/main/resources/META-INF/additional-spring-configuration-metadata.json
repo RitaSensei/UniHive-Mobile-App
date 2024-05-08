@@ -1,19 +1,72 @@
-{
-  "properties": [
-    {
-      "name": "supabase.jwt_secret",
-      "type": "java.lang.String",
-      "description": "A description for 'supabase.jwt_secret'"
-    },
-    {
-      "name": "supabase.anon",
-      "type": "java.lang.String",
-      "description": "A description for 'supabase.anon'"
-    },
-    {
-      "name": "supabase.url",
-      "type": "java.lang.String",
-      "description": "A description for 'supabase.url'"
-    }
-  ]
-}
+{"properties": [
+  {
+    "name": "supabase.jwt_secret",
+    "type": "java.lang.String",
+    "description": "A description for 'supabase.jwt_secret'"
+  },
+  {
+    "name": "supabase.anon",
+    "type": "java.lang.String",
+    "description": "A description for 'supabase.anon'"
+  },
+  {
+    "name": "supabase.url",
+    "type": "java.lang.String",
+    "description": "A description for 'supabase.url'"
+  },
+  {
+    "name": "gcp.config.file",
+    "type": "java.lang.String",
+    "description": "A description for 'gcp.config.file'"
+  },
+  {
+    "name": "gcp.project.id",
+    "type": "java.lang.String",
+    "description": "A description for 'gcp.project.id'"
+  },
+  {
+    "name": "gcp.bucket.id",
+    "type": "java.lang.String",
+    "description": "A description for 'gcp.bucket.id'"
+  },
+  {
+    "name": "gcp.dir.name",
+    "type": "java.lang.String",
+    "description": "A description for 'gcp.dir.name'"
+  },
+  {
+    "name": "app.config.bucket-name",
+    "type": "java.lang.String",
+    "description": "A description for 'app.config.bucket-name'"
+  },
+  {
+    "name": "app.config.max-upload-count",
+    "type": "java.lang.String",
+    "description": "A description for 'app.config.max-upload-count'"
+  },
+  {
+    "name": "app.config.max-request-size",
+    "type": "java.lang.String",
+    "description": "A description for 'app.config.max-request-size'"
+  },
+  {
+    "name": "app.config.max-in-mem-size",
+    "type": "java.lang.String",
+    "description": "A description for 'app.config.max-in-mem-size'"
+  },
+  {
+    "name": "spring.cloud.gcp.project-id",
+    "type": "java.lang.String",
+    "description": "A description for 'spring.cloud.gcp.project-id'"
+  },
+  {
+    "name": "spring.cloud.gcp.credentials.location",
+    "type": "java.lang.String",
+    "description": "A description for 'spring.cloud.gcp.credentials.location'"
+  },
+  {
+    "name": "gcp.bucket.name",
+    "type": "java.lang.String",
+    "description": "A description for 'gcp.bucket.name'"
+  }
+]}

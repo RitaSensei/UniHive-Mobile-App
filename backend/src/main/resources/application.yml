@@ -4,16 +4,16 @@ server:
     include-message: always
 
 supabase:
-  url: https://fysrnplzrzbnyjwctoof.supabase.co
-  anon: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImZ5c3JucGx6cnpibnlqd2N0b29mIiwicm9sZSI6ImFub24iLCJpYXQiOjE3MTE1MTA5NDksImV4cCI6MjAyNzA4Njk0OX0.xd3MDD88KRRStaUynKtSM8i1Oyxx7GkypMe7dD64ieI
-  jwt_secret: J1ssCJAhyDcBhJ0Zx8JepLUXFksnzFICdIen42e/6wNJjx01O8j9pB1F5dz4W1RIwKln5Q5F7aBRpEbo5AnYiw==
+  url: https://yfnmatryhthmdluxgbdb.supabase.co
+  anon: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Inlmbm1hdHJ5aHRobWRsdXhnYmRiIiwicm9sZSI6ImFub24iLCJpYXQiOjE3MTA0ODk2MDEsImV4cCI6MjAyNjA2NTYwMX0.4hYSYPs3_bNIuoMVRV023VJv2iMHExnISOCiFPu5V20
+  jwt_secret: AndWL5D2oEVYvhWiyTFAm7gN2P/0lpOaL8i4gYXq37u5wOKis5GLuU5tT7AOySYBwFeEF1oq5rxyA/RvR0/uuw==
 
 spring:
   application:
     name: backend
   datasource:
-    url: jdbc:postgresql://aws-0-us-west-1.pooler.supabase.com:5432/postgres
-    username: postgres.fysrnplzrzbnyjwctoof
+    url: jdbc:postgresql://aws-0-us-east-1.pooler.supabase.com:5432/postgres
+    username: postgres.yfnmatryhthmdluxgbdb
     password: UniHive575859
     driverClassName: org.postgresql.Driver
   jpa:
@@ -34,3 +34,15 @@ spring:
           auth: true
           starttls:
             enable: true
+  cloud:
+    gcp:
+      project-id: unihive-421208
+      credentials:
+        location: classpath:gcp-account-file.json
+    servlet:
+      multipart:
+        max-file-size: 10MB
+        max-request-size: 10MB
+gcp:
+  bucket:
+    name: unihive-files

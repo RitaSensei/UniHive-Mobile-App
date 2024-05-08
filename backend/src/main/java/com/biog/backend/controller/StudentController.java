@@ -14,7 +14,7 @@ import java.util.UUID;
 @RestController
 @RequestMapping("/student")
 @AllArgsConstructor
-@CrossOrigin(origins = "http://localhost:5173")
+//@CrossOrigin(origins = "http://localhost:5173")
 public class StudentController {
     private final EventService eventService;
     private final ClubService clubService;

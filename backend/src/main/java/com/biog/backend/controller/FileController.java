@@ -15,7 +15,7 @@ import java.util.List;
 
 @RestController
 @AllArgsConstructor
-@CrossOrigin(origins = "http://localhost:5173")
+//@CrossOrigin(origins = "http://localhost:5173")
 public class FileController {
 
     private final FileService fileService;
@@ -24,7 +24,6 @@ public class FileController {
     public ResponseEntity<List<String>> listOfFiles() {
 
         List<String> files = fileService.listOfFiles();
-
         return ResponseEntity.ok(files);
     }
 
@@ -33,16 +32,13 @@ public class FileController {
             @RequestParam MultipartFile[] files) throws IOException {
 
         fileService.uploadFiles(files);
-
         return ResponseEntity.ok("Files uploaded successfully");
     }
 
     @DeleteMapping("/delete/{fileName}")
-    public ResponseEntity<String> deleteFile(
-            @PathVariable String fileName) {
+    public ResponseEntity<String> deleteFile(@PathVariable String fileName) {
 
         fileService.deleteFile(fileName);
-
         return ResponseEntity.ok(" File deleted successfully");
     }
 
@@ -51,11 +47,8 @@ public class FileController {
             @PathVariable String fileName) {
 
         ByteArrayResource resource = fileService.downloadFile(fileName);
-
         HttpHeaders headers = new HttpHeaders();
-        headers.add(HttpHeaders.CONTENT_DISPOSITION,
-                "attachment; filename=\"" + fileName + "\"");
-
+        headers.add(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=\"" + fileName + "\"");
         return ResponseEntity.ok().contentType(MediaType.APPLICATION_OCTET_STREAM).headers(headers).body(resource);
     }
 
