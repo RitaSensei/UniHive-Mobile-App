@@ -5,6 +5,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
+import java.io.UnsupportedEncodingException;
 
 import java.util.UUID;
 
@@ -52,11 +53,12 @@ public class AuthenticationController {
 
   @PostMapping("/forgotPassword")
   public ResponseEntity<AuthenticationResponse> forgotPassword(
-          @RequestBody AuthenticationRequest request) throws MessagingException {
+          @RequestBody AuthenticationRequest request) throws MessagingException, UnsupportedEncodingException {
     return ResponseEntity.ok(service.forgotPassword(request));
   }
 
   @PostMapping("/register/superadmin")
+  @PreAuthorize("hasRole('ROLE_SUPER_ADMIN')")
   public ResponseEntity<AuthenticationResponse> registerSuperAdmin(
           @RequestBody RegisterRequest request) {
     return ResponseEntity.ok(service.registerSuperAdmin(request));
@@ -64,19 +66,14 @@ public class AuthenticationController {
 
   @PostMapping("/signup")
   public ResponseEntity<String> signUp(
-          @RequestBody RegisterRequest request) {
+          @RequestBody RegisterRequest request) throws MessagingException, UnsupportedEncodingException {
     return service.signup(request);
   }
 
   @PutMapping("/acceptrequest/{id}")
   @PreAuthorize("hasRole('ROLE_SUPER_ADMIN')")
   public ResponseEntity<String> acceptRequest(
-          @PathVariable UUID id) {
+          @PathVariable UUID id) throws MessagingException, UnsupportedEncodingException {
     return service.acceptRequest(id);
-  }
-
-  @PostMapping("/logout")
-  public ResponseEntity<String> logout() {
-    return service.logout();
   }
 }

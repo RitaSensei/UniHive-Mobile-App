@@ -16,6 +16,7 @@ public interface StudentService {
         void deleteStudent(UUID id, UUID... schoolId) throws AccessDeniedException;
 
         Student getStudent(UUID id, UUID... schoolId) throws AccessDeniedException;
+        Student getStudentByEmail(String email);
 
         School getSchoolByStudent(UUID id);
 

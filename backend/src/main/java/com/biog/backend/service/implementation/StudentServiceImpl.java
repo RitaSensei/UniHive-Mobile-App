@@ -134,4 +134,10 @@ public class StudentServiceImpl implements StudentService {
                 .getClubsBySchool(schoolId[0]);
     }
 
+    @Override
+    public Student getStudentByEmail(String email) {
+        return studentRepository.findByEmail(email).orElseThrow(
+                () -> new NotFoundException("Student with email " + email + " not found"));
+    }
+
 }
