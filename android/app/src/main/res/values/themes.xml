@@ -12,10 +12,12 @@
         <item name="android:windowLightStatusBar">?attr/isLightTheme</item>
     </style>
 
-    <style name="Theme.Unihiveandroid.NoActionBar1">
+    <style name="Theme.Unihiveandroid.NoActionBar1" parent="Theme.AppCompat.Light.NoActionBar">
         <item name="windowActionBar">false</item>
         <item name="windowNoTitle">true</item>
         <item name="android:statusBarColor">@color/picton_blue</item>
+        <item name="android:windowLightNavigationBar" tools:targetApi="o_mr1">true</item>
+        <item name="android:windowLightStatusBar">false</item>
         <!-- Transparent system bars for edge-to-edge. -->
         <item name="android:navigationBarColor">@color/white</item>
     </style>
@@ -34,6 +36,16 @@
         <item name="android:statusBarColor">@color/picton_blue</item>
         <!-- Transparent system bars for edge-to-edge. -->
         <item name="android:navigationBarColor">@color/picton_blue</item>
+    </style>
+
+    <style name="Theme.Unihiveandroid.NoActionBar4" parent="Theme.AppCompat.Light.NoActionBar">
+<!--        <item name="windowActionBar">false</item>-->
+        <item name="windowNoTitle">true</item>
+        <item name="android:windowLightNavigationBar" tools:targetApi="o_mr1">true</item>
+        <item name="android:windowLightStatusBar">true</item>
+        <item name="android:statusBarColor">@color/white</item>
+        <!-- Transparent system bars for edge-to-edge. -->
+        <item name="android:navigationBarColor">@color/white</item>
     </style>
 
     <style name="Theme.UniHiveandroid" parent="Theme.MaterialComponents.Light.DarkActionBar">

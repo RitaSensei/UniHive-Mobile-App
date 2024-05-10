@@ -47,7 +47,6 @@ public class ResetPasswordActivity extends AppCompatActivity {
         authenticationService.forgottenPassword(new RegisterRequest(email)).enqueue(new Callback<Void>() {
             @Override
             public void onResponse(@NonNull Call<Void> call, @NonNull Response<Void> response) {
-                Toast.makeText(ResetPasswordActivity.this, response.toString(), Toast.LENGTH_SHORT).show();
                 if (response.code() == 200) {
                     Toast.makeText(ResetPasswordActivity.this, "Email sent!", Toast.LENGTH_SHORT).show();
                     startActivity(new Intent(ResetPasswordActivity.this, LoginActivity.class));

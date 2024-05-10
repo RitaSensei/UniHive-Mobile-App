@@ -46,6 +46,17 @@ public class RegisterRequest {
         this.email = email;
     }
 
+    public RegisterRequest(String firstName, String lastName, String cne, int numApogee, String schoolCard, String schoolName, String email, String password) {
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.email = email;
+        this.password = password;
+        this.numApogee = numApogee;
+        this.cne = cne;
+        this.schoolName = schoolName;
+        this.schoolCard = schoolCard;
+    }
+
     public String getFirstName() {
         return firstName;
     }

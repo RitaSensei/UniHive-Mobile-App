@@ -2,7 +2,7 @@
     <string name="app_name">UniHive</string>
     <string name="login_button">Log in</string>
     <string name="signup_button">Sign up</string>
-    <string name="create_account_button">Create account</string>
+    <string name="create_account_button">Sign Up</string>
     <string name="reset_password">Reset Your Password</string>
     <string name="reset_password_button">Reset Password</string>
     <string name="email_address_text">Email Address</string>
@@ -14,7 +14,9 @@
     <string name="firstname_text">First Name</string>
     <string name="lastname_text">Last Name</string>
     <string name="cne_massar_text">CNE/MASSAR</string>
+    <string name="num_apogee_text">Num Apogée</string>
     <string name="import_school_card_text">Import School Card</string>
+    <string name="school_text">School</string>
     <string name="ic_home">Home</string>
     <string name="ic_events">Events</string>
     <string name="ic_clubs">Clubs</string>

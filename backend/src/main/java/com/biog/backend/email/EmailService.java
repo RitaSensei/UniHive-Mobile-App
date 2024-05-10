@@ -7,6 +7,8 @@ import lombok.AllArgsConstructor;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.stereotype.Service;
 
+import java.io.UnsupportedEncodingException;
+
 @Service
 @AllArgsConstructor
 public class EmailService {
@@ -14,10 +16,10 @@ public class EmailService {
   private final JavaMailSender javaMailSender;
 
   public void sendEmail(String to, String subject, String text)
-          throws MessagingException {
+          throws MessagingException, UnsupportedEncodingException {
     MimeMessage message = javaMailSender.createMimeMessage();
 
-    message.setFrom(new InternetAddress("noreply@ims.ensias.com"));
+    message.setFrom(new InternetAddress("noreply@ims.ensias.com", "UniHive Corporation"));
     message.setRecipients(
             MimeMessage.RecipientType.TO,
             InternetAddress.parse(to));

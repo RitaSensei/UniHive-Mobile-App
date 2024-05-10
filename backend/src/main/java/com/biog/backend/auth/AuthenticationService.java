@@ -22,6 +22,7 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import java.io.UnsupportedEncodingException;
 import java.util.Arrays;
 import java.util.UUID;
 
@@ -104,7 +105,8 @@ public class AuthenticationService {
     return AuthenticationResponse.builder().token(jwtToken).build();
   }
 
-  public ResponseEntity<String> signup(RegisterRequest request) {
+  public ResponseEntity<String> signup(RegisterRequest request)
+          throws MessagingException, UnsupportedEncodingException {
     var requestModel = Request
             .builder()
             .email(request.getEmail())
@@ -118,10 +120,15 @@ public class AuthenticationService {
             .build();
 
     requestRepository.save(requestModel);
+    emailService.sendEmail(
+            request.getEmail(),
+            "Request sent successfully",
+            "Congratulations, your sign up request has been sent successfully. You will be notified once your request is accepted.");
     return ResponseEntity.ok("Sign Up request sent successfully");
   }
 
-  public ResponseEntity<String> acceptRequest(UUID id, UUID... schoolId) {
+  public ResponseEntity<String> acceptRequest(UUID id, UUID... schoolId)
+          throws MessagingException, UnsupportedEncodingException {
     Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
 
     boolean isAdmin = authentication.getAuthorities().stream()
@@ -144,6 +151,10 @@ public class AuthenticationService {
               .build();
       studentRepository.save(student);
       requestRepository.delete(requestModel);
+      emailService.sendEmail(
+              requestModel.getEmail(),
+              "Request Accepted!",
+              "Congratulations, your sign up request has been accepted. You can now log in.");
       return ResponseEntity.ok("Request accepted successfully");
     }
     UUID loggedInUserSchoolId = ((Admin) (authentication).getPrincipal()).getSchool().getId();
@@ -168,6 +179,10 @@ public class AuthenticationService {
             .build();
     studentRepository.save(student);
     requestRepository.delete(requestModel);
+    emailService.sendEmail(
+            requestModel.getEmail(),
+            "Request Accepted!",
+            "Congratulations, your sign up request has been accepted. You can now log in.");
     return ResponseEntity.ok("Request accepted successfully");
   }
 
@@ -202,15 +217,6 @@ public class AuthenticationService {
         }
       }
     }
-  }
-
-  public ResponseEntity<String> logout() {
-    try {
-      SecurityContextHolder.getContext().setAuthentication(null);
-    } catch (Exception e) {
-      ResponseEntity.badRequest().body("Logout failed");
-    }
-    return ResponseEntity.ok("Logout successful");
   }
 
   public AuthenticationResponse changePassword(AuthenticationRequest request) {
@@ -317,14 +323,14 @@ public class AuthenticationService {
   }
 
   public AuthenticationResponse forgotPassword(AuthenticationRequest request)
-          throws MessagingException {
+          throws MessagingException, UnsupportedEncodingException {
     var admin = adminRepository.findByEmail(request.getEmail());
     if (admin.isPresent()) {
       String newPassword = generatePassayPassword();
       admin.get().setPassword(passwordEncoder.encode(newPassword));
       emailService.sendEmail(
               request.getEmail(),
-              "UniHive Corporation",
+              "Password Reset",
               "Your new password is " +
                       newPassword +
                       "." +
@@ -339,7 +345,7 @@ public class AuthenticationService {
         student.get().setPassword(passwordEncoder.encode(newPassword));
         emailService.sendEmail(
                 request.getEmail(),
-                "UniHive Corporation",
+                "Password Reset",
                 "Your new password is " +
                         newPassword +
                         "." +
@@ -354,7 +360,7 @@ public class AuthenticationService {
           club.get().setPassword(passwordEncoder.encode(newPassword));
           emailService.sendEmail(
                   request.getEmail(),
-                  "UniHive Corporation",
+                  "Password Reset",
                   "Your new password is " +
                           newPassword +
                           "." +
@@ -369,7 +375,7 @@ public class AuthenticationService {
             superAdmin.get().setPassword(passwordEncoder.encode(newPassword));
             emailService.sendEmail(
                     request.getEmail(),
-                    "UniHive Corporation",
+                    "Password Reset",
                     "Your new password is " +
                             newPassword +
                             "." +
