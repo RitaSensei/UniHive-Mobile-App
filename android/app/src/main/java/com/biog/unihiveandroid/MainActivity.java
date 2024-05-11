@@ -49,7 +49,6 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-
         NavHostFragment navHostFragment = (NavHostFragment) getSupportFragmentManager().findFragmentById(R.id.nav_host_fragment);
         assert navHostFragment != null;
         NavController navController = navHostFragment.getNavController();

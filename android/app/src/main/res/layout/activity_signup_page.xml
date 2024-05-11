@@ -13,16 +13,6 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
-        <ImageView
-            android:id="@+id/app_logo_signup"
-            android:layout_width="166dp"
-            android:layout_height="78dp"
-            android:layout_marginTop="20dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/linearLayout"
-            app:srcCompat="@drawable/logov1_rounded" />
-
         <TextView
             android:id="@+id/signup_title"
             android:layout_width="wrap_content"
@@ -37,9 +27,9 @@
             app:layout_constraintTop_toTopOf="parent" />
 
         <LinearLayout
-            android:id="@+id/linearLayout"
-            android:layout_width="256dp"
-            android:layout_height="680dp"
+            android:id="@+id/linearLayoutBig"
+            android:layout_width="280dp"
+            android:layout_height="690dp"
             android:layout_marginTop="10dp"
             android:orientation="vertical"
             app:layout_constraintEnd_toEndOf="parent"
@@ -219,6 +209,54 @@
                 android:textSize="20sp" />
 
         </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/login_from_signup"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:gravity="center"
+            android:orientation="horizontal"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/linearLayoutBig">
+
+            <TextView
+                android:id="@+id/login_existing_account_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="start|center_vertical"
+                android:layout_marginEnd="10dp"
+                android:fontFamily="@font/poppins_medium"
+                android:text="@string/existing_account"
+                android:textAlignment="textStart"
+                android:textColor="@color/black"
+                android:textSize="18sp" />
+
+            <TextView
+                android:id="@+id/login_existing_account_button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical|end"
+                android:fontFamily="@font/poppins_medium"
+                android:text="@string/login_button"
+                android:textAlignment="textEnd"
+                android:textColor="@color/picton_blue"
+                android:textSize="18sp" />
+
+        </LinearLayout>
+
+        <ImageView
+            android:id="@+id/app_logo_signup"
+            android:layout_width="166dp"
+            android:layout_height="78dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginBottom="10dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/login_from_signup"
+            app:srcCompat="@drawable/logov1_rounded" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </ScrollView>

@@ -11,6 +11,7 @@
     <string name="loginOrSignup">Or</string>
     <string name="rememberme_check_box">Remember Me</string>
     <string name="forget_password_text">Forgot password ?</string>
+    <string name="existing_account">Already have an account ? </string>
     <string name="firstname_text">First Name</string>
     <string name="lastname_text">Last Name</string>
     <string name="cne_massar_text">CNE/MASSAR</string>

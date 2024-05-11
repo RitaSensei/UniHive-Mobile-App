@@ -6,7 +6,6 @@ import android.database.Cursor;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.OpenableColumns;
-import android.text.InputFilter;
 import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
@@ -14,25 +13,30 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
+import android.widget.TextView;
 import android.widget.Toast;
-
 import androidx.activity.result.ActivityResultLauncher;
 import androidx.activity.result.PickVisualMediaRequest;
 import androidx.activity.result.contract.ActivityResultContracts.*;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
-
 import com.biog.unihiveandroid.R;
 import com.biog.unihiveandroid.model.RegisterRequest;
 import com.biog.unihiveandroid.model.SchoolsNames;
 import com.biog.unihiveandroid.service.AuthenticationService;
 import com.biog.unihiveandroid.service.RetrofitService;
+import com.biog.unihiveandroid.service.SuperAdminService;
 import com.google.android.material.snackbar.Snackbar;
-
+import java.io.IOException;
+import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
+import okhttp3.MediaType;
+import okhttp3.MultipartBody;
+import okhttp3.RequestBody;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -50,7 +54,10 @@ public class SignupActivity extends AppCompatActivity {
     private EditText passwordSignupText;
     private EditText confirmPasswordSignupText;
     private AuthenticationService authenticationService;
+    private SuperAdminService superAdminService;
     String selectedSchoolName;
+    private long selectedFileSize;
+    private Uri selectedFileUri;
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_signup_page);
@@ -61,11 +68,21 @@ public class SignupActivity extends AppCompatActivity {
                 Log.d("PhotoPicker", "Selected URI: " + uri);
                 // Extract the file name from the URI and set it to the selectedFileName variable
                 selectedFileName = extractFileNameFromUri(uri);
+                selectedFileSize = getFileSize(uri);
+                selectedFileUri = uri;
                 // Update the text of the importSchoolCardBtn with the selected file name
                 importSchoolCardBtn.setText(selectedFileName);
                 importSchoolCardBtn.setCompoundDrawablesRelativeWithIntrinsicBounds(0, 0, R.drawable.round_check_circle, 0);
             } else {
-                Log.d("PhotoPicker", "No media selected");
+//                Log.d("PhotoPicker", "No media selected");
+                Toast.makeText(this, "No media selected", Toast.LENGTH_SHORT).show();
+            }
+        });
+        TextView loginText = findViewById(R.id.login_existing_account_button);
+        loginText.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(SignupActivity.this, LoginActivity.class));
             }
         });
     }
@@ -81,12 +98,20 @@ public class SignupActivity extends AppCompatActivity {
         String firstName = this.firstName.getText().toString().trim();
         String lastName = this.lastName.getText().toString().trim();
         String cneOrMassar = this.cneOrMassar.getText().toString().trim();
-        int numApogee = Integer.parseInt(this.numApogee.getText().toString().trim());
+        String numApogee = this.numApogee.getText().toString().trim();
         String email = this.emailAddressSignupText.getText().toString().trim();
         String password = this.passwordSignupText.getText().toString().trim();
         String confirmPassword = this.confirmPasswordSignupText.getText().toString().trim();
-        if (firstName.isEmpty() || lastName.isEmpty() || cneOrMassar.isEmpty() || email.isEmpty() || password.isEmpty() || confirmPassword.isEmpty()) {
+
+        if (firstName.isEmpty() || lastName.isEmpty() || cneOrMassar.isEmpty() || numApogee.isEmpty() || selectedSchoolName == null || email.isEmpty() || password.isEmpty() || confirmPassword.isEmpty()) {
             Toast.makeText(this, "All fields are required!", Toast.LENGTH_SHORT).show();
+            return;
+        }
+        if (selectedFileSize > 10 * 1024 * 1024) {
+            Snackbar.make(view, "File size too large! It should be less than 10MB", Snackbar.LENGTH_SHORT)
+                    .setBackgroundTint(getResources().getColor(R.color.red_light, null))
+                    .setAnimationMode(Snackbar.ANIMATION_MODE_FADE)
+                    .show();
             return;
         }
         if (!validateEmail(email)) {
@@ -111,22 +136,54 @@ public class SignupActivity extends AppCompatActivity {
                     .show();
             return;
         }
+        // Upload the selected file to GCP Storage
+        try {
+            InputStream inputStream = getContentResolver().openInputStream(selectedFileUri);
+            assert inputStream != null;
+            byte[] fileBytes = new byte[inputStream.available()];
+            inputStream.read(fileBytes);
+            String selectedFileType = selectedFileName.substring(selectedFileName.lastIndexOf(".") + 1);
+            RequestBody fileRequestBody = RequestBody.create(MediaType.parse("image/" + selectedFileType), fileBytes);
+            MultipartBody.Part filePart = MultipartBody.Part.createFormData("files", selectedFileName, fileRequestBody);
+            List<MultipartBody.Part> filesParts = new ArrayList<>();
+            filesParts.add(filePart);
+            superAdminService.uploadFiles(filesParts).enqueue(new Callback<String>() {
+                @Override
+                public void onResponse(@NonNull Call<String> call, @NonNull Response<String> response) {
+                    if (response.isSuccessful()) {
+                        Toast.makeText(SignupActivity.this, "Upload successful!", Toast.LENGTH_SHORT).show();
+                    } else {
+                        Log.d("PhotoPicker", "Upload failed in the else : " + response +" and  size is " + selectedFileSize);
+                        Toast.makeText(SignupActivity.this, "Upload failed!", Toast.LENGTH_SHORT).show();
+                    }
+                }
+                @Override
+                public void onFailure(@NonNull Call<String> call, @NonNull Throwable t) {
+                    Log.d("PhotoPicker", "Upload failed in the catch : " + t);
+                    Toast.makeText(SignupActivity.this, "Upload failed!", Toast.LENGTH_SHORT).show();
+                }
+            });
+        } catch(IOException exception) {
+            Toast.makeText(SignupActivity.this, "Upload failed!", Toast.LENGTH_SHORT).show();
+        }
 
         RegisterRequest registerRequest = new RegisterRequest(
-                firstName, lastName,cneOrMassar,numApogee,selectedFileName,selectedSchoolName,email,password);
+                firstName, lastName,cneOrMassar,Integer.parseInt(numApogee),"https://storage.googleapis.com/unihive-files/" +selectedFileName,selectedSchoolName,email,password);
         authenticationService.register(registerRequest).enqueue(new Callback<Void>() {
             @Override
             public void onResponse(@NonNull Call<Void> call, @NonNull Response<Void> response) {
                 if (response.isSuccessful()) {
-                    Toast.makeText(SignupActivity.this, "Registration successful!", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(SignupActivity.this, "Signup successful!", Toast.LENGTH_SHORT).show();
                     startActivity(new Intent(SignupActivity.this, LoginActivity.class));
                 } else {
-                    Toast.makeText(SignupActivity.this, "Registration failed!", Toast.LENGTH_SHORT).show();
+                    Log.d("Signup", "Signup failed in the else : " + response.toString());
+                    Toast.makeText(SignupActivity.this, "Signup failed!", Toast.LENGTH_SHORT).show();
                 }
             }
             @Override
             public void onFailure(@NonNull Call<Void> call, @NonNull Throwable t) {
-                Toast.makeText(SignupActivity.this, "Registration failed!", Toast.LENGTH_SHORT).show();
+                Log.d("Signup", "Signup failed in the catch : " + t);
+                Toast.makeText(SignupActivity.this, "Signup failed!", Toast.LENGTH_SHORT).show();
             }
         });
     }
@@ -153,6 +210,19 @@ public class SignupActivity extends AppCompatActivity {
         }
         return fileName;
     }
+
+    private long getFileSize(Uri uri) {
+        try (Cursor cursor = getContentResolver().query(uri, null, null, null, null)) {
+            if (cursor != null && cursor.moveToFirst()) {
+                int sizeIndex = cursor.getColumnIndex(OpenableColumns.SIZE);
+                if (sizeIndex != -1) {
+                    return cursor.getLong(sizeIndex);
+                }
+            }
+        }
+        return 0;
+    }
+
     private void initializeViews() {
         firstName = findViewById(R.id.editFirstnameText);
         lastName = findViewById(R.id.editLastnameText);
@@ -165,6 +235,7 @@ public class SignupActivity extends AppCompatActivity {
         confirmPasswordSignupText= findViewById(R.id.editConfirmPasswordSignupText);
         RetrofitService retrofitService = new RetrofitService();
         authenticationService = retrofitService.getRetrofit().create(AuthenticationService.class);
+        superAdminService = retrofitService.getRetrofit().create(SuperAdminService.class);
         // Extract school names from enum values
         List<String> schoolNames = new ArrayList<>();
         for (SchoolsNames school : SchoolsNames.values()) {

@@ -15,7 +15,7 @@ import java.util.List;
 
 @RestController
 @AllArgsConstructor
-//@CrossOrigin(origins = "http://localhost:5173")
+@CrossOrigin(origins = "*/*")
 public class FileController {
 
     private final FileService fileService;
@@ -30,7 +30,6 @@ public class FileController {
     @PostMapping("/upload")
     public ResponseEntity<String> uploadFile(
             @RequestParam MultipartFile[] files) throws IOException {
-
         fileService.uploadFiles(files);
         return ResponseEntity.ok("Files uploaded successfully");
     }

@@ -16,83 +16,84 @@ import retrofit2.http.*;
 public interface SuperAdminService {
     //GET APIS
     @GET("/superadmin/clubs")
-    Call<List<Club>> getAllClubs();
-    @GET("/superadmin/students")
-    Call<List<Student>> getAllStudents();
-    @GET("/superadmin/events")
-    Call<List<Event>> getAllEvents();
-    @GET("/superadmin/schools")
-    Call<List<School>> getAllSchools();
+    Call<Void> listClubs(@Header("Authorization") String token);
     @GET("/superadmin/admins")
-    Call<List<Admin>> getAllAdmins();
+    Call<Void> listAdmins(@Header("Authorization") String token);
+    @GET("/superadmin/events")
+    Call<Void> listEvents(@Header("Authorization") String token);
+    @GET("/superadmin/schools")
+    Call<Void> listSchools(@Header("Authorization") String token);
+    @GET("/superadmin/students")
+    Call<Void> listStudents(@Header("Authorization") String token);
     @GET("/superadmin/requests")
-    Call<List<Request>> getAllRequests();
-    @GET("/superadmin/admin/{id}")
-    Call<Admin> getAdmin(@Path("id") UUID id);
-    @GET("/superadmin/school/{id}")
-    Call<School> getSchool(@Path("id") UUID id);
-    @GET("/superadmin/student/{id}")
-    Call<Student> getStudent(@Path("id") UUID id);
+    Call<Void> listRequests(@Header("Authorization") String token);
+
     @GET("/superadmin/club/{id}")
-    Call<Club> getClub(@Path("id") UUID id);
+    Call<Void> getClub(@Header("Authorization") String token, @Path("id") String id);
+    @GET("/superadmin/admin/{id}")
+    Call<Void> getAdmin(@Header("Authorization") String token, @Path("id") String id);
     @GET("/superadmin/event/{id}")
-    Call<Event> getEvent(@Path("id") UUID id);
+    Call<Void> getEvent(@Header("Authorization") String token, @Path("id") String id);
+    @GET("/superadmin/school/{id}")
+    Call<Void> getSchool(@Header("Authorization") String token, @Path("id") String id);
+    @GET("/superadmin/student/{id}")
+    Call<Void> getStudent(@Header("Authorization") String token, @Path("id") String id);
     @GET("/superadmin/request/{id}")
-    Call<Request> getRequest(@Path("id") UUID id);
+    Call<Void> getRequest(@Header("Authorization") String token, @Path("id") String id);
 
     //POST APIS
     @POST("/superadmin/addschool")
-    Call<School> addSchool(@Body School school);
+    Call<Void> addSchool(@Header("Authorization") String token, @Body Object data);
     @POST("/superadmin/addevent")
-    Call<Event> addEvent(@Body Event event);
+    Call<Void> addEvent(@Header("Authorization") String token, @Body Object data);
     @POST("/superadmin/addrequest")
-    Call<Request> addRequest(@Body Request request);
-    @POST("/superadmin/addfollowers/{id}")
-    Call<Club> addFollowers(@Path("id") UUID id, @Body List<Student> followers);
+    Call<Void> addRequest(@Header("Authorization") String token, @Body Object data);
+//    @POST("/superadmin/addfollowers/{id}")
+//    Call<Club> addFollowers(@Path("id") UUID id, @Body List<Student> followers);
     @POST("/auth/register/club")
-    Call<Club> addClub(@Body Club club);
+    Call<Void> addClub(@Header("Authorization") String token, @Body Object data);
     @POST("auth/register/admin")
-    Call<Admin> addAdmin(@Body Admin admin);
+    Call<Void> addAdmin(@Header("Authorization") String token, @Body Object data);
     @POST("/auth/register/student")
-    Call<Student> addStudent(@Body Student student);
+    Call<Void> addStudent(@Header("Authorization") String token, @Body Object data);
 
     //PUT APIS
     @PUT("/superadmin/upadmin/{id}")
-    Call<Admin> updateAdmin(@Path("id") UUID id, @Body Admin newadmin);
+    Call<Void> updateAdmin(@Header("Authorization") String token,@Path("id") String id, @Body Object data);
     @PUT("/superadmin/upschool/{id}")
-    Call<School> updateSchool(@Path("id") UUID id, @Body School newschool);
+    Call<Void> updateSchool(@Header("Authorization") String token,@Path("id") String id, @Body Object data);
     @PUT("/superadmin/upstudent/{id}")
-    Call<Student> updateStudent(@Path("id") UUID id, @Body Student newstudent);
+    Call<Void> updateStudent(@Header("Authorization") String token,@Path("id") String id, @Body Object data);
     @PUT("/superadmin/upclub/{id}")
-    Call<Club> updateClub(@Path("id") UUID id, @Body Club newclub);
+    Call<Void> updateClub(@Header("Authorization") String token,@Path("id") String id, @Body Object data);
     @PUT("/superadmin/upevent/{id}")
-    Call<Event> updateEvent(@Path("id") UUID id, @Body Event newevent);
+    Call<Void> updateEvent(@Header("Authorization") String token,@Path("id") String id, @Body Object data);
     @PUT("/superadmin/uprequest/{id}")
-    Call<Request> updateRequest(@Path("id") UUID id, @Body Request newrequest);
+    Call<Void> updateRequest(@Header("Authorization") String token,@Path("id") String id, @Body Object data);
 
     //DELETE APIS
     @DELETE("/superadmin/deladmin/{id}")
-    Call<Void> deleteAdmin(@Path("id") UUID id);
+    Call<Void> deleteAdmin(@Header("Authorization") String token, @Path("id") String id);
     @DELETE("/superadmin/delschool/{id}")
-    Call<Void> deleteSchool(@Path("id") UUID id);
+    Call<Void> deleteSchool(@Header("Authorization") String token, @Path("id") String id);
     @DELETE("/superadmin/delstudent/{id}")
-    Call<Void> deleteStudent(@Path("id") UUID id);
+    Call<Void> deleteStudent(@Header("Authorization") String token, @Path("id") String id);
     @DELETE("/superadmin/delclub/{id}")
-    Call<Void> deleteClub(@Path("id") UUID id);
-    @DELETE("/superadmin/delfollowers/{id}")
-    Call<Void> deleteFollowers(@Path("id") UUID id, @Body List<Student> followers);
+    Call<Void> deleteClub(@Header("Authorization") String token, @Path("id") String id);
+//    @DELETE("/superadmin/delfollowers/{id}")
+//    Call<Void> deleteFollowers(@Path("id") UUID id, @Body List<Student> followers);
     @DELETE("/superadmin/delevent/{id}")
-    Call<Void> deleteEvent(@Path("id") UUID id);
+    Call<Void> deleteEvent(@Header("Authorization") String token, @Path("id") String id);
     @DELETE("/superadmin/delrequest/{id}")
-    Call<Void> deleteRequest(@Path("id") UUID id);
+    Call<Void> deleteRequest(@Header("Authorization") String token, @Path("id") String id);
+
+    // ACCEPT REQUEST
+    @PUT("/auth/acceptrequest/{id}")
+    Call<Void> acceptRequest(@Header("Authorization") String token, @Header("Content_Type") String contentType, @Path("id") String id);
 
     //UPLOAD FILE
     @POST("/upload")
-    @Headers("Content-Type: multipart/form-data")
     @Multipart
-    Call<String> uploadFile(@Part MultipartBody.Part file);
+    Call<String> uploadFiles(@Part List<MultipartBody.Part> files);
 
-    // ACCEPT REQUEST
-    @PUT("/auth/acceptrequest/")
-    Call<Void> acceptRequest(@Body Request request);
 }
