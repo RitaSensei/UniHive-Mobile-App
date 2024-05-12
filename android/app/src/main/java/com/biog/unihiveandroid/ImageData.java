@@ -70,7 +70,7 @@ public class ImageData implements Parcelable {
         dest.writeInt(imageId);
         dest.writeParcelable((Parcelable) context, flags);
     }
-
+    // TODO : remove this method
     public static List<Integer> getTrendingEventsSwitcherItems() {
         List<Integer> switcherItems = new ArrayList<>();
         switcherItems.add(R.drawable.itholic_banner);

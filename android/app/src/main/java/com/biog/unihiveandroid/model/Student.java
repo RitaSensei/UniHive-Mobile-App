@@ -1,6 +1,10 @@
 package com.biog.unihiveandroid.model;
 
 import java.time.Instant;
+import java.util.Collection;
+import java.util.List;
+import java.util.UUID;
+import java.util.stream.Collectors;
 
 public class Student {
     private String id;
@@ -9,13 +13,14 @@ public class Student {
     private Instant createdAt;
     private String cne;
     private int numApogee;
-    private Role role;
     private String firstName;
     private String lastName;
     private String profileImage;
-    private Club[] clubs;
+    private List<Club> clubs;
     private School school;
-    public Student(String id, String email, String password, Instant createdAt, String cne, int numApogee, Role role, String firstName, String lastName, String profileImage, Club[] clubs, School school) {
+    private Role role=Role.STUDENT;
+
+    public Student(String id, String email, String password, Instant createdAt, String cne, int numApogee, Role role, String firstName, String lastName, String profileImage, List<Club> clubs, School school) {
         this.id = id;
         this.email = email;
         this.password = password;
@@ -60,7 +65,7 @@ public class Student {
     public String getProfileImage() {
         return profileImage;
     }
-    public Club[] getClubs() {
+    public List<Club> getClubs() {
         return clubs;
     }
     public School getSchool() {
@@ -97,7 +102,7 @@ public class Student {
     public void setProfileImage(String profileImage) {
         this.profileImage = profileImage;
     }
-    public void setClubs(Club[] clubs) {
+    public void setClubs(List<Club> clubs) {
         this.clubs = clubs;
     }
     public void setSchool(School school) {

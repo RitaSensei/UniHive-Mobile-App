@@ -1,6 +1,7 @@
 package com.biog.unihiveandroid.model;
 
 import java.time.Instant;
+import java.util.List;
 
 public class Club {
     private String id;
@@ -15,10 +16,10 @@ public class Club {
     private int ratingCount;
     private Instant createdAt;
     private School school;
-    private Student[] students;
-    private Event[] events;
+    private List<Student> students;
+    private List<Event> events;
 
-    public Club(String id, String clubName, String email, String password, Role role, String clubLogo, String clubDescription, String clubBanner, float clubRating, int ratingCount, Instant createdAt, School school, Student[] students, Event[] events) {
+    public Club(String id, String clubName, String email, String password, Role role, String clubLogo, String clubDescription, String clubBanner, float clubRating, int ratingCount, Instant createdAt, School school, List<Student> students, List<Event> events) {
         this.id = id;
         this.clubName = clubName;
         this.email = email;
@@ -131,19 +132,19 @@ public class Club {
         this.school = school;
     }
 
-    public Student[] getStudents() {
+    public List<Student> getStudents() {
         return students;
     }
 
-    public void setStudents(Student[] students) {
+    public void setStudents(List<Student> students) {
         this.students = students;
     }
 
-    public Event[] getEvents() {
+    public List<Event> getEvents() {
         return events;
     }
 
-    public void setEvents(Event[] events) {
+    public void setEvents(List<Event> events) {
         this.events = events;
     }
 }

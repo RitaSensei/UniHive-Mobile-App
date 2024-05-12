@@ -104,6 +104,7 @@ public class LoginActivity extends AppCompatActivity {
                         finish();
                     } catch (IOException exception) {
                         exception.printStackTrace();
+                        Log.d("unihivehome", "Login failed: " + exception.getMessage());
                         Toast.makeText(LoginActivity.this, "Login failed", Toast.LENGTH_SHORT).show();
                     }
                 } else {
@@ -112,6 +113,7 @@ public class LoginActivity extends AppCompatActivity {
             }
             @Override
             public void onFailure(@NonNull Call<ResponseBody> call, @NonNull Throwable t) {
+                Log.d("unihivehome", "Login failed: " + t.getMessage());
                 Toast.makeText(LoginActivity.this, "Login failed", Toast.LENGTH_SHORT).show();
             }
         });
