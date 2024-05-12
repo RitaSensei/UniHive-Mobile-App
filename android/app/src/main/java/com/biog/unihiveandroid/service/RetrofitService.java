@@ -14,7 +14,7 @@ public class RetrofitService {
     private void initRetrofit() {
         retrofit = new Retrofit.Builder()
                 .baseUrl(BASE_URL)
-                .addConverterFactory(GsonConverterFactory.create(new Gson()))
+                .addConverterFactory(GsonConverterFactory.create())
                 .build();
     }
     public Retrofit getRetrofit(){

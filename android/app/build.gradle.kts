@@ -1,3 +1,5 @@
+import java.util.Properties
+
 plugins {
     id("com.android.application")
     id("org.jetbrains.kotlin.android")
@@ -13,6 +15,10 @@ android {
         targetSdk = 34
         versionCode = 1
         versionName = "1.0"
+        val properties = Properties()
+        properties.load(project.rootProject.file("local.properties").inputStream())
+        val secretKey = properties.getProperty("secretKey")
+        buildConfigField("String", "API_KEY_NAME", secretKey)
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
         vectorDrawables {
@@ -33,6 +39,7 @@ android {
     buildFeatures {
         viewBinding = true
         compose = true
+        buildConfig = true
     }
     kotlinOptions {
         jvmTarget = "1.8"

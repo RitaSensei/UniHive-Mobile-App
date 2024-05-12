@@ -1,7 +1,9 @@
 package com.biog.unihiveandroid.authentication;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
@@ -11,15 +13,28 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.biog.unihiveandroid.BuildConfig;
 import com.biog.unihiveandroid.MainActivity;
 import com.biog.unihiveandroid.R;
-import com.biog.unihiveandroid.SettingsActivity;
+import com.biog.unihiveandroid.dashboard.AdminDashboardActivity;
+import com.biog.unihiveandroid.dashboard.SuperAdminDashboardActivity;
 import com.biog.unihiveandroid.model.RegisterRequest;
 import com.biog.unihiveandroid.service.AuthenticationService;
 import com.biog.unihiveandroid.service.RetrofitService;
-import com.biog.unihiveandroid.ui.home.FragmentHome;
 import com.google.android.material.snackbar.Snackbar;
+import com.google.gson.Gson;
+import com.google.gson.JsonObject;
 
+import java.io.IOException;
+import java.util.Base64;
+import java.util.Date;
+
+import javax.crypto.SecretKey;
+import io.jsonwebtoken.Claims;
+import io.jsonwebtoken.Jws;
+import io.jsonwebtoken.Jwts;
+import io.jsonwebtoken.security.Keys;
+import okhttp3.ResponseBody;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -28,6 +43,7 @@ public class LoginActivity extends AppCompatActivity {
     private EditText emailAddressLoginText;
     private EditText passwordLoginText;
     private AuthenticationService authenticationService;
+    private SharedPreferences sharedPreferences;
 
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -40,6 +56,7 @@ public class LoginActivity extends AppCompatActivity {
                 startActivity(new Intent(LoginActivity.this, ResetPasswordActivity.class));
             }
         });
+        sharedPreferences = getSharedPreferences("MyPrefs", MODE_PRIVATE);
     }
 
     public void onCreateAccountBtnClick(View view) {
@@ -74,22 +91,71 @@ public class LoginActivity extends AppCompatActivity {
             return;
         }
         RegisterRequest loginRequest = new RegisterRequest(email, password);
-        authenticationService.login(loginRequest).enqueue(new Callback<Void>() {
+        authenticationService.login(loginRequest).enqueue(new Callback<ResponseBody>() {
             @Override
-            public void onResponse(@NonNull Call<Void> call, @NonNull Response<Void> response) {
+            public void onResponse(@NonNull Call<ResponseBody> call, @NonNull Response<ResponseBody> response) {
                 if (response.isSuccessful()) {
-                    Toast.makeText(LoginActivity.this, "Login successful!", Toast.LENGTH_SHORT).show();
-                    startActivity(new Intent(LoginActivity.this, MainActivity.class));
-                    finish(); // Finish LoginActivity to prevent navigating back to it using the back button
+                    try {
+                        String responseString = response.body().string();
+                        JsonObject jsonObject = new Gson().fromJson(responseString, JsonObject.class);
+                        String token = jsonObject.get("token").getAsString();
+                        decodeJWTAndHandleRole(token);
+                        Toast.makeText(LoginActivity.this, "Login successful!", Toast.LENGTH_SHORT).show();
+                        finish();
+                    } catch (IOException exception) {
+                        exception.printStackTrace();
+                        Toast.makeText(LoginActivity.this, "Login failed", Toast.LENGTH_SHORT).show();
+                    }
                 } else {
                     Toast.makeText(LoginActivity.this, "Email or password is incorrect!", Toast.LENGTH_SHORT).show();
                 }
             }
             @Override
-            public void onFailure(@NonNull Call<Void> call, @NonNull Throwable t) {
-                Toast.makeText(LoginActivity.this, "Error: " + t.getCause(), Toast.LENGTH_SHORT).show();
+            public void onFailure(@NonNull Call<ResponseBody> call, @NonNull Throwable t) {
+                Toast.makeText(LoginActivity.this, "Login failed", Toast.LENGTH_SHORT).show();
             }
         });
+    }
+
+    private void saveToken(String token, String role) {
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        editor.putString(role, token);
+        editor.apply();
+        editor.commit();
+    }
+
+    private void decodeJWTAndHandleRole(String token) {
+        try {
+            String secretKey = BuildConfig.API_KEY_NAME;
+            String[] chunks = token.split("\\.");
+            String header = new String(Base64.getUrlDecoder().decode(chunks[0]));
+            String payload = new String(Base64.getUrlDecoder().decode(chunks[1]));
+            byte[] decodedBytes = Base64.getDecoder().decode(secretKey);
+            SecretKey secretKeySpec = Keys.hmacShaKeyFor(decodedBytes);
+            // Parse the token
+            Jws<Claims> claims = Jwts.parser()
+                    .verifyWith(secretKeySpec)
+                    .build()
+                    .parseSignedClaims(token);
+
+            // Extract user role from claims
+            String role = claims.getPayload().get("role", String.class);
+
+            // Handle user role as needed
+            if ("SUPER_ADMIN".equals(role)) {
+                saveToken(token, "superadmin");
+                startActivity(new Intent(LoginActivity.this, SuperAdminDashboardActivity.class));
+            } else if ("ADMIN".equals(role)) {
+                saveToken(token, "admin");
+                startActivity(new Intent(LoginActivity.this, AdminDashboardActivity.class));
+            } else if ("STUDENT".equals(role)) {
+                saveToken(token, "student");
+                startActivity(new Intent(LoginActivity.this, MainActivity.class));
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+            Toast.makeText(this, "Failed to decode JWT", Toast.LENGTH_SHORT).show();
+        }
     }
 
     private boolean validateEmail(String email) {

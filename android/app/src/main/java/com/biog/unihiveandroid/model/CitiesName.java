@@ -1,24 +1,32 @@
 package com.biog.unihiveandroid.model;
 
 public enum CitiesName {
-    AGADIR,
-    AL_HOCEIMA,
-    RABAT,
-    BEN_GUERIR,
-    BENI_MELLAL,
-    BERRECHID,
-    CASABLANCA,
-    EL_JADIDA,
-    ERRACHIDIA,
-    FES,
-    KENITRA,
-    KHOURIBGA,
-    MARRAKECH,
-    MEKNES,
-    MOHAMMEDIA,
-    OUJDA,
-    SAFI,
-    SETTAT,
-    TANGER,
-    TETOUAN,
+    AGADIR("Agadir"),
+    AL_HOCEIMA("Al Hoceima"),
+    RABAT("Rabat"),
+    BEN_GUERIR("Ben Guerir"),
+    BENI_MELLAL("Beni Mellal"),
+    BERRECHID("Berrechid"),
+    CASABLANCA("Casablanca"),
+    EL_JADIDA("El Jadida"),
+    ERRACHIDIA("Errachidia"),
+    FES("Fes"),
+    KENITRA("Kenitra"),
+    KHOURIBGA("Khouribga"),
+    MARRAKECH("Marrakech"),
+    MEKNES("Meknes"),
+    MOHAMMEDIA("Mohammedia"),
+    OUJDA("Oujda"),
+    SAFI("Safi"),
+    SETTAT("Settat"),
+    TANGER("Tanger"),
+    TETOUAN("Tetouan");
+
+    private final String cityName;
+    CitiesName(String cityName) {
+        this.cityName = cityName;
+    }
+    public String getCityName() {
+        return cityName;
+    }
 }

@@ -2,6 +2,7 @@ package com.biog.unihiveandroid.authentication;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
@@ -16,7 +17,13 @@ import com.biog.unihiveandroid.model.RegisterRequest;
 import com.biog.unihiveandroid.service.AuthenticationService;
 import com.biog.unihiveandroid.service.RetrofitService;
 import com.google.android.material.snackbar.Snackbar;
+import com.google.gson.Gson;
+import com.google.gson.JsonObject;
 
+import java.io.IOException;
+import java.util.Objects;
+
+import okhttp3.ResponseBody;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -44,22 +51,31 @@ public class ResetPasswordActivity extends AppCompatActivity {
             emailAddressResetText.setError("Please enter a valid email address!");
             return;
         }
-        authenticationService.forgottenPassword(new RegisterRequest(email)).enqueue(new Callback<Void>() {
+        authenticationService.forgottenPassword(new RegisterRequest(email)).enqueue(new Callback<ResponseBody>() {
             @Override
-            public void onResponse(@NonNull Call<Void> call, @NonNull Response<Void> response) {
-                if (response.code() == 200) {
-                    Toast.makeText(ResetPasswordActivity.this, "Email sent!", Toast.LENGTH_SHORT).show();
-                    startActivity(new Intent(ResetPasswordActivity.this, LoginActivity.class));
-                } else if (response.code() == 404) {
-                    Snackbar.make(view, "Email not found!", Snackbar.LENGTH_SHORT)
-                            .setBackgroundTint(getResources().getColor(R.color.red_light, null))
-                            .setAnimationMode(Snackbar.ANIMATION_MODE_FADE)
-                            .show();
+            public void onResponse(@NonNull Call<ResponseBody> call, @NonNull Response<ResponseBody> response) {
+                try {
+                    String responseString = response.body().string();
+                    JsonObject jsonObject = new Gson().fromJson(responseString, JsonObject.class);
+                    String token = jsonObject.get("token").getAsString();
+                    if(Objects.equals(token, "INVALID_TOKEN")) {
+                        Snackbar.make(view, "Email not found!", Snackbar.LENGTH_SHORT)
+                                .setBackgroundTint(getResources().getColor(R.color.red_light, null))
+                                .setAnimationMode(Snackbar.ANIMATION_MODE_FADE)
+                                .show();
+                    } else {
+                        Toast.makeText(ResetPasswordActivity.this, "Email sent!", Toast.LENGTH_SHORT).show();
+                        startActivity(new Intent(ResetPasswordActivity.this, LoginActivity.class));
+                        finish();
+                    }
+                } catch (IOException exception) {
+                    exception.printStackTrace();
+                    Toast.makeText(ResetPasswordActivity.this, "Error sending email ", Toast.LENGTH_SHORT).show();
                 }
             }
             @Override
-            public void onFailure(@NonNull Call<Void> call, @NonNull Throwable t) {
-                Toast.makeText(ResetPasswordActivity.this, "Error: " + t.getCause(), Toast.LENGTH_SHORT).show();
+            public void onFailure(@NonNull Call<ResponseBody> call, @NonNull Throwable t) {
+                Toast.makeText(ResetPasswordActivity.this, "Error sending email ", Toast.LENGTH_SHORT).show();
             }
         });
     }

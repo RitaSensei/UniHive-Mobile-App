@@ -50,6 +50,14 @@
             android:label="@string/title_activity_settings"
             android:theme="@style/Theme.Unihiveandroid.NoActionBar4"
             />
+        <activity
+            android:name=".dashboard.SuperAdminDashboardActivity"
+            android:exported="false"
+            android:theme="@style/Theme.Unihiveandroid.NoActionBar3" />
+        <activity
+            android:name=".dashboard.AdminDashboardActivity"
+            android:exported="false"
+            android:theme="@style/Theme.Unihiveandroid.NoActionBar3" />
     </application>
 
 </manifest>
