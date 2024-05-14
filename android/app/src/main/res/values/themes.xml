@@ -90,5 +90,12 @@
         <item name="android:progressDrawable">@drawable/custom_ratingbar_star</item>
     </style>
 
+    <style name="Theme.Unihiveandroid.CustomSplashScreenTheme" parent="Theme.SplashScreen">
+        <item name="windowSplashScreenBackground">@color/picton_blue</item>
+        <item name="windowSplashScreenAnimatedIcon">@drawable/logov1_rounded</item>
+        <item name="windowSplashScreenAnimationDuration">500</item>
+        <item name="postSplashScreenTheme">@style/Theme.Unihiveandroid</item>
+    </style>
+
 
 </resources>

@@ -23,7 +23,8 @@
             android:backgroundTint="@color/white"
             android:contentDescription="@null"
             app:layout_constraintEnd_toEndOf="parent"
-            android:src="@drawable/back_button" />
+            android:src="@drawable/back_button"
+            style="?attr/actionButtonStyle" />
 
         <TextView
             android:id="@+id/action_bar_home_text"

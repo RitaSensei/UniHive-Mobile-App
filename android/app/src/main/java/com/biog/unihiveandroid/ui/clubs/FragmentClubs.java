@@ -60,9 +60,7 @@ public class FragmentClubs extends Fragment {
     private JsonObject studentData;
     private JsonArray clubsData;
 
-    public FragmentClubs() {
-        // Required empty public constructor
-    }
+    public FragmentClubs() {}
 
     public static FragmentClubs newInstance(String param1, String param2) {
         FragmentClubs fragment = new FragmentClubs();
@@ -124,7 +122,6 @@ public class FragmentClubs extends Fragment {
                 Toast.makeText(requireContext(), "Failed to fetch club data", Toast.LENGTH_SHORT).show();
             }
         });
-
         return rootView;
     }
 

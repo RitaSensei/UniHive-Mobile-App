@@ -16,8 +16,7 @@ public class Event {
     private int ratingCount;
     private Club club;
 
-    public Event() {
-    }
+    public Event() {}
 
     public Event(String id, Instant createdAt, String eventName, String eventCategory, String eventDescription, String eventLocation, String eventBanner, Instant startTime, Instant endTime, float eventRating, int ratingCount, Club club) {
         this.id = id;
@@ -128,5 +127,8 @@ public class Event {
 
     public void setClub(Club club) {
         this.club = club;
+    }
+    public void setClubName(String clubName) {
+        this.club.setClubName(clubName);
     }
 }

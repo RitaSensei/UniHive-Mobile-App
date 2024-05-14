@@ -57,7 +57,11 @@ public class ClubFragmentClubAdapter extends ArrayAdapter<Club> {
         // Set data to views using ViewHolder references
         if (club != null) {
             viewHolder.clubName.setText(club.getClubName());
-            viewHolder.clubRatingValue.setText(String.valueOf(club.getClubRating()));
+            float ratingValue = club.getClubRating();
+            if (ratingValue == 0) {
+                viewHolder.clubRatingValue.setTextColor(ContextCompat.getColor(getContext(), R.color.mid_grey));
+            }
+            viewHolder.clubRatingValue.setText(String.valueOf(ratingValue));
             viewHolder.clubRating.setRating(club.getClubRating());
             viewHolder.clubRating.setProgressTintList(ColorStateList.valueOf(ContextCompat.getColor(getContext(), R.color.yellow)));
             Glide.with(getContext())

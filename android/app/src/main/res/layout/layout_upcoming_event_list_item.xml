@@ -9,70 +9,82 @@
 
     <com.google.android.material.imageview.ShapeableImageView
         android:id="@+id/event_poster_list_view_item"
-        android:layout_width="140dp"
-        android:layout_height="150dp"
+        android:layout_width="130dp"
+        android:layout_height="140dp"
         android:elevation="0dp"
         android:scaleType="fitXY"
-        app:shapeAppearanceOverlay="@style/ShapeAppearanceRoundedCorners"
-        android:src="@drawable/cindhconvoi_post_square" />
+        app:shapeAppearanceOverlay="@style/ShapeAppearanceRoundedCorners" />
 
-    <LinearLayout
-        android:layout_width="230dp"
-        android:layout_height="110dp"
-        android:layout_gravity="center_vertical"
+    <RelativeLayout
+        android:layout_width="240dp"
+        android:layout_height="140dp"
+        android:layout_gravity="center_horizontal"
         android:layout_marginStart="10dp"
         android:orientation="vertical">
 
-        <TextView
-            android:id="@+id/event_title_list_view_item"
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/upcoming_events_card_name"
-            android:fontFamily="@font/poppins_semibold"
-            android:textSize="20sp"
-            android:textColor="@color/black" />
+            android:layout_gravity="center_horizontal"
+            android:layout_alignParentTop="true"
+            android:orientation="vertical">
 
-        <TextView
-            android:id="@+id/event_date_list_view_item"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="@string/upcoming_events_date"
-            android:fontFamily="@font/poppins_regular"
-            android:textSize="12sp"
-            android:textColor="@color/black" />
+            <TextView
+                android:id="@+id/event_title_list_view_item"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/upcoming_events_card_name"
+                android:fontFamily="@font/poppins_semibold"
+                android:textSize="20sp"
+                android:textColor="@color/black" />
+
+            <TextView
+                android:id="@+id/event_date_list_view_item"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/poppins_regular"
+                android:gravity="top"
+                android:text="@string/upcoming_events_date"
+                android:textColor="@color/black"
+                android:textSize="12sp" />
+
+        </LinearLayout>
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="30dp"
-            android:layout_gravity="center_vertical"
-            android:layout_marginTop="5dp"
-            android:orientation="horizontal">
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_alignParentBottom="true">
 
-            <ImageView
-                android:layout_width="15dp"
-                android:layout_height="15dp"
+            <RatingBar
+                android:id="@+id/event_rating_list_item"
+                android:layout_width="20dp"
+                android:layout_height="20dp"
                 android:layout_gravity="center_vertical"
-                android:contentDescription="@null"
-                android:src="@drawable/ic_star_full" />
+                android:layout_marginEnd="3dp"
+                android:numStars="1"
+                android:progressDrawable="@drawable/custom_ratingbar_star"
+                android:rating="0"
+                android:stepSize="1" />
 
             <TextView
-                android:id="@+id/event_rating_list_view_item"
+                android:id="@+id/event_rating_value_list_item"
                 android:layout_width="wrap_content"
                 android:layout_height="20dp"
                 android:layout_gravity="center_vertical"
                 android:layout_marginStart="5dp"
                 android:fontFamily="@font/poppins_bold"
-                android:text="rating"
+                android:text="@string/default_rating_value"
                 android:textColor="@color/yellow"
                 android:textSize="13sp" />
 
             <TextView
                 android:id="@+id/club_name_list_view_item"
-                android:layout_width="140dp"
-                android:layout_height="20dp"
-                android:layout_gravity="center_vertical|end"
-                android:layout_marginStart="20dp"
-                android:layout_marginTop="2px"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="bottom|center|end"
+                android:layout_marginStart="3dp"
+                android:layout_weight="1"
                 android:fontFamily="@font/poppins_semibold"
                 android:text="@string/club_name"
                 android:textAlignment="textEnd"
@@ -81,6 +93,8 @@
 
         </LinearLayout>
 
-    </LinearLayout>
+    </RelativeLayout>
+
+
 
 </LinearLayout>

@@ -48,14 +48,13 @@
 
                 <RatingBar
                     android:id="@+id/event_rating_card_item"
-                    android:layout_width="wrap_content"
+                    android:layout_width="16dp"
                     android:layout_height="15dp"
                     android:layout_marginEnd="3dp"
                     android:numStars="1"
+                    android:progressDrawable="@drawable/custom_star"
                     android:rating="0"
-                    android:stepSize="1"
-                    style="@style/Widget.AppCompat.RatingBar.Small"
-                    />
+                    android:stepSize="1" />
 
                 <TextView
                     android:id="@+id/event_rating_number_card_item"
