@@ -8,8 +8,8 @@
     app:cardElevation="0dp">
 
         <RelativeLayout
-            android:layout_width="140dp"
-            android:layout_height="140dp">
+            android:layout_width="170dp"
+            android:layout_height="170dp">
 
             <ImageView
                 android:id="@+id/event_poster_card_item"
@@ -23,46 +23,61 @@
 
             <View
                 android:layout_width="match_parent"
-                android:layout_height="108dp"
+                android:layout_height="138dp"
                 android:background="#05000000" />
 
             <View
                 android:layout_width="match_parent"
                 android:layout_height="35dp"
-                android:layout_marginTop="105dp"
+                android:layout_marginTop="135dp"
                 android:background="@drawable/card_image_shadow" />
 
             <View
                 android:layout_width="match_parent"
                 android:layout_height="35dp"
-                android:layout_marginTop="105dp"
+                android:layout_marginTop="135dp"
                 android:background="@drawable/card_image_shadow" />
 
-            <ImageView
-                android:layout_width="8dp"
-                android:layout_height="8dp"
-                android:layout_marginTop="113dp"
-                android:layout_marginStart="48dp"
-                android:src="@drawable/ic_star"
-                android:contentDescription="@null" />
-
-            <TextView
-                android:id="@+id/event_rating_card_item"
-                android:layout_width="match_parent"
-                android:layout_height="40dp"
-                android:layout_marginTop="98dp"
-                android:fontFamily="@font/poppins_bold"
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="130dp"
+                android:layout_marginStart="50dp"
                 android:gravity="center"
-                android:text="rating"
-                android:textColor="@color/yellow"
-                android:textSize="8sp" />
+                android:orientation="horizontal">
+
+                <RatingBar
+                    android:id="@+id/event_rating_card_item"
+                    android:layout_width="wrap_content"
+                    android:layout_height="15dp"
+                    android:layout_marginEnd="3dp"
+                    android:numStars="1"
+                    android:rating="0"
+                    android:stepSize="1"
+                    style="@style/Widget.AppCompat.RatingBar.Small"
+                    />
+
+                <TextView
+                    android:id="@+id/event_rating_number_card_item"
+                    android:layout_width="match_parent"
+                    android:layout_height="15dp"
+                    android:fontFamily="@font/poppins_semibold"
+                    android:layout_marginVertical="2dp"
+                    android:gravity="center"
+                    android:text="@string/default_rating_value"
+                    android:textColor="@color/yellow"
+                    android:textSize="11sp" />
+
+            </LinearLayout>
 
             <TextView
                 android:id="@+id/event_title_card_item"
                 android:layout_width="match_parent"
                 android:layout_height="15dp"
-                android:layout_marginTop="123dp"
+                android:layout_marginTop="153dp"
                 android:fontFamily="@font/poppins_semibold"
+                android:paddingStart="5dp"
+                android:paddingEnd="5dp"
                 android:gravity="center"
                 android:text="@string/upcoming_events_card_name"
                 android:textColor="@color/white"

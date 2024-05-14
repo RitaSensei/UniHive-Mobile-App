@@ -1,37 +1,39 @@
 package com.biog.unihiveandroid.adapter;
 
 import android.content.Context;
+import android.content.res.ColorStateList;
 import android.view.View;
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.ImageView;
-import android.widget.TextView;
+import android.widget.RatingBar;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.core.content.ContextCompat;
 
 import com.biog.unihiveandroid.R;
-import com.biog.unihiveandroid.model.ClubModel;
+import com.biog.unihiveandroid.model.Club;
+import com.bumptech.glide.Glide;
 
 import java.util.List;
 
-public class ClubFragmentHomeAdapter extends ArrayAdapter<ClubModel> {
+public class ClubFragmentHomeAdapter extends ArrayAdapter<Club> {
     // ViewHolder class to hold references to views
     private static class ViewHolder {
-        TextView clubRating;
+        RatingBar clubRating;
         ImageView clubLogo;
     }
 
-    public ClubFragmentHomeAdapter(@NonNull Context context, List<ClubModel> objects) {
+    public ClubFragmentHomeAdapter(@NonNull Context context, List<Club> objects) {
         super(context, 0, objects);
     }
 
     @NonNull
     @Override
-    public View getView(int position, @Nullable View convertView, @NonNull ViewGroup parent) {
+    public View getView(int position, View convertView, @NonNull ViewGroup parent) {
         ViewHolder viewHolder;
-
         if (convertView == null) {
             // If convertView is null, inflate the layout and create a new ViewHolder
             convertView = LayoutInflater.from(getContext()).inflate(R.layout.layout_club_card, parent, false);
@@ -48,13 +50,17 @@ public class ClubFragmentHomeAdapter extends ArrayAdapter<ClubModel> {
         }
 
         // Get the ClubModel object at the current position
-        ClubModel clubModel = getItem(position);
+        Club club = getItem(position);
 
         // Set data to views using ViewHolder references
-//        viewHolder.clubRating.setText(clubModel != null ? clubModel.getClubRating() : "");
-        viewHolder.clubLogo.setImageResource(clubModel != null ? clubModel.getImgId() : 0);
+        if (club != null) {
+            viewHolder.clubRating.setRating(club.getClubRating());
+            viewHolder.clubRating.setProgressTintList(ColorStateList.valueOf(ContextCompat.getColor(getContext(), R.color.yellow)));
+            Glide.with(getContext())
+                    .load(club.getClubLogo())
+                    .into(viewHolder.clubLogo);
+        }
 
         return convertView;
     }
 }
-

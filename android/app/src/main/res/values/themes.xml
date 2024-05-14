@@ -84,4 +84,11 @@
         <item name="cornerSize">5dp</item>
     </style>
 
+    <style name="YellowRatingBar" parent="Widget.AppCompat.RatingBar">
+        <item name="android:minHeight">32dip</item>
+        <item name="android:minWidth">36dip</item>
+        <item name="android:progressDrawable">@drawable/custom_ratingbar_star</item>
+    </style>
+
+
 </resources>

@@ -19,6 +19,9 @@ public class Club {
     private List<Student> students;
     private List<Event> events;
 
+    public Club() {
+    }
+
     public Club(String id, String clubName, String email, String password, Role role, String clubLogo, String clubDescription, String clubBanner, float clubRating, int ratingCount, Instant createdAt, School school, List<Student> students, List<Event> events) {
         this.id = id;
         this.clubName = clubName;

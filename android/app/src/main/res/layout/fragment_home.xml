@@ -34,7 +34,7 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="300dp"
+        android:layout_marginTop="310dp"
         android:orientation="vertical">
 
         <RelativeLayout
@@ -94,30 +94,28 @@
                     android:contentDescription="@null"/>
 
             </RelativeLayout>
-
         </RelativeLayout>
 
-        <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:paddingStart="10dp">
+
+        <GridView
+            android:id="@+id/clubs_grid_view"
+            android:layout_width="match_parent"
+            android:layout_height="140dp"
+            android:numColumns="3"
+            android:scrollbars="horizontal"
             android:layout_gravity="center"
-            android:paddingStart="12dp"
-            android:paddingTop="15dp">
+            android:stretchMode="columnWidth"
+            android:clickable="true"
+            android:focusable="true"
+            android:drawSelectorOnTop="true"
+            android:smoothScrollbar="true"
+            />
 
-            <GridView
-                android:id="@+id/clubs_grid_view"
-                android:layout_width="wrap_content"
-                android:layout_height="150dp"
-                android:numColumns="3"
-                android:scrollbars="none"
-                android:layout_gravity="center"
-                android:stretchMode="columnWidth"
-                android:clickable="true"
-                android:focusable="true"
-                android:drawSelectorOnTop="true"
-                />
-
-        </LinearLayout>
+    </LinearLayout>
 
     </LinearLayout>
 
@@ -132,83 +130,89 @@
             android:layout_height="wrap_content"
             android:layout_marginBottom="8dp">
 
-        <RelativeLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="15dp">
-
-            <View
-                android:layout_width="4dp"
-                android:layout_height="12dp"
-                android:background="@drawable/blue_vertical_bar"
-                android:layout_marginTop="9dp"
-                />
-
-            <TextView
-                android:id="@+id/upcoming_events_switcher_title_home"
-                android:layout_width="wrap_content"
-                android:layout_height="30dp"
-                android:layout_marginStart="8dp"
-                android:text="@string/upcoming_events_title"
-                android:fontFamily="@font/poppins_medium"
-                android:textSize="18sp"
-                android:textColor="@color/black"
-                android:gravity="center_vertical"/>
-
-        </RelativeLayout>
-
-        <RelativeLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:gravity="center"
-            android:layout_marginStart="330dp">
-
-            <TextView
-                android:id="@+id/upcoming_events_switcher_see_all_home"
-                android:layout_width="wrap_content"
-                android:layout_height="30dp"
-                android:fontFamily="@font/poppins_regular"
-                android:gravity="center_vertical"
-                android:text="@string/see_all_text"
-                android:textColor="@color/black"
-                android:textSize="12sp" />
-
-            <ImageButton
-                android:id="@+id/see_all_button_upcoming_events_switcher"
+            <RelativeLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_centerVertical="true"
-                android:layout_marginStart="40dp"
-                android:background="?selectableItemBackgroundBorderless"
-                android:src="@drawable/ic_navigate_next_black"
-                android:contentDescription="@null"/>
+                android:layout_marginStart="15dp">
 
-        </RelativeLayout>
+                <View
+                    android:layout_width="4dp"
+                    android:layout_height="12dp"
+                    android:background="@drawable/blue_vertical_bar"
+                    android:layout_marginTop="9dp"
+                    />
 
-        </RelativeLayout>
+                <TextView
+                    android:id="@+id/upcoming_events_switcher_title_home"
+                    android:layout_width="wrap_content"
+                    android:layout_height="30dp"
+                    android:layout_marginStart="8dp"
+                    android:text="@string/upcoming_events_title"
+                    android:fontFamily="@font/poppins_medium"
+                    android:textSize="18sp"
+                    android:textColor="@color/black"
+                    android:gravity="center_vertical"/>
 
-        <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:paddingHorizontal="3dp"
-            android:paddingTop="15dp">
+            </RelativeLayout>
 
-            <GridView
-                android:id="@+id/upcoming_events_grid_view"
+            <RelativeLayout
                 android:layout_width="wrap_content"
-                android:layout_height="160dp"
-                android:numColumns="3"
-                android:scrollbars="none"
-                android:layout_gravity="center"
-                android:stretchMode="columnWidth"
-                android:clickable="true"
-                android:focusable="true"
-                android:horizontalSpacing="3dp"
-                android:drawSelectorOnTop="true"
-                />
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:layout_marginStart="330dp">
 
-        </LinearLayout>
+                <TextView
+                    android:id="@+id/upcoming_events_switcher_see_all_home"
+                    android:layout_width="wrap_content"
+                    android:layout_height="30dp"
+                    android:fontFamily="@font/poppins_regular"
+                    android:gravity="center_vertical"
+                    android:text="@string/see_all_text"
+                    android:textColor="@color/black"
+                    android:textSize="12sp" />
+
+                <ImageButton
+                    android:id="@+id/see_all_button_upcoming_events_switcher"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_marginStart="40dp"
+                    android:background="?selectableItemBackgroundBorderless"
+                    android:src="@drawable/ic_navigate_next_black"
+                    android:contentDescription="@null"/>
+
+            </RelativeLayout>
+
+        </RelativeLayout>
+
+        <HorizontalScrollView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:scrollbars="none">
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:scrollbars="none"
+                android:paddingTop="10dp"
+                android:paddingHorizontal="5dp">
+
+                <GridView
+                    android:id="@+id/upcoming_events_grid_view"
+                    android:layout_width="870dp"
+                    android:layout_height="180dp"
+                    android:numColumns="5"
+                    android:scrollbars="horizontal"
+                    android:layout_gravity="center"
+                    android:stretchMode="columnWidth"
+                    android:clickable="true"
+                    android:focusable="true"
+                    android:horizontalSpacing="5dp"
+                    android:drawSelectorOnTop="true"
+                    android:smoothScrollbar="true"
+                    />
+            </LinearLayout>
+        </HorizontalScrollView>
 
     </LinearLayout>
 
