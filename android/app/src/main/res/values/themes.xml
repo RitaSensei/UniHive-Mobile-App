@@ -75,6 +75,10 @@
         <item name="itemIconTint">@drawable/bottom_navigation_bar_icon_color</item>
     </style>
 
+    <style name="DrawerNavigationItemBackgroundStyle" parent="">
+        <item name="itemBackground">@drawable/drawer_navigation_item_background</item>
+    </style>
+
     <style name="Theme.Unihiveandroid.TextButtonColor" parent="">
         <item name="android:textColor">@drawable/button_text_color</item>
     </style>

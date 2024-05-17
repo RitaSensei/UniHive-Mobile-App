@@ -16,8 +16,8 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.biog.unihiveandroid.BuildConfig;
 import com.biog.unihiveandroid.MainActivity;
 import com.biog.unihiveandroid.R;
-import com.biog.unihiveandroid.dashboard.AdminDashboardActivity;
-import com.biog.unihiveandroid.dashboard.SuperAdminDashboardActivity;
+import com.biog.unihiveandroid.dashboard.admin.AdminDashboardActivity;
+import com.biog.unihiveandroid.dashboard.superadmin.SuperAdminDashboardActivity;
 import com.biog.unihiveandroid.model.RegisterRequest;
 import com.biog.unihiveandroid.service.AuthenticationService;
 import com.biog.unihiveandroid.service.RetrofitService;
@@ -27,7 +27,6 @@ import com.google.gson.JsonObject;
 
 import java.io.IOException;
 import java.util.Base64;
-import java.util.Date;
 
 import javax.crypto.SecretKey;
 import io.jsonwebtoken.Claims;

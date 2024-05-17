@@ -40,6 +40,10 @@ public interface SuperAdminService {
     Call<Void> getStudent(@Header("Authorization") String token, @Path("id") String id);
     @GET("/superadmin/request/{id}")
     Call<Void> getRequest(@Header("Authorization") String token, @Path("id") String id);
+    @GET("/superadmin/allcounts")
+    Call<Void> getAllCounts(@Header("Authorization") String token);
+    @GET("/superadmin/all")
+    Call<Void> getAll(@Header("Authorization") String token);
 
     //POST APIS
     @POST("/superadmin/addschool")
@@ -70,6 +74,10 @@ public interface SuperAdminService {
     Call<Void> updateEvent(@Header("Authorization") String token,@Path("id") String id, @Body Object data);
     @PUT("/superadmin/uprequest/{id}")
     Call<Void> updateRequest(@Header("Authorization") String token,@Path("id") String id, @Body Object data);
+    @PUT("/superamdin/upemail/{email}")
+    Call<Void> updateSuperAdminEmail(@Header("Authorization") String token,@Path("email") String email);
+    @PUT("/superamdin/uppassword")
+    Call<Void> updateSuperAdminPassword(@Header("Authorization") String token,@Body Object data);
 
     //DELETE APIS
     @DELETE("/superadmin/deladmin/{id}")

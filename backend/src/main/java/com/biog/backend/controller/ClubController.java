@@ -14,7 +14,7 @@ import java.util.List;
 @RestController
 @RequestMapping("/club")
 @AllArgsConstructor
-@CrossOrigin(origins = "http://localhost:5173")
+//@CrossOrigin(origins = "http://localhost:5173")
 public class ClubController {
     private final ClubService clubService;
 

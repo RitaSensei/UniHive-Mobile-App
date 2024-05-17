@@ -24,6 +24,7 @@
     <string name="ic_calendar">Calendar</string>
     <string name="ic_profile">Profile</string>
     <string name="settings_title">Settings</string>
+    <string name="superadmin_dashboard_title">Super Admin Dashboard</string>
     <string name="title_activity_bottom_bar">BottomBarActivity</string>
     <string name="title_activity_settings">SettingsActivity</string>
     <string name="title_activity_imageview">ImageViewActivity</string>
@@ -75,5 +76,22 @@
     <string name="upcoming_events_date">From Day Month Year To Day Month Year</string>
     <string name="club_name">Club Name</string>
     <string name="club_description">Description of the club</string>
+
+    <!-- SuperAdmin Dashboard Drawer Items -->
+    <string name="dashboard_item_text">Dashboard</string>
+    <string name="admins_item_text">Admins</string>
+    <string name="schools_item_text">Schools</string>
+    <string name="students_item_text">Students</string>
+    <string name="signup_requests_item_text">Sign up Requests</string>
+    <string name="drawer_open">Open</string>
+    <string name="drawer_close">Close</string>
+    <string name="admins_table_text">Admins Table</string>
+    <string name="clubs_table_text">Clubs Table</string>
+    <string name="events_table_text">Events Table</string>
+    <string name="schools_table_text">Schools Table</string>
+    <string name="students_table_text">Students Table</string>
+    <string name="requests_table_text">Pending Sign up Requests</string>
+    <string name="edit_table_button_text">Edit Table</string>
+    <string name="number_of_rows">loading</string>
 
 </resources>

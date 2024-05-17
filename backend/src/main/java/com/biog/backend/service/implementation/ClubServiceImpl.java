@@ -281,4 +281,9 @@ public class ClubServiceImpl implements ClubService {
             clubRepository.save(club);
         }
     }
+    @Override
+    public List<Club> getClubsByStudent(UUID id) {
+        return studentRepository.findById(id).orElseThrow(
+                () -> new NotFoundException("Student with id " + id + " not found")).getClubs();
+    }
 }

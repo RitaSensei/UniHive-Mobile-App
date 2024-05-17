@@ -1,5 +1,6 @@
 package com.biog.backend.service;
 
+import com.biog.backend.auth.AuthenticationResponse;
 import com.biog.backend.model.Club;
 import com.biog.backend.model.School;
 import com.biog.backend.model.Student;
@@ -16,10 +17,17 @@ public interface StudentService {
         void deleteStudent(UUID id, UUID... schoolId) throws AccessDeniedException;
 
         Student getStudent(UUID id, UUID... schoolId) throws AccessDeniedException;
+
         Student getStudentByEmail(String email);
 
         School getSchoolByStudent(UUID id);
 
         List<Club> getClubsByFollower(UUID id, UUID... schoolId) throws AccessDeniedException;
+
+        AuthenticationResponse updateStudentEmail(UUID id, String email);
+
+        Student updateStudentProfileImage(UUID id, String profileImage);
+
+        void unfollowClub(UUID studentId, UUID clubId);
 }
 

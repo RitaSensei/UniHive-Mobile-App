@@ -1,5 +1,7 @@
 package com.biog.backend.service.implementation;
 
+import com.biog.backend.auth.AuthenticationResponse;
+import com.biog.backend.config.JwtService;
 import com.biog.backend.exception.NotFoundException;
 import com.biog.backend.model.*;
 import com.biog.backend.repository.*;
@@ -20,6 +22,7 @@ public class StudentServiceImpl implements StudentService {
 
     private final StudentRepository studentRepository;
     private SchoolRepository schoolRepository;
+    private final JwtService jwtService;
 
     @Override
     public Student updateStudent(UUID id, Student newstudent, UUID... schoolId) throws AccessDeniedException {
@@ -140,4 +143,32 @@ public class StudentServiceImpl implements StudentService {
                 () -> new NotFoundException("Student with email " + email + " not found"));
     }
 
+    @Override
+    public AuthenticationResponse updateStudentEmail(UUID id, String email) {
+        Student student = studentRepository.findById(id).orElseThrow(
+                () -> new NotFoundException("Student with id " + id + " not found"));
+        student.setEmail(email);
+        studentRepository.save(student);
+        var jwtToken = jwtService.generateToken(student);
+        return AuthenticationResponse.builder().token(jwtToken).build();
+    }
+
+    @Override
+    public Student updateStudentProfileImage(UUID id, String profileImage) {
+        Student student = studentRepository.findById(id).orElseThrow(
+                () -> new NotFoundException("Student with id " + id + " not found"));
+        student.setProfileImage(profileImage);
+        return studentRepository.save(student);
+    }
+
+    @Override
+    public void unfollowClub(UUID studentId, UUID clubId) {
+        Student student = studentRepository.findById(studentId)
+                .orElseThrow(() -> new NotFoundException(
+                        "Student with id " + studentId + " not found"));
+        Club club = student.getClubs().stream().filter(c -> c.getId().equals(clubId)).findFirst()
+                .orElseThrow(() -> new NotFoundException("Club with id " + clubId + " not found"));
+        student.getClubs().remove(club);
+        studentRepository.save(student);
+    }
 }

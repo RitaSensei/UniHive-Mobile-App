@@ -1,0 +1,36 @@
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="180dp"
+    android:layout_height="180dp"
+    android:layout_gravity="center"
+    android:layout_marginVertical="4dp"
+    android:padding="8dp"
+    android:background="@drawable/table_item_rounded_corners_shape"
+    android:elevation="5dp"
+    android:clickable="true">
+
+    <TextView
+        android:id="@+id/club_name_list_view_item"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_centerVertical="true"
+        android:fontFamily="@font/poppins_semibold"
+        android:text="@string/number_of_rows"
+        android:textAlignment="center"
+        android:textColor="@color/black"
+        android:textSize="14sp" />
+
+    <TextView
+        android:id="@+id/table_name_item"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_alignParentBottom="true"
+        android:fontFamily="@font/poppins_semibold"
+        android:text="@string/admins_table_text"
+        android:textColor="@color/black"
+        android:textAlignment="center"
+        android:textSize="20sp" />
+
+</RelativeLayout>

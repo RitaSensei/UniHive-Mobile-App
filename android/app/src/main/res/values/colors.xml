@@ -11,5 +11,6 @@
     <color name="light_grey">#D5D5D5</color>
     <color name="mid_grey">#CBCBCB</color>
     <color name="extra_light_grey">#EDEDED</color>
+    <color name="ilyass_grey">#C5C5C5</color>
     <color name="yellow">#fcc153</color>
 </resources>

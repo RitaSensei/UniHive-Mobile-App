@@ -7,7 +7,6 @@
 
     <application
         android:allowBackup="true"
-        android:usesCleartextTraffic="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
         android:fullBackupContent="@xml/backup_rules"
         android:icon="@mipmap/ic_launcher"
@@ -15,6 +14,7 @@
         android:roundIcon="@mipmap/ic_launcher"
         android:supportsRtl="true"
         android:theme="@style/Theme.Unihiveandroid"
+        android:usesCleartextTraffic="true"
         tools:targetApi="31">
         <activity
             android:name=".authentication.WelcomePage"
@@ -22,7 +22,6 @@
             android:theme="@style/Theme.Unihiveandroid.NoActionBar1">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
@@ -41,22 +40,21 @@
         <activity
             android:name=".authentication.SignupActivity"
             android:exported="false"
-            android:windowSoftInputMode="adjustResize"
-            android:theme="@style/Theme.Unihiveandroid.NoActionBar2" />
+            android:theme="@style/Theme.Unihiveandroid.NoActionBar2"
+            android:windowSoftInputMode="adjustResize" />
         <activity
             android:name=".SettingsActivity"
             android:exported="false"
             android:label="@string/title_activity_settings"
-            android:theme="@style/Theme.Unihiveandroid.NoActionBar4"
-            />
+            android:theme="@style/Theme.Unihiveandroid.NoActionBar4" />
         <activity
-            android:name=".dashboard.SuperAdminDashboardActivity"
+            android:name=".dashboard.superadmin.SuperAdminDashboardActivity"
             android:exported="false"
-            android:theme="@style/Theme.Unihiveandroid.NoActionBar3" />
+            android:theme="@style/Theme.Unihiveandroid.NoActionBar2" />
         <activity
-            android:name=".dashboard.AdminDashboardActivity"
+            android:name=".dashboard.admin.AdminDashboardActivity"
             android:exported="false"
-            android:theme="@style/Theme.Unihiveandroid.NoActionBar3" />
+            android:theme="@style/Theme.Unihiveandroid.NoActionBar2" />
     </application>
 
 </manifest>

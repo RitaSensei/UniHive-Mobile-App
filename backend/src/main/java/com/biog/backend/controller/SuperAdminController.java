@@ -1,5 +1,8 @@
 package com.biog.backend.controller;
 
+import com.biog.backend.auth.AuthenticationRequest;
+import com.biog.backend.auth.AuthenticationResponse;
+import com.biog.backend.auth.AuthenticationService;
 import com.biog.backend.service.*;
 import com.biog.backend.model.*;
 import lombok.AllArgsConstructor;
@@ -21,6 +24,8 @@ public class SuperAdminController {
     private final EventService eventService;
     private final SchoolService schoolService;
     private final RequestService requestService;
+    private final SuperAdminService superAdminService;
+    private final AuthenticationService authenticationService;
 
     @PreAuthorize("hasRole('ROLE_SUPER_ADMIN')")
     @GetMapping("/admins")
@@ -189,5 +194,30 @@ public class SuperAdminController {
     @GetMapping("/request/{id}")
     Request getRequest(@PathVariable UUID id) throws AccessDeniedException {
         return requestService.getRequest(id);
+    }
+
+    @PreAuthorize("hasRole('ROLE_SUPER_ADMIN')")
+    @GetMapping("/allcounts")
+    List<Integer> getAllCounts() throws AccessDeniedException {
+        return List.of(adminService.getAll().size(), studentService.getAll().size(), clubService.getAll().size(),
+                eventService.getAll().size(), schoolService.getAll().size(), requestService.getAll().size());
+    }
+
+    @PreAuthorize("hasRole('ROLE_SUPER_ADMIN')")
+    @GetMapping("/all")
+    List<SuperAdmin> getAll() {
+        return superAdminService.getAll();
+    }
+
+    @PreAuthorize("hasRole('ROLE_SUPER_ADMIN')")
+    @PutMapping("/upemail")
+    AuthenticationResponse updateSuperAdminEmail(@RequestParam String email) {
+        return superAdminService.updateSuperAdminEmail(email);
+    }
+
+    @PreAuthorize("hasRole('ROLE_SUPER_ADMIN')")
+    @PutMapping("/uppassword")
+    AuthenticationResponse updateSuperAdminPassword(@RequestBody AuthenticationRequest password) {
+        return authenticationService.changePassword(password);
     }
 }
