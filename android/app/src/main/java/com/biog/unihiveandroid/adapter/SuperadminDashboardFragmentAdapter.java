@@ -11,14 +11,18 @@ import androidx.annotation.Nullable;
 
 import com.biog.unihiveandroid.R;
 
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 public class SuperadminDashboardFragmentAdapter extends ArrayAdapter<Object> {
+    private final List<Integer> tableCounts;
     private static class ViewHolder {
         TextView tableName, numberOfRows;
     }
-        public SuperadminDashboardFragmentAdapter(@NonNull Context context, List<Object> objects) {
+    public SuperadminDashboardFragmentAdapter(@NonNull Context context, ArrayList<Object> objects, List<Integer> tableCounts) {
         super(context, 0, objects);
+        this.tableCounts = tableCounts;
     }
 
     @NonNull
@@ -37,7 +41,9 @@ public class SuperadminDashboardFragmentAdapter extends ArrayAdapter<Object> {
         Object object = getItem(position);
         assert object != null;
         viewHolder.tableName.setText(object.toString());
-        viewHolder.numberOfRows.setText("4 rows");
+        String tableRows = tableCounts.get(position) > 1 ? tableCounts.get(position).toString() + " rows" : tableCounts.get(position).toString() + " row";
+        viewHolder.numberOfRows.setText(tableRows);
         return convertView;
     }
+
 }

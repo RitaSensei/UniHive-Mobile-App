@@ -74,7 +74,6 @@ public class SignupActivity extends AppCompatActivity {
                 importSchoolCardBtn.setText(selectedFileName);
                 importSchoolCardBtn.setCompoundDrawablesRelativeWithIntrinsicBounds(0, 0, R.drawable.round_check_circle, 0);
             } else {
-//                Log.d("PhotoPicker", "No media selected");
                 Toast.makeText(this, "No media selected", Toast.LENGTH_SHORT).show();
             }
         });

@@ -18,8 +18,7 @@
             android:layout_width="120dp"
             android:layout_height="120dp"
             android:layout_gravity="center"
-            android:contentDescription="@null"
-            android:src="@drawable/cindh_logo" />
+            android:contentDescription="@null" />
 
         <RatingBar
             android:id="@+id/club_rating_card_item"

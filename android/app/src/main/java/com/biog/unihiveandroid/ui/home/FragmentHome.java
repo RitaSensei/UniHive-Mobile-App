@@ -71,9 +71,7 @@ public class FragmentHome extends Fragment {
     private JsonObject studentData;
     private JsonArray clubsData,eventsData;
 
-    public FragmentHome() {
-        // Required empty public constructor
-    }
+    public FragmentHome() {}
 
     public static FragmentHome newInstance(String param1, String param2) {
         FragmentHome fragment = new FragmentHome();

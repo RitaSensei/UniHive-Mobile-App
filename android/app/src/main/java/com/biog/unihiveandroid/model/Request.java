@@ -27,6 +27,10 @@ public class Request {
         this.schoolName = schoolName;
     }
 
+
+    public Request() {
+    }
+
     public int getId() {
         return id;
     }

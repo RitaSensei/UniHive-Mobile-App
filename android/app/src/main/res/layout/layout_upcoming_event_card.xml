@@ -18,8 +18,7 @@
                 android:layout_gravity="center"
                 android:scaleType="fitXY"
                 android:contentDescription="@null"
-                android:fadingEdge="vertical"
-                android:src="@drawable/oly_ensias_post_square" />
+                android:fadingEdge="vertical"/>
 
             <View
                 android:layout_width="match_parent"

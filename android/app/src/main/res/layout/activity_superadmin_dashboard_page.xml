@@ -24,23 +24,36 @@
             android:layout_gravity="start"
             android:layout_marginBottom="19dp"
             android:fontFamily="@font/poppins_medium"
-            android:text="@string/superadmin_dashboard_title"
             android:textColor="@color/black"
             android:textSize="20sp" />
 
         <ImageButton
-            android:id="@+id/superadmin_dashboard_toolbar_profile_icon"
+            android:id="@+id/superadmin_dashboard_toolbar_logout_icon"
+            style="?attr/actionButtonStyle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="end"
-            android:layout_marginBottom="10dp"
-            android:layout_marginEnd="10dp"
+            android:layout_marginEnd="5dp"
+            android:layout_marginBottom="7dp"
+            android:backgroundTint="@color/white"
+            android:clickable="true"
+            android:contentDescription="@null"
+            android:focusable="true"
+            android:rotation="180"
+            android:src="@drawable/ic_logout_black" />
+
+        <ImageButton
+            android:id="@+id/superadmin_dashboard_toolbar_search_icon"
+            style="?attr/actionButtonStyle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="end"
+            android:layout_marginBottom="7dp"
+            android:src="@drawable/ic_search"
             android:backgroundTint="@color/white"
             android:contentDescription="@null"
             android:clickable="true"
-            android:focusable="true"
-            style="?attr/actionButtonStyle"
-            android:src="@drawable/ic_person" />
+            android:focusable="true" />
 
     </androidx.appcompat.widget.Toolbar>
 
@@ -75,14 +88,51 @@
             android:background="@color/white"
             android:paddingHorizontal="8dp"
             app:itemTextColor="@color/drawer_navigation_text_color"
-            app:itemIconTint="@color/drawer_navigation_icon_color"
             app:itemTextAppearance="@font/poppins_medium"
             app:itemTextAppearanceActiveBoldEnabled="false"
+            app:itemIconTint="@color/black"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:menu="@menu/drawer_menu"
-            style="@style/DrawerNavigationItemBackgroundStyle"/>
+            style="@style/DrawerNavigationItemBackgroundStyle">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="1"/>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="10dp"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/superadmin_profile_item"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:paddingStart="20dp"
+                        android:drawablePadding="20dp"
+                        android:fontFamily="@font/poppins_medium"
+                        android:gravity="center_vertical"
+                        android:padding="10dp"
+                        android:text="@string/ic_profile"
+                        android:textColor="@color/drawer_navigation_text_color"
+                        android:clickable="true"
+                        android:focusable="true"
+                        app:drawableLeftCompat="@drawable/superadmin_profile_icon_selector"/>
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+        </com.google.android.material.navigation.NavigationView>
 
     </androidx.drawerlayout.widget.DrawerLayout>
 

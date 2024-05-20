@@ -22,6 +22,8 @@ public class School {
         this.students = students;
     }
 
+    public School() {}
+
     public String getId() {
         return id;
     }

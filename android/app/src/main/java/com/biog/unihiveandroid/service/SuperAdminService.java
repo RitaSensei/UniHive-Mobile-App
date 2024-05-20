@@ -1,32 +1,25 @@
 package com.biog.unihiveandroid.service;
 
-import com.biog.unihiveandroid.model.Admin;
-import com.biog.unihiveandroid.model.Club;
-import com.biog.unihiveandroid.model.Event;
-import com.biog.unihiveandroid.model.Request;
-import com.biog.unihiveandroid.model.School;
-import com.biog.unihiveandroid.model.Student;
 import java.util.List;
-import java.util.UUID;
-
 import okhttp3.MultipartBody;
+import okhttp3.ResponseBody;
 import retrofit2.Call;
 import retrofit2.http.*;
 
 public interface SuperAdminService {
     //GET APIS
     @GET("/superadmin/clubs")
-    Call<Void> listClubs(@Header("Authorization") String token);
+    Call<ResponseBody> listClubs(@Header("Authorization") String token);
     @GET("/superadmin/admins")
-    Call<Void> listAdmins(@Header("Authorization") String token);
+    Call<ResponseBody> listAdmins(@Header("Authorization") String token);
     @GET("/superadmin/events")
-    Call<Void> listEvents(@Header("Authorization") String token);
+    Call<ResponseBody> listEvents(@Header("Authorization") String token);
     @GET("/superadmin/schools")
-    Call<Void> listSchools(@Header("Authorization") String token);
+    Call<ResponseBody> listSchools(@Header("Authorization") String token);
     @GET("/superadmin/students")
-    Call<Void> listStudents(@Header("Authorization") String token);
+    Call<ResponseBody> listStudents(@Header("Authorization") String token);
     @GET("/superadmin/requests")
-    Call<Void> listRequests(@Header("Authorization") String token);
+    Call<ResponseBody> listRequests(@Header("Authorization") String token);
 
     @GET("/superadmin/club/{id}")
     Call<Void> getClub(@Header("Authorization") String token, @Path("id") String id);
@@ -41,9 +34,9 @@ public interface SuperAdminService {
     @GET("/superadmin/request/{id}")
     Call<Void> getRequest(@Header("Authorization") String token, @Path("id") String id);
     @GET("/superadmin/allcounts")
-    Call<Void> getAllCounts(@Header("Authorization") String token);
+    Call<ResponseBody> getAllCounts(@Header("Authorization") String token);
     @GET("/superadmin/all")
-    Call<Void> getAll(@Header("Authorization") String token);
+    Call<ResponseBody> getAll(@Header("Authorization") String token);
 
     //POST APIS
     @POST("/superadmin/addschool")
@@ -75,9 +68,9 @@ public interface SuperAdminService {
     @PUT("/superadmin/uprequest/{id}")
     Call<Void> updateRequest(@Header("Authorization") String token,@Path("id") String id, @Body Object data);
     @PUT("/superamdin/upemail/{email}")
-    Call<Void> updateSuperAdminEmail(@Header("Authorization") String token,@Path("email") String email);
+    Call<ResponseBody> updateSuperAdminEmail(@Header("Authorization") String token,@Path("email") String email);
     @PUT("/superamdin/uppassword")
-    Call<Void> updateSuperAdminPassword(@Header("Authorization") String token,@Body Object data);
+    Call<ResponseBody> updateSuperAdminPassword(@Header("Authorization") String token,@Body Object data);
 
     //DELETE APIS
     @DELETE("/superadmin/deladmin/{id}")

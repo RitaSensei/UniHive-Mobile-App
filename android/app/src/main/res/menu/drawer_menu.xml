@@ -2,37 +2,37 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
     <item
         android:id="@+id/dashboard_item"
-        android:icon="@drawable/ic_drawer_dashboard_black"
+        android:icon="@drawable/superadmin_dashboard_icon_selector"
         android:title="@string/dashboard_item_text"
         android:checkable="true"/>
     <item
         android:id="@+id/admins_item"
-        android:icon="@drawable/ic_drawer_admins_black"
+        android:icon="@drawable/superadmin_admins_icon_selector"
         android:title="@string/admins_item_text"
         android:checkable="true"/>
     <item
         android:id="@+id/clubs_item"
-        android:icon="@drawable/ic_drawer_clubs_black"
+        android:icon="@drawable/superadmin_clubs_icon_selector"
         android:title="@string/ic_clubs"
         android:checkable="true" />
     <item
         android:id="@+id/events_item"
-        android:icon="@drawable/ic_drawer_events_black"
+        android:icon="@drawable/superadmin_events_icon_selector"
         android:title="@string/ic_events"
         android:checkable="true"/>
     <item
         android:id="@+id/schools_item"
-        android:icon="@drawable/ic_drawer_schools_black"
+        android:icon="@drawable/superadmin_schools_icon_selector"
         android:title="@string/schools_item_text"
         android:checkable="true" />
     <item
         android:id="@+id/students_item"
-        android:icon="@drawable/ic_drawer_students_black"
+        android:icon="@drawable/superadmin_students_icon_selector"
         android:title="@string/students_item_text"
         android:checkable="true"/>
     <item
         android:id="@+id/signup_requests_item"
-        android:icon="@drawable/ic_drawer_requests_black"
+        android:icon="@drawable/superadmin_requests_icon_selector"
         android:title="@string/signup_requests_item_text"
         android:checkable="true" />
 

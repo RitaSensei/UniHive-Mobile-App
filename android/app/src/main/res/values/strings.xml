@@ -8,6 +8,9 @@
     <string name="email_address_text">Email Address</string>
     <string name="password_text">Password</string>
     <string name="confirm_password_text">Confirm Password</string>
+    <string name="old_password_text">Old Password</string>
+    <string name="new_password_text">New Password</string>
+    <string name="update_button">Update</string>
     <string name="loginOrSignup">Or</string>
     <string name="rememberme_check_box">Remember Me</string>
     <string name="forget_password_text">Forgot password ?</string>
@@ -91,6 +94,7 @@
     <string name="schools_table_text">Schools Table</string>
     <string name="students_table_text">Students Table</string>
     <string name="requests_table_text">Pending Sign up Requests</string>
+    <string name="requests_title">Requests</string>
     <string name="edit_table_button_text">Edit Table</string>
     <string name="number_of_rows">loading</string>
 

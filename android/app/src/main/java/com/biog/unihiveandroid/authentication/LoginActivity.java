@@ -99,6 +99,7 @@ public class LoginActivity extends AppCompatActivity {
                         JsonObject jsonObject = new Gson().fromJson(responseString, JsonObject.class);
                         String token = jsonObject.get("token").getAsString();
                         decodeJWTAndHandleRole(token);
+                        Log.d("unihivehome", "Login successful: " + token);
                         Toast.makeText(LoginActivity.this, "Login successful!", Toast.LENGTH_SHORT).show();
                         finish();
                     } catch (IOException exception) {

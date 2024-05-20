@@ -21,6 +21,9 @@ public class Admin {
         this.createdAt = createdAt;
         this.school = school;
     }
+
+    public Admin() {}
+
     public String getId() {
         return id;
     }

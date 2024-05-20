@@ -150,6 +150,7 @@ public class FragmentEvents extends Fragment {
                 Toast.makeText(requireContext(), "Failed to fetch event data", Toast.LENGTH_SHORT).show();
             }
         });
+
         return rootView;
     }
 

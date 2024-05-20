@@ -35,6 +35,8 @@ public class Student {
         this.school = school;
     }
 
+    public Student() {
+    }
     public String getId() {
         return id;
     }

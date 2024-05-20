@@ -70,48 +70,7 @@ public class ImageData implements Parcelable {
         dest.writeInt(imageId);
         dest.writeParcelable((Parcelable) context, flags);
     }
-    // TODO : remove this method
-    public static List<Integer> getTrendingEventsSwitcherItems() {
-        List<Integer> switcherItems = new ArrayList<>();
-        switcherItems.add(R.drawable.itholic_banner);
-        switcherItems.add(R.drawable.aiday_banner);
-        switcherItems.add(R.drawable.japanday_banner);
-        switcherItems.add(R.drawable.cindhconvoi_banner);
-        switcherItems.add(R.drawable.fintech_banner);
-        switcherItems.add(R.drawable.forum_ehtp_banner);
-        switcherItems.add(R.drawable.forum_ensias_banner);
-        switcherItems.add(R.drawable.ideh_banner);
-        switcherItems.add(R.drawable.sghiour_meetup_inpt_banner);
-        switcherItems.add(R.drawable.olympiades_ensias_banner);
-        return switcherItems;
-    }
 
-    public static List<Integer> getClubsGridItems() {
-        List<Integer> gridItems = new ArrayList<>();
-        gridItems.add(R.drawable.eitc_logo);
-        gridItems.add(R.drawable.cje_logo);
-        gridItems.add(R.drawable.eaic_logo);
-        gridItems.add(R.drawable.cindh_logo);
-        gridItems.add(R.drawable.cit_logo);
-        gridItems.add(R.drawable.fintech_logo);
-        gridItems.add(R.drawable.forum_ehtp_logo);
-        gridItems.add(R.drawable.oly_ensias_logo);
-        gridItems.add(R.drawable.forum_geni_entreprise_logo);
-        gridItems.add(R.drawable.cse_logo);
-        return gridItems;
-    }
-
-    public static List<Integer> getUpcomingEventsGridItems() {
-        List<Integer> gridItems = new ArrayList<>();
-        gridItems.add(R.drawable.itholic_post_square);
-        gridItems.add(R.drawable.fintech_post_square);
-        gridItems.add(R.drawable.aiday_post_square);
-        gridItems.add(R.drawable.oly_ensias_post_square);
-        gridItems.add(R.drawable.japanday_post_square);
-        gridItems.add(R.drawable.cindhconvoi_post_square);
-        gridItems.add(R.drawable.insec_mcsc_post_square);
-        return gridItems;
-    }
 }
 
 
