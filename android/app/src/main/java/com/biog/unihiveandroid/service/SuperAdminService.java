@@ -1,9 +1,14 @@
 package com.biog.unihiveandroid.service;
 
+import com.google.gson.JsonObject;
+
 import java.util.List;
+
+import kotlin.ParameterName;
 import okhttp3.MultipartBody;
 import okhttp3.ResponseBody;
 import retrofit2.Call;
+import retrofit2.Response;
 import retrofit2.http.*;
 
 public interface SuperAdminService {
@@ -67,10 +72,10 @@ public interface SuperAdminService {
     Call<Void> updateEvent(@Header("Authorization") String token,@Path("id") String id, @Body Object data);
     @PUT("/superadmin/uprequest/{id}")
     Call<Void> updateRequest(@Header("Authorization") String token,@Path("id") String id, @Body Object data);
-    @PUT("/superamdin/upemail/{email}")
-    Call<ResponseBody> updateSuperAdminEmail(@Header("Authorization") String token,@Path("email") String email);
-    @PUT("/superamdin/uppassword")
-    Call<ResponseBody> updateSuperAdminPassword(@Header("Authorization") String token,@Body Object data);
+    @PUT("/superadmin/upemail")
+    Call<ResponseBody> updateSuperAdminEmail(@Header("Authorization") String token,@Query("email") String email);
+    @PUT("/superadmin/uppassword")
+    Call<ResponseBody> updateSuperAdminPassword(@Header("Authorization") String token, @Body Object data);
 
     //DELETE APIS
     @DELETE("/superadmin/deladmin/{id}")

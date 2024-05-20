@@ -3,9 +3,9 @@ package com.biog.unihiveandroid.dashboard.superadmin;
 import static android.content.Context.MODE_PRIVATE;
 
 import android.content.Context;
-import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.os.Handler;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -21,16 +21,16 @@ import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 
 import com.biog.unihiveandroid.BuildConfig;
-import com.biog.unihiveandroid.MainActivity;
 import com.biog.unihiveandroid.R;
 import com.biog.unihiveandroid.authentication.LoginActivity;
-import com.biog.unihiveandroid.dashboard.admin.AdminDashboardActivity;
 import com.biog.unihiveandroid.model.PasswordUpdateRequest;
 import com.biog.unihiveandroid.service.RetrofitService;
 import com.biog.unihiveandroid.service.SuperAdminService;
 import com.google.android.material.snackbar.Snackbar;
 import com.google.gson.Gson;
+import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
+import com.google.gson.JsonParser;
 
 import java.io.IOException;
 import java.util.Base64;
@@ -49,12 +49,11 @@ import retrofit2.Response;
 
 public class FragmentProfile extends Fragment {
     private Context mContext;
-    private GridView requestsGridView;
     private EditText superadminEmailEditText, superadminOldPasswordEditText, superadminNewPasswordEditText;
     private Button superadminUpdateButton;
     private SharedPreferences sharedPreferences;
     private SuperAdminService superadminService;
-    private String token, superadminEmail;
+    private String initialToken, superadminEmail;
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -75,6 +74,7 @@ public class FragmentProfile extends Fragment {
         superadminNewPasswordEditText = rootView.findViewById(R.id.edit_new_password_superadmin_profile);
         superadminUpdateButton = rootView.findViewById(R.id.update_superadmin_profile_button);
         superadminEmailEditText.setText(superadminEmail);
+//        superadminNewPasswordEditText.setEnabled(false);
 
         superadminUpdateButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -90,98 +90,147 @@ public class FragmentProfile extends Fragment {
         String oldPassword = superadminOldPasswordEditText.getText().toString();
         String newPassword = superadminNewPasswordEditText.getText().toString();
 
-        if (email.isEmpty() || oldPassword.isEmpty() || newPassword.isEmpty()) {
-//            superadminUpdateButton.setEnabled(false);
+        if (email.isEmpty()) {
+            superadminUpdateButton.setEnabled(false);
             return;
+        } else {
+            superadminUpdateButton.setEnabled(true);
+            if (!validateEmail(email)) {
+                Snackbar.make(view, "Invalid email address!", Snackbar.LENGTH_SHORT)
+                        .setBackgroundTint(getResources().getColor(R.color.red_light, null))
+                        .setAnimationMode(Snackbar.ANIMATION_MODE_FADE)
+                        .show();
+                return;
+            }
         }
-        if (!validateEmail(email)) {
-            Snackbar.make(view, "Invalid email address!", Snackbar.LENGTH_SHORT)
-                    .setBackgroundTint(getResources().getColor(R.color.red_light, null))
-                    .setAnimationMode(Snackbar.ANIMATION_MODE_FADE)
-                    .show();
-            return;
+        superadminNewPasswordEditText.setEnabled(!oldPassword.isEmpty());
+        if (!oldPassword.isEmpty()) {
+            if (!validatePassword(oldPassword)) {
+                superadminOldPasswordEditText.setError("Password must be at least 8 characters long and contain at least one uppercase letter, one lowercase letter, one number, and one special character!");
+                return;
+            }
+            if (!validatePassword(newPassword)) {
+                superadminNewPasswordEditText.setError("Password must be at least 8 characters long and contain at least one uppercase letter, one lowercase letter, one number, and one special character!");
+                return;
+            }
+            if (superadminOldPasswordEditText.equals(superadminNewPasswordEditText)) {
+                Snackbar.make(view, "New Password must be different", Snackbar.LENGTH_SHORT)
+                        .setBackgroundTint(getResources().getColor(R.color.red_light, null))
+                        .setAnimationMode(Snackbar.ANIMATION_MODE_FADE)
+                        .show();
+                return;
+            }
         }
-//        if (!validatePassword(oldPassword)) {
-//            superadminOldPasswordEditText.setError("Password must be at least 8 characters long and contain at least one uppercase letter, one lowercase letter, one number, and one special character!");
-//            return;
-//        }
-        if (!validatePassword(newPassword)) {
-            superadminNewPasswordEditText.setError("Password must be at least 8 characters long and contain at least one uppercase letter, one lowercase letter, one number, and one special character!");
-            return;
-        }
-        if (superadminOldPasswordEditText.equals(superadminNewPasswordEditText)) {
-            Snackbar.make(view, "New Password must be different", Snackbar.LENGTH_SHORT)
-                    .setBackgroundTint(getResources().getColor(R.color.red_light, null))
-                    .setAnimationMode(Snackbar.ANIMATION_MODE_FADE)
-                    .show();
-            return;
-        }
-        superadminUpdateButton.setEnabled(true);
-        superadminService.updateSuperAdminEmail("Bearer " + token, email).enqueue(new Callback<ResponseBody>() {
-            @Override
-            public void onResponse(@NonNull Call<ResponseBody> call, @NonNull Response<ResponseBody> response) {
-                if (response.code() == 200 && response.body() != null) {
-                    removeToken();
-                    String responseString = response.body().toString();
-                    JsonObject jsonObject = new Gson().fromJson(responseString, JsonObject.class);
-                    String token = jsonObject.get("token").getAsString();
-                    decodeJWTAndHandleRole(token);
-                    Snackbar.make(view, "Email updated successfully", Snackbar.LENGTH_SHORT)
-                            .setBackgroundTint(getResources().getColor(R.color.green, null))
-                            .setAnimationMode(Snackbar.ANIMATION_MODE_FADE)
-                            .show();
-                } else {
-                    Log.d("fragmentProfile", "email update failed first: " + response.message());
+
+        if (!superadminEmailEditText.getText().toString().equals(superadminEmail)) {
+            superadminService.updateSuperAdminEmail("Bearer " + initialToken, email).enqueue(new Callback<ResponseBody>() {
+                @Override
+                public void onResponse(@NonNull Call<ResponseBody> call, @NonNull Response<ResponseBody> response) {
+                    Log.d("fragmentProfile", "initial token in email : "+ initialToken);
+                    Log.d("fragmentProfile", "response in email : "+ response);
+                    if (response.isSuccessful()) {
+                        try {
+                            removeToken();
+                            String responseString = response.body().string();
+                            Log.d("fragmentProfile", "responseString : "+ responseString);
+                            JsonObject jsonObject = new Gson().fromJson(responseString, JsonObject.class);
+                            String token = jsonObject.get("token").getAsString();
+                            decodeJWT(token);
+                            Log.d("fragmentProfile", "new token : "+ token);
+                            handleRole(token);
+                            Snackbar.make(view, "Email updated successfully", Snackbar.LENGTH_SHORT)
+                                    .setBackgroundTint(getResources().getColor(R.color.green, null))
+                                    .setAnimationMode(Snackbar.ANIMATION_MODE_FADE)
+                                    .show();
+                        } catch (Exception e) {
+                            e.printStackTrace();
+                            Log.d("fragmentProfile", "email updating failed: " + e.getMessage());
+                            Toast.makeText(mContext, "error in updating profile", Toast.LENGTH_SHORT).show();
+                        }
+
+                    } else {
+                        Log.d("fragmentProfile", "email update failed first: " + response.message());
+                        Snackbar.make(view, "Error updating email", Snackbar.LENGTH_SHORT)
+                                .setBackgroundTint(getResources().getColor(R.color.red_light, null))
+                                .setAnimationMode(Snackbar.ANIMATION_MODE_FADE)
+                                .show();
+                    }
+                }
+                @Override
+                public void onFailure(@NonNull Call<ResponseBody> call, @NonNull Throwable t) {
+                    Log.d("fragmentProfile", "email update failed second: " + t.getMessage());
                     Snackbar.make(view, "Error updating email", Snackbar.LENGTH_SHORT)
                             .setBackgroundTint(getResources().getColor(R.color.red_light, null))
                             .setAnimationMode(Snackbar.ANIMATION_MODE_FADE)
                             .show();
                 }
-            }
-            @Override
-            public void onFailure(@NonNull Call<ResponseBody> call, @NonNull Throwable t) {
-                Log.d("fragmentProfile", "email update failed second: " + t.getMessage());
-                Snackbar.make(view, "Error updating email", Snackbar.LENGTH_SHORT)
-                        .setBackgroundTint(getResources().getColor(R.color.red_light, null))
-                        .setAnimationMode(Snackbar.ANIMATION_MODE_FADE)
-                        .show();
-            }
-        });
-        PasswordUpdateRequest passwordUpdateRequest = new PasswordUpdateRequest(oldPassword, newPassword);
-        superadminService.updateSuperAdminPassword("Bearer " + token, passwordUpdateRequest).enqueue(new Callback<ResponseBody>() {
-            @Override
-            public void onResponse(@NonNull Call<ResponseBody> call, @NonNull Response<ResponseBody> response) {
-                if (response.code() == 200 && response.body() != null) {
-                    String responseString = response.body().toString();
-                    JsonObject jsonObject = new Gson().fromJson(responseString, JsonObject.class);
-                    String token = jsonObject.get("token").getAsString();
-                    if (!Objects.equals(token, "INVALID_TOKEN")) {
-                        Snackbar.make(view, "Old Password Incorrect", Snackbar.LENGTH_SHORT)
+            });
+            new Handler().postDelayed(new Runnable() {
+                @Override
+                public void run() {
+                    superadminEmailEditText.getText().clear();
+                    superadminOldPasswordEditText.getText().clear();
+                    superadminNewPasswordEditText.getText().clear();
+                }
+            }, 2000);
+        }
+
+        if (!oldPassword.isEmpty() && !newPassword.isEmpty()) {
+            PasswordUpdateRequest passwordUpdateRequest = new PasswordUpdateRequest(oldPassword, newPassword);
+            superadminService.updateSuperAdminPassword("Bearer " + initialToken, passwordUpdateRequest).enqueue(new Callback<ResponseBody>() {
+                @Override
+                public void onResponse(@NonNull Call<ResponseBody> call, @NonNull Response<ResponseBody> response) {
+                    if (response.isSuccessful()) {
+                        try {
+                            String responseString = response.body().string();
+                            JsonObject jsonObject = new Gson().fromJson(responseString, JsonObject.class);
+                            String token = jsonObject.get("token").getAsString();
+                            Log.d("fragmentProfile", "token in password : "+ token);
+//                            decodeJWT(token);
+                            if (Objects.equals(token, "INVALID_TOKEN")) {
+                                Snackbar.make(view, "Old Password Incorrect", Snackbar.LENGTH_SHORT)
+                                        .setBackgroundTint(getResources().getColor(R.color.red_light, null))
+                                        .setAnimationMode(Snackbar.ANIMATION_MODE_FADE)
+                                        .show();
+                            } else {
+                                Snackbar.make(view, "Password updated successfully", Snackbar.LENGTH_SHORT)
+                                        .setBackgroundTint(getResources().getColor(R.color.green, null))
+                                        .setAnimationMode(Snackbar.ANIMATION_MODE_FADE)
+                                        .show();
+                            }
+
+                        } catch (Exception e) {
+                            e.printStackTrace();
+                            Log.d("fragmentProfile", "password updating failed: " + e.getMessage());
+                            Toast.makeText(mContext, "error in updating profile", Toast.LENGTH_SHORT).show();
+                        }
+
+                    } else {
+                        Log.d("fragmentProfile", "password update failed first: " + response);
+                        Snackbar.make(view, "Error updating password", Snackbar.LENGTH_SHORT)
                                 .setBackgroundTint(getResources().getColor(R.color.red_light, null))
                                 .setAnimationMode(Snackbar.ANIMATION_MODE_FADE)
                                 .show();
                     }
-                    Snackbar.make(view, "Password updated successfully", Snackbar.LENGTH_SHORT)
-                            .setBackgroundTint(getResources().getColor(R.color.green, null))
-                            .setAnimationMode(Snackbar.ANIMATION_MODE_FADE)
-                            .show();
-                } else {
-                    Log.d("fragmentProfile", "password update failed first: " + response);
+                }
+                @Override
+                public void onFailure(@NonNull Call<ResponseBody> call, @NonNull Throwable t) {
+                    Log.d("fragmentProfile", "password update failed second: " + t.getMessage());
                     Snackbar.make(view, "Error updating password", Snackbar.LENGTH_SHORT)
                             .setBackgroundTint(getResources().getColor(R.color.red_light, null))
                             .setAnimationMode(Snackbar.ANIMATION_MODE_FADE)
                             .show();
                 }
-            }
-            @Override
-            public void onFailure(@NonNull Call<ResponseBody> call, @NonNull Throwable t) {
-                Log.d("fragmentProfile", "password update failed second: " + t.getMessage());
-                Snackbar.make(view, "Error updating password", Snackbar.LENGTH_SHORT)
-                        .setBackgroundTint(getResources().getColor(R.color.red_light, null))
-                        .setAnimationMode(Snackbar.ANIMATION_MODE_FADE)
-                        .show();
-            }
-        });
+            });
+            new Handler().postDelayed(new Runnable() {
+                @Override
+                public void run() {
+                    superadminEmailEditText.getText().clear();
+                    superadminOldPasswordEditText.getText().clear();
+                    superadminNewPasswordEditText.getText().clear();
+                }
+            }, 2000);
+        }
     }
 
     private boolean validateEmail(String email) {
@@ -191,7 +240,23 @@ public class FragmentProfile extends Fragment {
         return password.matches("^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[@$!%*?&])[A-Za-z\\d@$!%*?&]{8,}$");
     }
 
-    private void decodeJWTAndHandleRole(String token) {
+    private void decodeJWT(String token) {
+        try {
+            String secretKey = BuildConfig.API_KEY_NAME;
+            byte[] decodedBytes = Base64.getDecoder().decode(secretKey);
+            SecretKey secretKeySpec = Keys.hmacShaKeyFor(decodedBytes);
+            // Parse the token
+            Jws<Claims> claims = Jwts.parser()
+                    .verifyWith(secretKeySpec)
+                    .build()
+                    .parseSignedClaims(token);
+        } catch (Exception e) {
+            e.printStackTrace();
+            Toast.makeText(mContext, "Failed to decode JWT", Toast.LENGTH_SHORT).show();
+        }
+    }
+
+    private void handleRole(String token) {
         try {
             String secretKey = BuildConfig.API_KEY_NAME;
             byte[] decodedBytes = Base64.getDecoder().decode(secretKey);
@@ -204,10 +269,8 @@ public class FragmentProfile extends Fragment {
 
             // Extract user role from claims
             String role = claims.getPayload().get("role", String.class);
-
-            // Handle user role as needed
             if ("SUPER_ADMIN".equals(role)) {
-                saveToken(token, "superadmin");
+                saveToken(token);
             }
         } catch (Exception e) {
             e.printStackTrace();
@@ -215,9 +278,9 @@ public class FragmentProfile extends Fragment {
         }
     }
 
-    private void saveToken(String token, String role) {
+    private void saveToken(String token) {
         SharedPreferences.Editor editor = sharedPreferences.edit();
-        editor.putString(role, token);
+        editor.putString("superadmin", token);
         editor.apply();
         editor.commit();
     }
@@ -234,7 +297,7 @@ public class FragmentProfile extends Fragment {
         RetrofitService retrofitService = new RetrofitService();
         superadminService = retrofitService.getRetrofit().create(SuperAdminService.class);
 
-        token = sharedPreferences.getString("superadmin", "");
+        initialToken = sharedPreferences.getString("superadmin", "");
         String secretKey = BuildConfig.API_KEY_NAME;
         byte[] decodedBytes = Base64.getDecoder().decode(secretKey);
         SecretKey secretKeySpec = Keys.hmacShaKeyFor(decodedBytes);
@@ -242,15 +305,15 @@ public class FragmentProfile extends Fragment {
         Jws<Claims> claims = Jwts.parser()
                 .verifyWith(secretKeySpec)
                 .build()
-                .parseSignedClaims(token);
+                .parseSignedClaims(initialToken);
         superadminEmail = claims.getPayload().get("sub", String.class);
-        superadminService.getAll("Bearer " + token).enqueue(new Callback<ResponseBody>() {
+        superadminService.getAll("Bearer " + initialToken).enqueue(new Callback<ResponseBody>() {
             @Override
             public void onResponse(@NonNull Call<ResponseBody> call, @NonNull Response<ResponseBody> response) {
                 if (response.body() != null) {
                     try {
                         String responseString = response.body().string();
-//                        JsonObject jsonObject = new Gson().fromJson(responseString, JsonObject.class);
+                        JsonArray jsonArray = new Gson().fromJson(responseString, JsonArray.class);
                         Log.d("fragmentProfile", responseString);
                     } catch (IOException e) {
                         e.printStackTrace();
