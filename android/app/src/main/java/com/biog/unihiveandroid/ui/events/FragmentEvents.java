@@ -99,6 +99,7 @@ public class FragmentEvents extends Fragment {
 
         initializeViews();
         upcomingEventsListView = rootView.findViewById(R.id.upcoming_events_list_view);
+        ((MainActivity) requireActivity()).showLoadingIndicator();
 
         fetchEvents(new EventDataListener() {
             @Override
@@ -142,12 +143,15 @@ public class FragmentEvents extends Fragment {
                     UpcomingEventsFragmentEventsAdapter adapter = new UpcomingEventsFragmentEventsAdapter(mContext, upcomingEventList);
                     upcomingEventsListView.setAdapter(adapter);
                 }
+
+                ((MainActivity) requireActivity()).hideLoadingIndicator();
             }
 
             @Override
             public void onFetchFailure(Throwable t) {
                 Log.e("FragmentEvents", "Fetch event failed: " + t.getMessage());
                 Toast.makeText(requireContext(), "Failed to fetch event data", Toast.LENGTH_SHORT).show();
+                ((MainActivity) requireActivity()).hideLoadingIndicator();
             }
         });
 

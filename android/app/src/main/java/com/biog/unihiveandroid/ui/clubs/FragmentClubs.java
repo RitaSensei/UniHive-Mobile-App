@@ -87,7 +87,7 @@ public class FragmentClubs extends Fragment {
 
         initializeViews();
         clubsListView = rootView.findViewById(R.id.clubs_list_view);
-
+        ((MainActivity) requireActivity()).showLoadingIndicator();
         fetchClubs(new ClubDataListener() {
             @Override
             public void onClubDataReceived(JsonArray clubData) {
@@ -115,11 +115,13 @@ public class FragmentClubs extends Fragment {
                     ClubFragmentClubAdapter adapter = new ClubFragmentClubAdapter(mContext, clubList);
                     clubsListView.setAdapter(adapter);
                 }
+                ((MainActivity) requireActivity()).hideLoadingIndicator();
             }
             @Override
             public void onFetchFailure(Throwable t) {
                 Log.e("FragmentHome", "Fetch club failed: " + t.getMessage());
                 Toast.makeText(requireContext(), "Failed to fetch club data", Toast.LENGTH_SHORT).show();
+                ((MainActivity) requireActivity()).hideLoadingIndicator();
             }
         });
         return rootView;

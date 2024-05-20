@@ -14,6 +14,7 @@ import android.widget.GridView;
 import android.widget.ImageButton;
 import android.widget.ImageSwitcher;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 import android.widget.ViewSwitcher;
@@ -97,7 +98,6 @@ public class FragmentHome extends Fragment {
         searchIcon.setVisibility(View.GONE);
 
         initializeViews();
-
         trendingEventsSwitcher = rootView.findViewById(R.id.trending_events_switcher_home);
         previousButton = rootView.findViewById(R.id.previous_button_switcher);
         nextButton = rootView.findViewById(R.id.next_button_switcher);
@@ -105,7 +105,7 @@ public class FragmentHome extends Fragment {
         seeAllClubsButton = rootView.findViewById(R.id.see_all_button_clubs_switcher);
         upcomingEventsGridView = rootView.findViewById(R.id.upcoming_events_grid_view);
         seeAllUpcomingEventsButton = rootView.findViewById(R.id.see_all_button_upcoming_events_switcher);
-
+        ((MainActivity) requireActivity()).showLoadingIndicator();
         fetchData();
         fetchEvents(new EventDataListener() {
             @Override
@@ -195,12 +195,14 @@ public class FragmentHome extends Fragment {
                     UpcomingEventsFragmentHomeAdapter upcomingEventsAdapter = new UpcomingEventsFragmentHomeAdapter(requireContext(), threeNextEvents);
                     upcomingEventsGridView.setAdapter(upcomingEventsAdapter);
                 }
+                ((MainActivity) requireActivity()).hideLoadingIndicator();
             }
 
             @Override
             public void onFetchFailure(Throwable t) {
                 Log.e("FragmentHome", "Fetch event failed: " + t.getMessage());
                 Toast.makeText(requireContext(), "Failed to fetch event data", Toast.LENGTH_SHORT).show();
+                ((MainActivity) requireActivity()).hideLoadingIndicator();
             }
         });
         seeAllUpcomingEventsButton.setOnClickListener(new View.OnClickListener() {
@@ -241,11 +243,13 @@ public class FragmentHome extends Fragment {
                     ClubFragmentHomeAdapter adapter = new ClubFragmentHomeAdapter(requireContext(), topThreeClubs);
                     clubsGridView.setAdapter(adapter);
                 }
+                ((MainActivity) requireActivity()).hideLoadingIndicator();
             }
             @Override
             public void onFetchFailure(Throwable t) {
                 Log.e("FragmentHome", "Fetch club failed: " + t.getMessage());
                 Toast.makeText(requireContext(), "Failed to fetch club data", Toast.LENGTH_SHORT).show();
+                ((MainActivity) requireActivity()).hideLoadingIndicator();
             }
         });
         seeAllClubsButton.setOnClickListener(new View.OnClickListener() {

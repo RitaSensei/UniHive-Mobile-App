@@ -3,9 +3,11 @@ package com.biog.unihiveandroid;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageButton;
+import android.widget.ProgressBar;
 
 import androidx.annotation.AnimRes;
 import androidx.annotation.NonNull;
@@ -27,12 +29,16 @@ import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 public class MainActivity extends AppCompatActivity {
     Toolbar toolbar;
+    ProgressBar progressBar;
+    View fragmentContainer;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
         toolbar = findViewById(R.id.main_toolbar);
+        progressBar = findViewById(R.id.progress_bar_circular_main_activity);
+        fragmentContainer = findViewById(R.id.nav_host_fragment);
         ImageButton settingsIcon = toolbar.findViewById(R.id.main_toolbar_settings_icon);
         ImageButton searchIcon = toolbar.findViewById(R.id.main_toolbar_search_icon);
         settingsIcon.setOnClickListener(new View.OnClickListener() {
@@ -42,12 +48,12 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        searchIcon.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                startActivity(new Intent(MainActivity.this, SearchActivity.class));
-            }
-        });
+//        searchIcon.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                startActivity(new Intent(MainActivity.this, SearchActivity.class));
+//            }
+//        });
 
         NavHostFragment navHostFragment = (NavHostFragment) getSupportFragmentManager().findFragmentById(R.id.nav_host_fragment);
         assert navHostFragment != null;
@@ -81,7 +87,18 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
+    public void showLoadingIndicator() {
+        progressBar.setVisibility(View.VISIBLE);
+        fragmentContainer.setVisibility(View.GONE);
+    }
+
+    public void hideLoadingIndicator() {
+        progressBar.setVisibility(View.GONE);
+        fragmentContainer.setVisibility(View.VISIBLE);
+    }
+
     public void replaceFragment(Fragment fragment, @AnimRes int enterAnim, @AnimRes int exitAnim, @AnimRes int popEnterAnim, @AnimRes int popExitAnim) {
+        showLoadingIndicator();
         getSupportFragmentManager()
                 .beginTransaction()
                 .setCustomAnimations(enterAnim, exitAnim, popEnterAnim, popExitAnim)

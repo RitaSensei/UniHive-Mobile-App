@@ -27,6 +27,7 @@
     <string name="ic_calendar">Calendar</string>
     <string name="ic_profile">Profile</string>
     <string name="settings_title">Settings</string>
+    <string name="search_title">Search</string>
     <string name="superadmin_dashboard_title">Super Admin Dashboard</string>
     <string name="title_activity_bottom_bar">BottomBarActivity</string>
     <string name="title_activity_settings">SettingsActivity</string>

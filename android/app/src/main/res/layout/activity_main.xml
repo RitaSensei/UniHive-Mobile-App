@@ -96,5 +96,18 @@
         app:layout_constraintStart_toStartOf="parent"
         app:menu="@menu/bottom_navigation_bar_menu" />
 
+    <ProgressBar
+        android:id="@+id/progress_bar_circular_main_activity"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:visibility="visible"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/nav_host_fragment"
+        android:indeterminateTint="@color/picton_blue"
+        style="@android:style/Widget.Material.ProgressBar"/>
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>
