@@ -98,7 +98,6 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void replaceFragment(Fragment fragment, @AnimRes int enterAnim, @AnimRes int exitAnim, @AnimRes int popEnterAnim, @AnimRes int popExitAnim) {
-        showLoadingIndicator();
         getSupportFragmentManager()
                 .beginTransaction()
                 .setCustomAnimations(enterAnim, exitAnim, popEnterAnim, popExitAnim)

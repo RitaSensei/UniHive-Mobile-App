@@ -66,8 +66,8 @@ public class FragmentClubs extends Fragment {
         fragmentAdminsTitle.setText(R.string.clubs_table_text);
         ImageButton searchIcon = ((SuperAdminDashboardActivity) requireActivity()).findViewById(R.id.superadmin_dashboard_toolbar_search_icon);
         searchIcon.setVisibility(View.VISIBLE);
-
         initializeViews();
+        ((SuperAdminDashboardActivity) requireActivity()).showLoadingIndicator();
         clubsGridView = rootView.findViewById(R.id.superadmin_clubs_grid_view);
 
         fetchClubs(new ClubDataListener() {
@@ -88,11 +88,13 @@ public class FragmentClubs extends Fragment {
                     SuperadminClubsFragmentAdapter adapter = new SuperadminClubsFragmentAdapter(mContext,clubsList);
                     clubsGridView.setAdapter(adapter);
                 }
+                ((SuperAdminDashboardActivity) requireActivity()).hideLoadingIndicator();
             }
             @Override
             public void onFetchFailure(Throwable t) {
                 Log.d("fragmentclubs","fetch failure : "+ String.valueOf(t));
                 Toast.makeText(requireContext(), t.getMessage(), Toast.LENGTH_SHORT).show();
+                ((SuperAdminDashboardActivity) requireActivity()).hideLoadingIndicator();
             }
         });
 

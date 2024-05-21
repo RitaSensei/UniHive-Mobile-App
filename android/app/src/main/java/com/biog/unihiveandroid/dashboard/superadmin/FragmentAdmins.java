@@ -76,6 +76,7 @@ public class FragmentAdmins extends Fragment {
         ImageButton searchButton = ((SuperAdminDashboardActivity) requireActivity()).findViewById(R.id.superadmin_dashboard_toolbar_search_icon);
         searchButton.setVisibility(View.VISIBLE);
         initializeViews();
+        ((SuperAdminDashboardActivity) requireActivity()).showLoadingIndicator();
         adminsGridView = rootView.findViewById(R.id.superadmin_admins_grid_view);
         fetchAdmins(new DataListener() {
             @Override
@@ -92,11 +93,13 @@ public class FragmentAdmins extends Fragment {
                     adapter = new SuperadminAdminsFragmentAdapter(mContext,adminsList);
                     adminsGridView.setAdapter(adapter);
                 }
+                ((SuperAdminDashboardActivity) requireActivity()).hideLoadingIndicator();
             }
             @Override
             public void onFetchFailure(Throwable t) {
                 Log.d("fragmentadmins","fetch failure : "+ String.valueOf(t));
                 Toast.makeText(requireContext(), t.getMessage(), Toast.LENGTH_SHORT).show();
+                ((SuperAdminDashboardActivity) requireActivity()).hideLoadingIndicator();
             }
         });
         return rootView;

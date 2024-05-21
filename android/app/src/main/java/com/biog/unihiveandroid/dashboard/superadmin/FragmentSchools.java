@@ -68,8 +68,8 @@ public class FragmentSchools extends Fragment {
         fragmentAdminsTitle.setText(R.string.schools_table_text);
         ImageButton searchIcon = ((SuperAdminDashboardActivity) requireActivity()).findViewById(R.id.superadmin_dashboard_toolbar_search_icon);
         searchIcon.setVisibility(View.VISIBLE);
-
         initializeViews();
+        ((SuperAdminDashboardActivity) requireActivity()).showLoadingIndicator();
         schoolsGridView = rootView.findViewById(R.id.superadmin_schools_grid_view);
         fetchSchools(new SchoolDataListener() {
             @Override
@@ -86,11 +86,13 @@ public class FragmentSchools extends Fragment {
                     SuperadminSchoolsFragmentAdapter adapter = new SuperadminSchoolsFragmentAdapter(mContext,schoolsList);
                     schoolsGridView.setAdapter(adapter);
                 }
+                ((SuperAdminDashboardActivity) requireActivity()).hideLoadingIndicator();
             }
             @Override
             public void onFetchFailure(Throwable t) {
                 Log.d("fragmentevents","fetch failure : "+ String.valueOf(t));
                 Toast.makeText(requireContext(), t.getMessage(), Toast.LENGTH_SHORT).show();
+                ((SuperAdminDashboardActivity) requireActivity()).hideLoadingIndicator();
             }
         });
         return rootView;

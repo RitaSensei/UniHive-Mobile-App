@@ -82,8 +82,8 @@ public class FragmentDashboard extends Fragment {
         ImageButton searchIcon = ((SuperAdminDashboardActivity) requireActivity()).findViewById(R.id.superadmin_dashboard_toolbar_search_icon);
         searchIcon.setVisibility(View.GONE);
         superadminDashboardGridView = rootView.findViewById(R.id.dashboard_grid_view);
-
         initializeViews();
+        ((SuperAdminDashboardActivity) requireActivity()).showLoadingIndicator();
         fetchData();
 
         superadminDashboardGridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -146,10 +146,12 @@ public class FragmentDashboard extends Fragment {
                             Log.e("fragmentsuperadmindashboard", "Error reading response body: " + e.getMessage());
                         }
                     }
+                    ((SuperAdminDashboardActivity) requireActivity()).hideLoadingIndicator();
                 }
                 @Override
                 public void onFailure(@NonNull Call<ResponseBody> call, @NonNull Throwable t) {
                     Toast.makeText(mContext, t.getMessage(), Toast.LENGTH_SHORT).show();
+                    ((SuperAdminDashboardActivity) requireActivity()).hideLoadingIndicator();
                 }
             });
         }

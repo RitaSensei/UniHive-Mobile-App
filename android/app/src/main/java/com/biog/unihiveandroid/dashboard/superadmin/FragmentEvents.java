@@ -69,8 +69,8 @@ public class FragmentEvents extends Fragment {
         fragmentAdminsTitle.setText(R.string.events_table_text);
         ImageButton searchIcon = ((SuperAdminDashboardActivity) requireActivity()).findViewById(R.id.superadmin_dashboard_toolbar_search_icon);
         searchIcon.setVisibility(View.VISIBLE);
-
         initializeViews();
+        ((SuperAdminDashboardActivity) requireActivity()).showLoadingIndicator();
         eventsGridView = rootView.findViewById(R.id.superadmin_events_grid_view);
 
         fetchEvents(new EventDataListener() {
@@ -87,11 +87,13 @@ public class FragmentEvents extends Fragment {
                     SuperadminEventsFragmentAdapter adapter = new SuperadminEventsFragmentAdapter(mContext,eventsList);
                     eventsGridView.setAdapter(adapter);
                 }
+                ((SuperAdminDashboardActivity) requireActivity()).hideLoadingIndicator();
             }
             @Override
             public void onFetchFailure(Throwable t) {
                 Log.d("fragmentevents","fetch failure : "+ String.valueOf(t));
                 Toast.makeText(requireContext(), t.getMessage(), Toast.LENGTH_SHORT).show();
+                ((SuperAdminDashboardActivity) requireActivity()).hideLoadingIndicator();
             }
         });
         return rootView;

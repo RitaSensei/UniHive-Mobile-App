@@ -10,6 +10,7 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageButton;
+import android.widget.ProgressBar;
 import android.widget.SearchView;
 import android.widget.TextView;
 
@@ -55,11 +56,15 @@ public class SuperAdminDashboardActivity extends AppCompatActivity {
     public DrawerLayout drawerLayout;
     public ActionBarDrawerToggle drawerToggle;
     private Toolbar toolbar;
+    private ProgressBar progressBar;
+    private View fragmentContainer;
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_superadmin_dashboard_page);
         toolbar = findViewById(R.id.superadmin_dashboard_toolbar);
+        progressBar = findViewById(R.id.progress_bar_circular_superadmin_activity);
+        fragmentContainer = findViewById(R.id.fragment_container);
         initializeViews();
         ImageButton logoutButton = toolbar.findViewById(R.id.superadmin_dashboard_toolbar_logout_icon);
         logoutButton.setOnClickListener(new View.OnClickListener() {
@@ -176,6 +181,16 @@ public class SuperAdminDashboardActivity extends AppCompatActivity {
             editor.remove("superadmin");
             editor.apply();
         }
+    }
+
+    public void showLoadingIndicator() {
+        progressBar.setVisibility(View.VISIBLE);
+        fragmentContainer.setVisibility(View.GONE);
+    }
+
+    public void hideLoadingIndicator() {
+        progressBar.setVisibility(View.GONE);
+        fragmentContainer.setVisibility(View.VISIBLE);
     }
 
     private void initializeViews() {
