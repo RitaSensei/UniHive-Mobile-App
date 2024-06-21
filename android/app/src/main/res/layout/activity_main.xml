@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context=".MainActivity">
+
+    <androidx.fragment.app.FragmentContainerView
+        android:id="@+id/nav_host_fragment"
+        android:name="androidx.navigation.fragment.NavHostFragment"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:defaultNavHost="true"
+        app:navGraph="@navigation/nav_graph"
+        tools:layout_editor_absoluteX="0dp"
+        tools:layout_editor_absoluteY="0dp" />
+
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/main_toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:backgroundTint="@color/white"
+        android:elevation="0dp"
+        android:theme="@style/ThemeOverlay.AppCompat.ActionBar"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:popupTheme="@style/ThemeOverlay.AppCompat.Light">
+
+        <ImageView
+            android:id="@+id/main_toolbar_logo"
+            android:layout_width="90dp"
+            android:layout_height="50dp"
+            android:layout_gravity="center_vertical"
+            android:src="@drawable/logov1_rounded"
+            tools:layout_editor_absoluteX="147dp"
+            tools:layout_editor_absoluteY="5dp" />
+
+        <TextView
+            android:id="@+id/main_toolbar_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:layout_marginStart="30dp"
+            android:fontFamily="@font/poppins_medium"
+            android:text="@string/ic_home"
+            android:textColor="@color/black"
+            android:textSize="27sp" />
+
+        <ImageButton
+            android:id="@+id/main_toolbar_settings_icon"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="end|center_vertical"
+            android:layout_marginEnd="10dp"
+            android:backgroundTint="@color/white"
+            android:contentDescription="@null"
+            android:clickable="true"
+            android:focusable="true"
+            style="?attr/actionButtonStyle"
+            android:src="@drawable/ic_settings" />
+
+        <ImageButton
+            android:id="@+id/main_toolbar_search_icon"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="end|center_vertical"
+            android:src="@drawable/ic_search"
+            android:backgroundTint="@color/white"
+            android:contentDescription="@null"
+            android:clickable="true"
+            style="?attr/actionButtonStyle"
+            android:focusable="true" />
+
+    </androidx.appcompat.widget.Toolbar>
+
+    <com.google.android.material.bottomnavigation.BottomNavigationView
+        android:id="@+id/bottom_navigation_bar"
+        style="@style/BottomNavigationItemBackgroundStyle"
+        android:layout_width="0dp"
+        android:layout_height="55dp"
+        android:animateLayoutChanges="true"
+        android:focusable="true"
+        app:backgroundTint="@color/white"
+        app:compatShadowEnabled="true"
+        app:itemIconSize="18dp"
+        app:itemPaddingBottom="10dp"
+        app:itemTextAppearanceActive="@style/BottomNavigationTextActiveStyle"
+        app:itemTextAppearanceInactive="@style/BottomNavigationTextInactiveStyle"
+        app:labelVisibilityMode="labeled"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:menu="@menu/bottom_navigation_bar_menu" />
+
+    <ProgressBar
+        android:id="@+id/progress_bar_circular_main_activity"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/nav_host_fragment"
+        android:indeterminateTint="@color/picton_blue"
+        style="@android:style/Widget.Material.ProgressBar"/>
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_gravity="center"
+    app:cardCornerRadius="5dp"
+    app:cardElevation="0dp">
+
+        <RelativeLayout
+            android:layout_width="170dp"
+            android:layout_height="170dp">
+
+            <ImageView
+                android:id="@+id/event_poster_card_item"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_gravity="center"
+                android:scaleType="fitXY"
+                android:contentDescription="@null"
+                android:fadingEdge="vertical"/>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="138dp"
+                android:background="#05000000" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="35dp"
+                android:layout_marginTop="135dp"
+                android:background="@drawable/card_image_shadow" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="35dp"
+                android:layout_marginTop="135dp"
+                android:background="@drawable/card_image_shadow" />
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="130dp"
+                android:layout_marginStart="50dp"
+                android:gravity="center"
+                android:orientation="horizontal">
+
+                <RatingBar
+                    android:id="@+id/event_rating_card_item"
+                    android:layout_width="16dp"
+                    android:layout_height="15dp"
+                    android:layout_marginEnd="3dp"
+                    android:numStars="1"
+                    android:progressDrawable="@drawable/custom_star"
+                    android:rating="0"
+                    android:stepSize="1" />
+
+                <TextView
+                    android:id="@+id/event_rating_number_card_item"
+                    android:layout_width="match_parent"
+                    android:layout_height="15dp"
+                    android:fontFamily="@font/poppins_semibold"
+                    android:layout_marginVertical="2dp"
+                    android:gravity="center"
+                    android:text="@string/default_rating_value"
+                    android:textColor="@color/yellow"
+                    android:textSize="11sp" />
+
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/event_title_card_item"
+                android:layout_width="match_parent"
+                android:layout_height="15dp"
+                android:layout_marginTop="153dp"
+                android:fontFamily="@font/poppins_semibold"
+                android:paddingStart="5dp"
+                android:paddingEnd="5dp"
+                android:gravity="center"
+                android:text="@string/upcoming_events_card_name"
+                android:textColor="@color/white"
+                android:textSize="8sp" />
+
+        </RelativeLayout>
+
+</androidx.cardview.widget.CardView>

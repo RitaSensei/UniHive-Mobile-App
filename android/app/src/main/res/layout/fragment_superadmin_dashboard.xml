@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_gravity="center_horizontal"
+    android:paddingTop="20dp"
+    tools:context=".dashboard.superadmin.FragmentDashboard"
+    android:background="@color/white">
+
+    <GridView
+        android:id="@+id/dashboard_grid_view"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_gravity="center_horizontal"
+        android:paddingTop="10dp"
+        android:layout_marginHorizontal="5dp"
+        android:numColumns="2"
+        android:verticalSpacing="10dp"
+        android:scrollbars="none"
+        android:stretchMode="columnWidth"
+        android:gravity="center"/>
+
+</FrameLayout>

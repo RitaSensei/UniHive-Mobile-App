@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="black">#FF000000</color>
+    <color name="white">#FFFFFFFF</color>
+    <color name="picton_blue">#46BFFF</color>
+    <color name="picton_blue_light">#8CC9EA</color>
+    <color name="picton_blue_darker">#0EABFF</color>
+    <color name="red">#FF0000</color>
+    <color name="red_light">#DD4444</color>
+    <color name="green">#43a047</color>
+    <color name="grey">#868686</color>
+    <color name="light_grey">#D5D5D5</color>
+    <color name="mid_grey">#CBCBCB</color>
+    <color name="extra_light_grey">#EDEDED</color>
+    <color name="ilyass_grey">#C5C5C5</color>
+    <color name="yellow">#fcc153</color>
+</resources>

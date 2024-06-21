@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:padding="4dp"
+    android:orientation="horizontal"
+    app:layout_constrainedHeight="true">
+
+    <com.google.android.material.imageview.ShapeableImageView
+        android:id="@+id/club_logo_list_view_item"
+        android:layout_width="120dp"
+        android:layout_height="120dp"
+        android:layout_marginHorizontal="5dp"
+        android:layout_gravity="center_vertical"
+        android:elevation="0dp"
+        android:scaleType="fitXY"
+        app:shapeAppearanceOverlay="@style/ShapeAppearanceRoundedCorners" />
+
+    <LinearLayout
+        android:layout_width="250dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_vertical"
+        android:layout_marginStart="5dp"
+        android:layout_marginVertical="10dp"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/club_name_list_view_item"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/club_name"
+            android:fontFamily="@font/poppins_semibold"
+            android:textSize="20sp"
+            android:textColor="@color/black" />
+
+        <TextView
+            android:id="@+id/club_description_list_view_item"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/club_description"
+            android:fontFamily="@font/poppins_regular"
+            android:textSize="12sp"
+            android:textColor="@color/black" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="10dp"
+            android:orientation="horizontal">
+
+            <RatingBar
+                android:id="@+id/club_rating_list_item"
+                android:progressDrawable="@drawable/custom_ratingbar_star"
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:layout_gravity="center_vertical"
+                android:layout_marginEnd="3dp"
+                android:numStars="1"
+                android:rating="0"
+                android:stepSize="1" />
+
+            <TextView
+                android:id="@+id/club_rating_value_list_item"
+                android:layout_width="wrap_content"
+                android:layout_height="20dp"
+                android:layout_gravity="center_vertical"
+                android:layout_marginStart="5dp"
+                android:fontFamily="@font/poppins_bold"
+                android:text="@string/default_rating_value"
+                android:textColor="@color/yellow"
+                android:textSize="15sp" />
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+</LinearLayout>

@@ -1,0 +1,102 @@
+<resources>
+    <string name="app_name">UniHive</string>
+    <string name="login_button">Log in</string>
+    <string name="signup_button">Sign up</string>
+    <string name="create_account_button">Sign Up</string>
+    <string name="reset_password">Reset Your Password</string>
+    <string name="reset_password_button">Reset Password</string>
+    <string name="email_address_text">Email Address</string>
+    <string name="password_text">Password</string>
+    <string name="confirm_password_text">Confirm Password</string>
+    <string name="old_password_text">Old Password</string>
+    <string name="new_password_text">New Password</string>
+    <string name="update_button">Update</string>
+    <string name="loginOrSignup">Or</string>
+    <string name="rememberme_check_box">Remember Me</string>
+    <string name="forget_password_text">Forgot password ?</string>
+    <string name="existing_account">Already have an account ? </string>
+    <string name="firstname_text">First Name</string>
+    <string name="lastname_text">Last Name</string>
+    <string name="cne_massar_text">CNE/MASSAR</string>
+    <string name="num_apogee_text">Num Apogée</string>
+    <string name="import_school_card_text">Import School Card</string>
+    <string name="school_text">School</string>
+    <string name="ic_home">Home</string>
+    <string name="ic_events">Events</string>
+    <string name="ic_clubs">Clubs</string>
+    <string name="ic_calendar">Calendar</string>
+    <string name="ic_profile">Profile</string>
+    <string name="settings_title">Settings</string>
+    <string name="search_title">Search</string>
+    <string name="superadmin_dashboard_title">Super Admin Dashboard</string>
+    <string name="title_activity_bottom_bar">BottomBarActivity</string>
+    <string name="title_activity_settings">SettingsActivity</string>
+    <string name="title_activity_imageview">ImageViewActivity</string>
+
+    <!-- Settings Titles -->
+    <string name="general_section">General</string>
+    <string name="language_settings">Language</string>
+    <string name="view_mode_settings">Night Mode</string>
+    <string name="contact_settings">Contact</string>
+    <string name="about_us_settings">About Us</string>
+    <string name="delete_account_settings">Delete My Account</string>
+
+    <!-- Preference Titles -->
+    <string name="language_setting_description">Choose a language</string>
+    <string-array name="language_entries_settings">
+        <item>Arabic</item>
+        <item>English</item>
+        <item>Spanish</item>
+        <item>French</item>
+        <item>German</item>
+        <item>Italian</item>
+        <item>Japanese</item>
+        <item>Korean</item>
+        <item>Chinese (Simplified)</item>
+        <item>Chinese (Traditional)</item>
+        <item>Russian</item>
+        <item>Portuguese</item>
+    </string-array>
+    <string-array name="language_entry_values">
+        <item>ar</item>
+        <item>en</item>
+        <item>es</item>
+        <item>fr</item>
+        <item>ge</item>
+        <item>it</item>
+        <item>ja</item>
+        <item>ko</item>
+        <item>chs</item>
+        <item>cht</item>
+        <item>ru</item>
+        <item>po</item>
+    </string-array>
+
+
+    <string name="see_all_text">See all</string>
+    <string name="upcoming_events_title">Upcoming events</string>
+    <string name="upcoming_events_card_name">Name Of Event</string>
+    <string name="default_rating_value">0.0</string>
+    <string name="upcoming_events_date">From Day Month Year To Day Month Year</string>
+    <string name="club_name">Club Name</string>
+    <string name="club_description">Description of the club</string>
+
+    <!-- SuperAdmin Dashboard Drawer Items -->
+    <string name="dashboard_item_text">Dashboard</string>
+    <string name="admins_item_text">Admins</string>
+    <string name="schools_item_text">Schools</string>
+    <string name="students_item_text">Students</string>
+    <string name="signup_requests_item_text">Sign up Requests</string>
+    <string name="drawer_open">Open</string>
+    <string name="drawer_close">Close</string>
+    <string name="admins_table_text">Admins Table</string>
+    <string name="clubs_table_text">Clubs Table</string>
+    <string name="events_table_text">Events Table</string>
+    <string name="schools_table_text">Schools Table</string>
+    <string name="students_table_text">Students Table</string>
+    <string name="requests_table_text">Pending Sign up Requests</string>
+    <string name="requests_title">Requests</string>
+    <string name="edit_table_button_text">Edit Table</string>
+    <string name="number_of_rows">loading</string>
+
+</resources>

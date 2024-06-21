@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/picton_blue"
+    >
+
+    <RelativeLayout
+        android:id="@+id/welcome_bg"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@drawable/blue_gradient_bg_rectangle">
+
+        <ImageView
+            android:id="@+id/app_logo"
+            android:layout_width="336dp"
+            android:layout_height="158dp"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentEnd="true"
+            android:layout_marginStart="31dp"
+            android:layout_marginTop="172dp"
+            android:layout_marginEnd="31dp"
+            android:contentDescription="@null"
+            app:layout_constraintHorizontal_bias="0.493"
+            app:srcCompat="@drawable/logov1_rounded" />
+
+        <Button
+            android:id="@+id/button_login"
+            android:layout_width="250dp"
+            android:layout_height="65dp"
+            android:layout_below="@+id/app_logo"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentEnd="true"
+            android:layout_marginStart="73dp"
+            android:layout_marginTop="240dp"
+            android:layout_marginEnd="72dp"
+            android:background="@drawable/rounded_corners_white"
+            android:outlineProvider="none"
+            android:fontFamily="@font/poppins_medium"
+            android:onClick="onLoginBtnClick"
+            android:text="@string/login_button"
+            android:textColor="@color/picton_blue"
+            android:textSize="20sp"
+            style="@style/Theme.Unihiveandroid.TextButtonColor"
+            app:layout_constraintEnd_toEndOf="@+id/app_logo"
+            app:layout_constraintStart_toStartOf="@+id/app_logo"
+            app:layout_constraintTop_toBottomOf="@+id/app_logo" />
+
+        <Button
+            android:id="@+id/button_register"
+            android:layout_width="250dp"
+            android:layout_height="65dp"
+            android:layout_below="@+id/button_login"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentEnd="true"
+            android:layout_marginStart="71dp"
+            android:layout_marginTop="17dp"
+            android:layout_marginEnd="71dp"
+            android:background="@drawable/rounded_corners_blue"
+            android:outlineProvider="none"
+            android:fontFamily="@font/poppins_medium"
+            android:onClick="onCreateAccountBtnClick"
+            android:text="@string/create_account_button"
+            android:textColor="@color/white"
+            android:textSize="20sp"
+            app:layout_constraintEnd_toEndOf="@+id/button_login"
+            app:layout_constraintStart_toStartOf="@+id/button_login"
+            app:layout_constraintTop_toBottomOf="@+id/button_login" />
+    </RelativeLayout>
+<!--    <ImageView-->
+<!--        android:id="@+id/welcome_bg"-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="match_parent"-->
+<!--        android:layout_marginBottom="25dp"-->
+<!--        android:adjustViewBounds="true"-->
+<!--        android:contentDescription="@null"-->
+<!--        android:scaleType="centerCrop"-->
+<!--        app:layout_constraintBottom_toBottomOf="parent"-->
+<!--        app:layout_constraintEnd_toEndOf="parent"-->
+<!--        app:layout_constraintStart_toStartOf="parent"-->
+<!--        app:layout_constraintTop_toTopOf="parent"-->
+<!--        app:layout_constraintVertical_bias="0.0"-->
+<!--        app:srcCompat="@drawable/blue_gradient_bg_rectangle" />-->
+
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
